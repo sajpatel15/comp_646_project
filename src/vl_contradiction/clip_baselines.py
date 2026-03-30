@@ -40,25 +40,25 @@ def _open_image(path: str | Path) -> Image.Image:
 def compute_similarity_scores(records: pd.DataFrame, bundle: ClipBundle, batch_size: int = 8) -> pd.DataFrame:
     """Compute cosine similarity scores for image-caption pairs."""
 
-    outputs: list[dict] = []
+    rows: list[dict] = []
     for start in tqdm(range(0, len(records), batch_size), desc="CLIP scoring"):
         batch = records.iloc[start : start + batch_size]
         images = [_open_image(path) for path in batch["file_path"]]
         captions = batch["edited_caption"].tolist()
         model_inputs = bundle.processor(text=captions, images=images, padding=True, return_tensors="pt").to(bundle.device)
         with torch.inference_mode():
-            outputs = bundle.model(
+            model_outputs = bundle.model(
                 **model_inputs,
                 return_dict=True,
             )
-            image_embeds = outputs.image_embeds
-            text_embeds = outputs.text_embeds
+            image_embeds = model_outputs.image_embeds
+            text_embeds = model_outputs.text_embeds
             image_embeds = torch.nn.functional.normalize(image_embeds, dim=-1)
             text_embeds = torch.nn.functional.normalize(text_embeds, dim=-1)
             scores = (image_embeds * text_embeds).sum(dim=-1).detach().cpu().numpy()
         for sample_id, label, score in zip(batch["sample_id"], batch["label"], scores, strict=True):
-            outputs.append({"sample_id": sample_id, "label": label, "raw_score": float(score)})
-    return pd.DataFrame(outputs)
+            rows.append({"sample_id": sample_id, "label": label, "raw_score": float(score)})
+    return pd.DataFrame(rows)
 
 
 def fit_similarity_thresholds(labels: list[str], scores: np.ndarray, grid_size: int = 200) -> tuple[dict[str, float], pd.DataFrame]:
