@@ -1,0 +1,47 @@
+runtime:
+  seed: 42
+  split_seed: 7
+  auto_mount_drive: true
+  local_root: "."
+  colab_drive_root: "/content/drive/MyDrive/comp646_multimodal_contradiction"
+
+paths:
+  dataset_root: "artifacts/datasets/coco2017"
+  benchmark_root: "artifacts/benchmark"
+  checkpoint_root: "artifacts/checkpoints"
+  log_root: "artifacts/logs"
+  metrics_root: "artifacts/metrics"
+  figure_root: "artifacts/figures"
+  qwen_root: "artifacts/qwen"
+
+data:
+  prototype_families: 1200
+  midscale_families: 4000
+  final_families: 6000
+  split_ratio: [0.7, 0.15, 0.15]
+  audit_samples_per_family: 25
+  qwen_subset_size: 600
+  image_splits: ["train", "val"]
+
+model:
+  clip_name: "openai/clip-vit-base-patch32"
+  qwen_name: "Qwen/Qwen2.5-VL-3B-Instruct"
+  use_qwen_4bit: true
+  hidden_dim: 256
+  num_attention_heads: 4
+  dropout: 0.1
+  max_qwen_tokens: 96
+
+training:
+  batch_size: 16
+  num_workers: 2
+  learning_rate: 0.0005
+  weight_decay: 0.01
+  epochs: 5
+  device: "auto"
+  log_every_epoch: true
+
+evaluation:
+  bootstrap_samples: 500
+  threshold_grid_size: 200
+  save_figures_as_pdf: true

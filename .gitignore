@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+output/
+cache/
+artifacts/
+*.pt
+*.parquet
+*.zip
+.DS_Store
