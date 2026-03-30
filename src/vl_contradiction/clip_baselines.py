@@ -123,11 +123,19 @@ def extract_token_features(records: pd.DataFrame, bundle: ClipBundle, batch_size
     image_tokens: list[torch.Tensor] = []
     text_tokens: list[torch.Tensor] = []
     labels: list[int] = []
+    max_text_length = int(bundle.model.config.text_config.max_position_embeddings)
     for start in tqdm(range(0, len(records), batch_size), desc="CLIP token states"):
         batch = records.iloc[start : start + batch_size]
         images = [_open_image(path) for path in batch["file_path"]]
         captions = batch["edited_caption"].tolist()
-        model_inputs = bundle.processor(text=captions, images=images, padding=True, return_tensors="pt").to(bundle.device)
+        model_inputs = bundle.processor(
+            text=captions,
+            images=images,
+            padding="max_length",
+            truncation=True,
+            max_length=max_text_length,
+            return_tensors="pt",
+        ).to(bundle.device)
         with torch.inference_mode():
             outputs = bundle.model(
                 **model_inputs,
