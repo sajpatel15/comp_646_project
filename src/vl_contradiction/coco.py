@@ -64,6 +64,20 @@ def coco_assets_present(paths: CocoPaths) -> bool:
     return all(path.exists() for path in required)
 
 
+def coco_assets_present_for_splits(paths: CocoPaths, image_splits: Iterable[str]) -> bool:
+    """Return True when the requested image splits and annotations exist."""
+
+    required = [paths.annotations_dir, paths.instances_train, paths.instances_val, paths.captions_train, paths.captions_val]
+    for split in image_splits:
+        if split == "train":
+            required.append(paths.train_images_dir)
+        elif split == "val":
+            required.append(paths.val_images_dir)
+        else:
+            raise ValueError(f"Unsupported COCO split: {split}")
+    return all(path.exists() for path in required)
+
+
 def _download_file(url: str, destination: Path) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
     with urlopen(url) as response:  # noqa: S310 - controlled URLs
@@ -83,11 +97,16 @@ def _extract_zip(zip_path: Path, target_dir: Path) -> None:
         archive.extractall(target_dir)
 
 
-def ensure_coco_dataset(dataset_root: str | Path, download: bool = True) -> CocoPaths:
+def ensure_coco_dataset(
+    dataset_root: str | Path,
+    download: bool = True,
+    image_splits: Iterable[str] = ("train", "val"),
+) -> CocoPaths:
     """Validate COCO assets and optionally download missing files."""
 
     paths = build_coco_paths(dataset_root)
-    if coco_assets_present(paths):
+    requested_splits = list(image_splits)
+    if coco_assets_present_for_splits(paths, requested_splits):
         print(f"COCO dataset already available at {paths.dataset_root}")
         return paths
     if not download:
@@ -96,12 +115,21 @@ def ensure_coco_dataset(dataset_root: str | Path, download: bool = True) -> Coco
     print(f"Preparing COCO dataset under {paths.dataset_root}")
     paths.dataset_root.mkdir(parents=True, exist_ok=True)
     download_dir = paths.dataset_root / "_downloads"
-    for key, url in COCO_URLS.items():
+    keys = []
+    if "train" in requested_splits:
+        keys.append("train_images")
+    if "val" in requested_splits:
+        keys.append("val_images")
+    keys.append("annotations")
+
+    for key in keys:
+        url = COCO_URLS[key]
         zip_path = download_dir / f"{key}.zip"
         if not zip_path.exists():
             _download_file(url, zip_path)
         print(f"Extracting {zip_path.name}")
         _extract_zip(zip_path, paths.dataset_root)
+        zip_path.unlink(missing_ok=True)
     return paths
 
 

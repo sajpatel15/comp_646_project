@@ -16,6 +16,7 @@ class RuntimeConfig:
     auto_mount_drive: bool
     local_root: str
     colab_drive_root: str
+    colab_dataset_root: str
 
 
 @dataclass(slots=True)

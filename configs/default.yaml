@@ -4,6 +4,7 @@ runtime:
   auto_mount_drive: true
   local_root: "."
   colab_drive_root: "/content/drive/MyDrive/comp646_multimodal_contradiction"
+  colab_dataset_root: "/content/comp646_datasets/coco2017"
 
 paths:
   dataset_root: "artifacts/datasets/coco2017"
@@ -21,7 +22,7 @@ data:
   split_ratio: [0.7, 0.15, 0.15]
   audit_samples_per_family: 25
   qwen_subset_size: 600
-  image_splits: ["train", "val"]
+  image_splits: ["val"]
 
 model:
   clip_name: "openai/clip-vit-base-patch32"

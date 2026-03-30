@@ -70,7 +70,11 @@ def detect_runtime(project_root: str | Path, config: ProjectConfig) -> RuntimeIn
         is_colab=is_colab,
         device=device,
         cache_root=cache_root,
-        dataset_root=_resolve_subpath(cache_root, config.paths.dataset_root),
+        dataset_root=(
+            Path(config.runtime.colab_dataset_root).expanduser()
+            if is_colab
+            else _resolve_subpath(cache_root, config.paths.dataset_root)
+        ),
         benchmark_root=_resolve_subpath(cache_root, config.paths.benchmark_root),
         checkpoint_root=_resolve_subpath(cache_root, config.paths.checkpoint_root),
         log_root=_resolve_subpath(cache_root, config.paths.log_root),
@@ -103,5 +107,10 @@ def print_runtime_summary(runtime: RuntimeInfo) -> None:
     print("Runtime summary")
     print(f"  project_root: {runtime.project_root}")
     print(f"  cache_root:   {runtime.cache_root}")
+    print(f"  dataset_root: {runtime.dataset_root}")
+    print(f"  benchmark:    {runtime.benchmark_root}")
+    print(f"  checkpoints:  {runtime.checkpoint_root}")
+    print(f"  metrics:      {runtime.metrics_root}")
+    print(f"  figures:      {runtime.figure_root}")
     print(f"  colab:        {runtime.is_colab}")
     print(f"  device:       {runtime.device}")
