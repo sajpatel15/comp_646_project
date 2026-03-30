@@ -47,11 +47,12 @@ def compute_similarity_scores(records: pd.DataFrame, bundle: ClipBundle, batch_s
         captions = batch["edited_caption"].tolist()
         model_inputs = bundle.processor(text=captions, images=images, padding=True, return_tensors="pt").to(bundle.device)
         with torch.inference_mode():
-            image_embeds = bundle.model.get_image_features(pixel_values=model_inputs["pixel_values"])
-            text_embeds = bundle.model.get_text_features(
-                input_ids=model_inputs["input_ids"],
-                attention_mask=model_inputs["attention_mask"],
+            outputs = bundle.model(
+                **model_inputs,
+                return_dict=True,
             )
+            image_embeds = outputs.image_embeds
+            text_embeds = outputs.text_embeds
             image_embeds = torch.nn.functional.normalize(image_embeds, dim=-1)
             text_embeds = torch.nn.functional.normalize(text_embeds, dim=-1)
             scores = (image_embeds * text_embeds).sum(dim=-1).detach().cpu().numpy()
@@ -99,11 +100,12 @@ def extract_joint_features(records: pd.DataFrame, bundle: ClipBundle, batch_size
         captions = batch["edited_caption"].tolist()
         model_inputs = bundle.processor(text=captions, images=images, padding=True, return_tensors="pt").to(bundle.device)
         with torch.inference_mode():
-            image_embeds = bundle.model.get_image_features(pixel_values=model_inputs["pixel_values"])
-            text_embeds = bundle.model.get_text_features(
-                input_ids=model_inputs["input_ids"],
-                attention_mask=model_inputs["attention_mask"],
+            outputs = bundle.model(
+                **model_inputs,
+                return_dict=True,
             )
+            image_embeds = outputs.image_embeds
+            text_embeds = outputs.text_embeds
             image_embeds = torch.nn.functional.normalize(image_embeds, dim=-1)
             text_embeds = torch.nn.functional.normalize(text_embeds, dim=-1)
             scores = (image_embeds * text_embeds).sum(dim=-1, keepdim=True)
