@@ -41,15 +41,17 @@ class CrossAttentionFusionClassifier(nn.Module):
 
     def __init__(
         self,
-        input_dim: int,
+        image_input_dim: int,
+        text_input_dim: int | None = None,
         hidden_dim: int = 256,
         num_heads: int = 4,
         dropout: float = 0.1,
         num_classes: int = 3,
     ) -> None:
         super().__init__()
-        self.image_proj = nn.Linear(input_dim, hidden_dim)
-        self.text_proj = nn.Linear(input_dim, hidden_dim)
+        resolved_text_dim = text_input_dim if text_input_dim is not None else image_input_dim
+        self.image_proj = nn.Linear(image_input_dim, hidden_dim)
+        self.text_proj = nn.Linear(resolved_text_dim, hidden_dim)
         self.attention = nn.MultiheadAttention(hidden_dim, num_heads=num_heads, dropout=dropout, batch_first=True)
         self.norm = nn.LayerNorm(hidden_dim)
         self.classifier = nn.Sequential(
