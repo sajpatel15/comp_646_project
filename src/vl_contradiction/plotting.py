@@ -9,9 +9,18 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from PIL import Image
+from matplotlib.ticker import FormatStrFormatter, MaxNLocator
 
 
 sns.set_theme(style="whitegrid", context="talk")
+
+
+LABEL_ORDER = ["contradiction", "neutral", "entailment"]
+LABEL_PALETTE = {
+    "contradiction": "#c44e52",
+    "neutral": "#dd8452",
+    "entailment": "#4c72b0",
+}
 
 
 def _prepare_output(path: str | Path) -> Path:
@@ -50,24 +59,96 @@ def save_confusion_matrix(matrix: list[list[int]], class_names: list[str], outpu
 
 def save_score_histogram(score_frame: pd.DataFrame, output_path: str | Path, title: str) -> None:
     output = _prepare_output(output_path)
-    fig, ax = plt.subplots(figsize=(7, 4))
-    sns.histplot(score_frame, x="raw_score", hue="label", bins=30, element="step", stat="density", common_norm=False, ax=ax)
+    label_order = [label for label in LABEL_ORDER if label in set(score_frame["label"])]
+    fig, ax = plt.subplots(figsize=(8.5, 4.8))
+    sns.histplot(
+        score_frame,
+        x="raw_score",
+        hue="label",
+        hue_order=label_order,
+        palette=LABEL_PALETTE,
+        bins=24,
+        element="step",
+        fill=True,
+        alpha=0.18,
+        linewidth=1.8,
+        stat="density",
+        common_norm=False,
+        ax=ax,
+    )
     ax.set_xlabel("Cosine Similarity")
     ax.set_ylabel("Density")
     ax.set_title(title)
-    fig.tight_layout()
+    if ax.legend_ is not None:
+        sns.move_legend(ax, "upper left", bbox_to_anchor=(1.02, 1.0), title="Label", frameon=True)
+    fig.tight_layout(rect=(0, 0, 0.82, 1))
     fig.savefig(output, bbox_inches="tight")
     plt.close(fig)
 
 
 def save_threshold_sweep(search_frame: pd.DataFrame, output_path: str | Path, title: str) -> None:
+    if search_frame.empty:
+        raise ValueError("search_frame must contain threshold sweep results.")
+
     output = _prepare_output(output_path)
-    pivot = search_frame.pivot_table(index="tau_low", columns="tau_high", values="macro_f1")
-    fig, ax = plt.subplots(figsize=(6, 5))
-    sns.heatmap(pivot, cmap="magma", ax=ax)
-    ax.set_xlabel("tau_high")
-    ax.set_ylabel("tau_low")
+    best_row = search_frame.loc[search_frame["macro_f1"].idxmax()]
+    score_min = float(search_frame[["tau_low", "tau_high"]].min().min())
+    score_max = float(search_frame[["tau_low", "tau_high"]].max().max())
+
+    fig, ax = plt.subplots(figsize=(8.2, 5.6))
+    scatter = ax.scatter(
+        search_frame["tau_low"],
+        search_frame["tau_high"],
+        c=search_frame["macro_f1"],
+        cmap="viridis",
+        s=24,
+        edgecolors="none",
+        alpha=0.9,
+        rasterized=len(search_frame) > 5_000,
+    )
+    ax.plot(
+        [score_min, score_max],
+        [score_min, score_max],
+        linestyle="--",
+        color="black",
+        linewidth=1.1,
+        alpha=0.55,
+    )
+    ax.scatter(
+        best_row["tau_low"],
+        best_row["tau_high"],
+        marker="*",
+        s=260,
+        color="#d62728",
+        edgecolors="white",
+        linewidth=1.0,
+        zorder=3,
+    )
+    ax.annotate(
+        (
+            "Best pair\n"
+            f"tau_low={best_row['tau_low']:.4f}\n"
+            f"tau_high={best_row['tau_high']:.4f}\n"
+            f"macro-F1={best_row['macro_f1']:.3f}"
+        ),
+        xy=(best_row["tau_low"], best_row["tau_high"]),
+        xytext=(0.04, 0.96),
+        textcoords="axes fraction",
+        va="top",
+        ha="left",
+        fontsize=11,
+        bbox={"boxstyle": "round,pad=0.35", "facecolor": "white", "edgecolor": "#555555", "alpha": 0.95},
+        arrowprops={"arrowstyle": "->", "color": "#555555", "linewidth": 1.2},
+    )
+    colorbar = fig.colorbar(scatter, ax=ax, pad=0.02)
+    colorbar.set_label("Validation Macro-F1")
+    ax.set_xlabel("tau_low")
+    ax.set_ylabel("tau_high")
     ax.set_title(title)
+    ax.xaxis.set_major_locator(MaxNLocator(nbins=6))
+    ax.yaxis.set_major_locator(MaxNLocator(nbins=6))
+    ax.xaxis.set_major_formatter(FormatStrFormatter("%.3f"))
+    ax.yaxis.set_major_formatter(FormatStrFormatter("%.3f"))
     fig.tight_layout()
     fig.savefig(output, bbox_inches="tight")
     plt.close(fig)
