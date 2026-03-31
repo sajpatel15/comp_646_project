@@ -19,6 +19,7 @@ except ModuleNotFoundError:  # pragma: no cover - exercised in dependency-light 
     SummaryWriter = None
 
 from .metrics import compute_classification_metrics
+from .performance import _cuda_bf16_supported
 
 
 class FeatureDataset(Dataset):
@@ -125,13 +126,13 @@ def _resolve_amp_settings(
         elif normalized == "fp16":
             return True, torch.float16
         elif normalized == "bf16":
-            if not torch.cuda.is_bf16_supported():
+            if not _cuda_bf16_supported():
                 return True, torch.float16
             return True, torch.bfloat16
         else:
             raise ValueError(f"Unsupported amp_precision '{amp_precision}'. Expected one of: auto, fp16, bf16")
 
-    amp_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+    amp_dtype = torch.bfloat16 if _cuda_bf16_supported() else torch.float16
     return True, amp_dtype
 
 

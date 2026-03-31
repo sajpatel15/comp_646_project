@@ -114,7 +114,7 @@ class ClipExtractionPerfTests(unittest.TestCase):
 class TrainingPerfTests(unittest.TestCase):
     def test_explicit_amp_precision_uses_requested_dtype_without_probe(self) -> None:
         with patch(
-            "vl_contradiction.training.torch.cuda.is_bf16_supported",
+            "vl_contradiction.training._cuda_bf16_supported",
             side_effect=AssertionError("bf16 probe should not run"),
         ):
             amp_enabled, amp_dtype = _resolve_amp_settings(
@@ -126,8 +126,25 @@ class TrainingPerfTests(unittest.TestCase):
         self.assertTrue(amp_enabled)
         self.assertEqual(torch.float16, amp_dtype)
 
-    def test_explicit_bf16_amp_precision_falls_back_when_probe_reports_unsupported(self) -> None:
-        with patch("vl_contradiction.training.torch.cuda.is_bf16_supported", return_value=False):
+    def test_auto_amp_precision_falls_back_when_probe_errors(self) -> None:
+        with patch(
+            "vl_contradiction.performance.torch.cuda.is_bf16_supported",
+            side_effect=RuntimeError("bf16 probe unavailable"),
+        ):
+            amp_enabled, amp_dtype = _resolve_amp_settings(
+                torch.device("cuda"),
+                amp=True,
+                amp_precision=None,
+            )
+
+        self.assertTrue(amp_enabled)
+        self.assertEqual(torch.float16, amp_dtype)
+
+    def test_explicit_bf16_precision_falls_back_when_unsupported(self) -> None:
+        with patch(
+            "vl_contradiction.training._cuda_bf16_supported",
+            return_value=False,
+        ):
             amp_enabled, amp_dtype = _resolve_amp_settings(
                 torch.device("cuda"),
                 amp=True,
