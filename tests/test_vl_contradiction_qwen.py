@@ -172,7 +172,11 @@ class QwenTests(unittest.TestCase):
             self.assertEqual(5, len(list((scratch_root / final_dir.name).glob("*.json"))))
             printed = "\n".join(" ".join(str(arg) for arg in call.args) for call in fake_print.call_args_list)
             self.assertIn("[qwen] start total=5 cached=0 run=5 batch=4 precision=fp16", printed)
+            self.assertIn("[qwen] call=1 rows=1-4/5 batch=4", printed)
             self.assertIn("[qwen] oom batch=4 -> 2", printed)
+            self.assertIn("[qwen] call=2 rows=1-2/5 batch=2", printed)
+            self.assertIn("[qwen] call=3 rows=3-4/5 batch=2", printed)
+            self.assertIn("[qwen] call=4 rows=5/5 batch=1", printed)
             self.assertIn("[qwen] done profile=t4 precision=fp16 batch=2", printed)
 
     def test_run_qwen_inference_promotes_scratch_hits_into_canonical_cache(self) -> None:

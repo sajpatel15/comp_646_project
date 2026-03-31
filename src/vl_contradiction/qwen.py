@@ -460,6 +460,18 @@ def _progress_stride(total: int) -> int:
     return max(1, total // 10)
 
 
+def _log_qwen(message: str) -> None:
+    print(message, flush=True)
+
+
+def _format_row_span(start_index: int, end_index: int, total: int) -> str:
+    start = start_index + 1
+    end = end_index + 1
+    if start == end:
+        return f"{start}/{total}"
+    return f"{start}-{end}/{total}"
+
+
 def _generate_batch(
     bundle: QwenBundle,
     batch_rows: list[tuple[int, pd.Series]],
@@ -565,7 +577,7 @@ def run_qwen_inference(
 
     if not miss_entries:
         elapsed_seconds = 0.0
-        print(
+        _log_qwen(
             f"[qwen] profile={policy.profile_name} precision={policy.precision} batch_size={policy.batch_size or 1} "
             f"cache_mode={policy.cache_mode} hits={cache_hits} misses=0 elapsed_s={elapsed_seconds:.2f} samples_per_s=inf"
         )
@@ -586,7 +598,7 @@ def run_qwen_inference(
     progress_stride = _progress_stride(len(miss_entries))
     next_progress = progress_stride
 
-    print(
+    _log_qwen(
         f"[qwen] start total={total_rows} cached={cache_hits} run={len(miss_entries)} "
         f"batch={target_batch_size} precision={policy.precision}"
     )
@@ -594,11 +606,16 @@ def run_qwen_inference(
     while cursor < len(miss_entries):
         current_batch_size = min(target_batch_size, len(miss_entries) - cursor)
         batch = miss_entries[cursor : cursor + current_batch_size]
+        batch_start = cursor
+        batch_end = cursor + len(batch) - 1
         try:
             if target_batch_size == 1:
                 batch_payloads: list[dict[str, Any]] = []
                 for batch_row in batch:
                     invocation_count += 1
+                    _log_qwen(
+                        f"[qwen] call={invocation_count} rows={_format_row_span(batch_start, batch_start, len(miss_entries))} batch=1"
+                    )
                     single_started = time.perf_counter()
                     image_path = batch_row[1]["file_path"]
                     with Image.open(image_path) as image:
@@ -623,6 +640,10 @@ def run_qwen_inference(
                     )
             else:
                 invocation_count += 1
+                _log_qwen(
+                    f"[qwen] call={invocation_count} rows={_format_row_span(batch_start, batch_end, len(miss_entries))} "
+                    f"batch={current_batch_size}"
+                )
                 batch_started = time.perf_counter()
                 batch_payloads = _generate_batch(bundle, batch, max_new_tokens, policy.precision)
                 generation_seconds += time.perf_counter() - batch_started
@@ -631,7 +652,7 @@ def run_qwen_inference(
                 if _cuda_available():
                     torch.cuda.empty_cache()
                 new_batch_size = max(1, current_batch_size // 2)
-                print(f"[qwen] oom batch={current_batch_size} -> {new_batch_size}")
+                _log_qwen(f"[qwen] oom batch={current_batch_size} -> {new_batch_size}")
                 target_batch_size = new_batch_size
                 continue
             raise
@@ -658,7 +679,7 @@ def run_qwen_inference(
             remaining = len(miss_entries) - processed_misses
             eta = remaining / max(rate, 1e-9)
             percent = (processed_misses / max(len(miss_entries), 1)) * 100.0
-            print(
+            _log_qwen(
                 f"[qwen] {processed_misses}/{len(miss_entries)} {percent:.0f}% "
                 f"calls={invocation_count} batch={current_batch_size} eta={_format_eta(eta)}"
             )
@@ -668,7 +689,7 @@ def run_qwen_inference(
     elapsed_seconds = time.perf_counter() - run_started
     throughput = total_rows / max(elapsed_seconds, 1e-9)
     generation_throughput = len(miss_entries) / max(generation_seconds, 1e-9)
-    print(
+    _log_qwen(
         f"[qwen] done profile={policy.profile_name} precision={policy.precision} batch={target_batch_size} "
         f"hits={cache_hits} misses={len(miss_entries)} calls={invocation_count} "
         f"elapsed_s={elapsed_seconds:.2f} samples_per_s={throughput:.2f} model_samples_per_s={generation_throughput:.2f}"
