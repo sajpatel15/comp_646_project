@@ -100,6 +100,8 @@ def _resolve_training_amp_precision(mode: str, *, device: torch.device, amp_enab
         )
     if normalized == "auto":
         return "bf16" if _cuda_bf16_supported() else "fp16"
+    if normalized == "bf16" and not _cuda_bf16_supported():
+        return "fp16"
     return normalized
 
 

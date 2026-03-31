@@ -66,6 +66,29 @@ class PerformanceResolutionTests(unittest.TestCase):
         self.assertTrue(profile.amp_training)
         self.assertEqual("fp16", profile.training_amp_precision)
 
+    def test_explicit_bf16_training_profile_falls_back_to_fp16_when_cuda_lacks_support(self) -> None:
+        config = load_config(PROJECT_ROOT / "configs" / "default.yaml")
+        config.performance.active_profile = "h100"
+
+        with (
+            mock.patch("vl_contradiction.performance.torch.cuda.is_available", return_value=True),
+            mock.patch("vl_contradiction.performance.torch.cuda.get_device_name", return_value="Tesla T4"),
+            mock.patch(
+                "vl_contradiction.performance.torch.cuda.get_device_properties",
+                return_value=SimpleNamespace(total_memory=16 * 1024**3),
+            ),
+            mock.patch("vl_contradiction.performance.torch.cuda.is_bf16_supported", return_value=False),
+        ):
+            profile = resolve_performance_profile(
+                config.performance,
+                device=torch.device("cuda"),
+                is_colab=True,
+                cache_root=PROJECT_ROOT / "artifacts",
+            )
+
+        self.assertEqual("h100", profile.name)
+        self.assertEqual("fp16", profile.training_amp_precision)
+
     def test_compatibility_mode_forces_conservative_qwen_settings(self) -> None:
         config = load_config(PROJECT_ROOT / "configs" / "default.yaml")
         config.performance.compatibility_mode = True

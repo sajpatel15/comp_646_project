@@ -126,6 +126,17 @@ class TrainingPerfTests(unittest.TestCase):
         self.assertTrue(amp_enabled)
         self.assertEqual(torch.float16, amp_dtype)
 
+    def test_explicit_bf16_amp_precision_falls_back_when_probe_reports_unsupported(self) -> None:
+        with patch("vl_contradiction.training.torch.cuda.is_bf16_supported", return_value=False):
+            amp_enabled, amp_dtype = _resolve_amp_settings(
+                torch.device("cuda"),
+                amp=True,
+                amp_precision="bf16",
+            )
+
+        self.assertTrue(amp_enabled)
+        self.assertEqual(torch.float16, amp_dtype)
+
     def test_early_stopping_and_cpu_amp_fallback(self) -> None:
         torch.manual_seed(0)
         features = torch.tensor(

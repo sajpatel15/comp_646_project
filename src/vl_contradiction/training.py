@@ -125,6 +125,8 @@ def _resolve_amp_settings(
         elif normalized == "fp16":
             return True, torch.float16
         elif normalized == "bf16":
+            if not torch.cuda.is_bf16_supported():
+                return True, torch.float16
             return True, torch.bfloat16
         else:
             raise ValueError(f"Unsupported amp_precision '{amp_precision}'. Expected one of: auto, fp16, bf16")
