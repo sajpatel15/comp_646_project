@@ -32,15 +32,29 @@ def _prepare_output(path: str | Path) -> Path:
 def save_training_curves(history: list[dict[str, float]], output_path: str | Path, title: str) -> None:
     frame = pd.DataFrame(history)
     output = _prepare_output(output_path)
-    fig, ax1 = plt.subplots(figsize=(7, 4))
-    ax1.plot(frame["epoch"], frame["train_loss"], label="Train Loss", linewidth=2)
+    fig, ax1 = plt.subplots(figsize=(8.5, 4.6))
+    train_line = ax1.plot(frame["epoch"], frame["train_loss"], label="Train Loss", linewidth=2)[0]
     ax1.set_xlabel("Epoch")
     ax1.set_ylabel("Loss")
     ax2 = ax1.twinx()
-    ax2.plot(frame["epoch"], frame["val_macro_f1"], color="tab:orange", label="Val Macro-F1", linewidth=2)
+    val_line = ax2.plot(
+        frame["epoch"],
+        frame["val_macro_f1"],
+        color="tab:orange",
+        label="Val Macro-F1",
+        linewidth=2,
+    )[0]
     ax2.set_ylabel("Macro-F1")
     ax1.set_title(title)
-    fig.tight_layout()
+    ax1.legend(
+        [train_line, val_line],
+        ["Train Loss", "Val Macro-F1"],
+        loc="upper left",
+        bbox_to_anchor=(1.02, 1.0),
+        borderaxespad=0.0,
+        frameon=True,
+    )
+    fig.tight_layout(rect=(0, 0, 0.82, 1))
     fig.savefig(output, bbox_inches="tight")
     plt.close(fig)
 
@@ -168,15 +182,36 @@ def save_bar_chart(frame: pd.DataFrame, x: str, y: str, output_path: str | Path,
 
 def save_reliability_diagram(bin_centers: np.ndarray, bin_accuracy: np.ndarray, bin_confidence: np.ndarray, output_path: str | Path, title: str) -> None:
     output = _prepare_output(output_path)
-    fig, ax = plt.subplots(figsize=(5, 5))
-    ax.plot([0, 1], [0, 1], linestyle="--", color="black", linewidth=1)
-    ax.plot(bin_confidence, bin_accuracy, marker="o", linewidth=2)
+    fig, ax = plt.subplots(figsize=(6.5, 5.2))
+    perfect_line = ax.plot(
+        [0, 1],
+        [0, 1],
+        linestyle="--",
+        color="black",
+        linewidth=1,
+        label="Perfect Calibration",
+    )[0]
+    observed_line = ax.plot(
+        bin_confidence,
+        bin_accuracy,
+        marker="o",
+        linewidth=2,
+        label="Observed Accuracy",
+    )[0]
     ax.set_xlabel("Confidence")
     ax.set_ylabel("Accuracy")
     ax.set_title(title)
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
-    fig.tight_layout()
+    ax.legend(
+        [perfect_line, observed_line],
+        ["Perfect Calibration", "Observed Accuracy"],
+        loc="upper left",
+        bbox_to_anchor=(1.02, 1.0),
+        borderaxespad=0.0,
+        frameon=True,
+    )
+    fig.tight_layout(rect=(0, 0, 0.78, 1))
     fig.savefig(output, bbox_inches="tight")
     plt.close(fig)
 

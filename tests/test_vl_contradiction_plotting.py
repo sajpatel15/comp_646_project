@@ -4,8 +4,10 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 import matplotlib
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
@@ -15,10 +17,43 @@ matplotlib.use("Agg")
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
-from vl_contradiction.plotting import save_score_histogram, save_threshold_sweep  # noqa: E402
+from vl_contradiction.plotting import (  # noqa: E402
+    save_reliability_diagram,
+    save_score_histogram,
+    save_threshold_sweep,
+    save_training_curves,
+)
 
 
 class PlottingTests(unittest.TestCase):
+    def test_save_training_curves_writes_image_and_places_legend_on_right(self) -> None:
+        history = [
+            {"epoch": 1.0, "train_loss": 1.2, "val_macro_f1": 0.32},
+            {"epoch": 2.0, "train_loss": 0.8, "val_macro_f1": 0.47},
+            {"epoch": 3.0, "train_loss": 0.5, "val_macro_f1": 0.61},
+        ]
+
+        captured: dict[str, object] = {}
+        original_close = plt.close
+
+        def capture_close(fig=None):  # noqa: ANN001
+            if fig is not None:
+                captured["figure"] = fig
+            return original_close(fig)
+
+        with tempfile.TemporaryDirectory() as tmpdir, mock.patch("matplotlib.pyplot.close", side_effect=capture_close):
+            output_path = Path(tmpdir) / "training.png"
+            save_training_curves(history, output_path, "Synthetic Training")
+            self.assertTrue(output_path.exists())
+            self.assertGreater(output_path.stat().st_size, 0)
+
+        figure = captured["figure"]
+        axes = figure.axes
+        legend = axes[0].get_legend()
+        self.assertIsNotNone(legend)
+        self.assertEqual(["Train Loss", "Val Macro-F1"], [text.get_text() for text in legend.get_texts()])
+        self.assertEqual((1.02, 1.0), tuple(legend.get_bbox_to_anchor()._bbox.p1))
+
     def test_save_score_histogram_writes_nonempty_image(self) -> None:
         frame = pd.DataFrame(
             [
@@ -36,6 +71,36 @@ class PlottingTests(unittest.TestCase):
             save_score_histogram(frame, output_path, "Synthetic Score Distribution")
             self.assertTrue(output_path.exists())
             self.assertGreater(output_path.stat().st_size, 0)
+
+    def test_save_reliability_diagram_writes_image_and_places_legend_on_right(self) -> None:
+        captured: dict[str, object] = {}
+        original_close = plt.close
+
+        def capture_close(fig=None):  # noqa: ANN001
+            if fig is not None:
+                captured["figure"] = fig
+            return original_close(fig)
+
+        with tempfile.TemporaryDirectory() as tmpdir, mock.patch("matplotlib.pyplot.close", side_effect=capture_close):
+            output_path = Path(tmpdir) / "reliability.png"
+            save_reliability_diagram(
+                bin_centers=np.array([0.1, 0.5, 0.9]),
+                bin_accuracy=np.array([0.2, 0.55, 0.88]),
+                bin_confidence=np.array([0.15, 0.52, 0.91]),
+                output_path=output_path,
+                title="Synthetic Reliability",
+            )
+            self.assertTrue(output_path.exists())
+            self.assertGreater(output_path.stat().st_size, 0)
+
+        figure = captured["figure"]
+        legend = figure.axes[0].get_legend()
+        self.assertIsNotNone(legend)
+        self.assertEqual(
+            ["Perfect Calibration", "Observed Accuracy"],
+            [text.get_text() for text in legend.get_texts()],
+        )
+        self.assertEqual((1.02, 1.0), tuple(legend.get_bbox_to_anchor()._bbox.p1))
 
     def test_save_threshold_sweep_marks_best_pair_and_writes_image(self) -> None:
         rows = []
