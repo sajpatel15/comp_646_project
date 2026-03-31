@@ -54,13 +54,14 @@ class ModelConfig:
 
 @dataclass(slots=True)
 class TrainingConfig:
-    batch_size: int
     num_workers: int
-    learning_rate: float
-    weight_decay: float
-    epochs: int
     device: str
     log_every_epoch: bool
+    selection_metric: str
+    clip_batch_size: int
+    joint_feature_batch_size: int
+    token_feature_batch_size: int
+    sweeps: dict[str, dict[str, dict[str, list[dict[str, Any]]]]]
 
 
 @dataclass(slots=True)

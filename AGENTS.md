@@ -21,16 +21,17 @@ There is also a `src/multimodal_contradiction` tree in the repo. The current not
 - `src/vl_contradiction/audit_ui.py`: interactive audit review UI
 - `src/vl_contradiction/clip_baselines.py`: raw CLIP scoring, feature extraction, threshold search
 - `src/vl_contradiction/models.py`: linear probe and cross-attention models
-- `src/vl_contradiction/training.py`: dataloaders, training loop, evaluation
+- `src/vl_contradiction/training.py`: dataloaders, single-trial training loop, stage-aware hyperparameter sweeps, evaluation
 - `src/vl_contradiction/qwen.py`: Qwen2.5-VL loading, prompting, caching, parsing
 - `src/vl_contradiction/plotting.py`: report-style figure export helpers
-- `tests/`: lightweight unit coverage for benchmark, audit, and plotting helpers
+- `tests/`: lightweight unit coverage for config loading, training sweeps, benchmark rules, audit helpers, and plotting helpers
 
 ## Working Rules
 
 - Keep the notebook readable. Push heavy logic into `src/vl_contradiction` helpers when cells start getting dense.
 - Preserve the config-driven runtime layout from `configs/default.yaml` and `src/vl_contradiction/runtime.py`.
 - Stage outputs are now scoped under stage-specific subdirectories such as `artifacts/metrics/prototype` and `artifacts/figures/final`, while the COCO dataset cache remains shared.
+- Learned models no longer use one global set of hyperparameters. The notebook resolves stage-specific trial lists from `training.sweeps.<stage>.<model>.trials` and selects the best trial by validation macro-F1.
 - Treat the notebook as Colab-compatible first. The bootstrap cell now installs the `qwen` extra in Colab so `RUN_QWEN = True` works without a second manual install.
 - Avoid writing derived artifacts into the repo unless the user explicitly wants committed outputs. Runtime artifacts are expected under `artifacts/`.
 - When editing figures, check both the saved-figure layout and the inline notebook display path.
@@ -53,6 +54,8 @@ There is also a `src/multimodal_contradiction` tree in the repo. The current not
 
 - Benchmark CSVs: `artifacts/benchmark/<stage>`
 - Metrics JSON/CSVs: `artifacts/metrics/<stage>`
+- Sweep summaries: `artifacts/metrics/<stage>/<model>_sweep_<stage>.csv`
+- Best-trial metadata: `artifacts/metrics/<stage>/<model>_best_trial_<stage>.json`
 - Figures: `artifacts/figures/<stage>`
 - Checkpoints: `artifacts/checkpoints/<stage>`
 - Qwen cache/output JSON: `artifacts/qwen/<stage>`

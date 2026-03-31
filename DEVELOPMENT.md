@@ -10,7 +10,7 @@ This repo centers on one end-to-end notebook, `notebooks/multimodal_contradictio
 4. Build the contradiction benchmark and split by family.
 5. Run the audit gate.
 6. Execute prototype baselines: raw CLIP, linear probe, Qwen subset, cross-attention.
-7. Export metrics, figures, and cached Qwen outputs under `artifacts/`.
+7. Sweep stage-specific hyperparameters for the learned CLIP models, keep the best trial by validation macro-F1, and export metrics, figures, checkpoints, and cached Qwen outputs under `artifacts/`.
 
 ## Recommended Environment Setup
 
@@ -88,6 +88,20 @@ The notebook currently sets:
 - `RUN_QWEN = True`
 - `CURRENT_STAGE = "prototype"`
 
+The learned-model hyperparameters now come from `configs/default.yaml`:
+
+- fixed extraction/inference batch sizes:
+  - `training.clip_batch_size`
+  - `training.joint_feature_batch_size`
+  - `training.token_feature_batch_size`
+- stage/model sweep lists:
+  - `training.sweeps.prototype.linear_probe.trials`
+  - `training.sweeps.prototype.cross_attention.trials`
+  - `training.sweeps.midscale.*`
+  - `training.sweeps.final.*`
+
+The notebook writes one sweep summary CSV and one best-trial JSON per learned model and stage, then keeps the best checkpoint under the existing canonical filename for downstream compatibility.
+
 ## Testing
 
 ### Fast tests
@@ -97,6 +111,8 @@ These are the quickest checks to run after targeted code changes:
 ```bash
 python -m unittest tests.test_vl_contradiction_plotting
 python -m unittest tests.test_vl_contradiction_benchmark
+python -m unittest tests.test_vl_contradiction_config
+python -m unittest tests.test_vl_contradiction_training
 ```
 
 ### Audit tests
@@ -118,6 +134,7 @@ Useful cheap validations after notebook or helper edits:
 ```bash
 python -m json.tool notebooks/multimodal_contradiction_project.ipynb >/dev/null
 python -m py_compile src/vl_contradiction/plotting.py
+python -m py_compile src/vl_contradiction/config.py src/vl_contradiction/training.py
 ```
 
 ## Important Repo Conventions
@@ -137,8 +154,12 @@ Resolved from `src/vl_contradiction/runtime.py`, the config, and the current not
 - shared dataset cache: `artifacts/datasets/coco2017`
 - benchmark outputs: `artifacts/benchmark/<stage>`
 - checkpoints: `artifacts/checkpoints/<stage>`
+- per-trial checkpoints: `artifacts/checkpoints/<stage>/<model>__<trial>.pt`
 - TensorBoard logs: `artifacts/logs/<stage>`
+- per-trial TensorBoard logs: `artifacts/logs/<stage>/<model>__<trial>/`
 - metrics: `artifacts/metrics/<stage>`
+- sweep summaries: `artifacts/metrics/<stage>/<model>_sweep_<stage>.csv`
+- best-trial metadata: `artifacts/metrics/<stage>/<model>_best_trial_<stage>.json`
 - figures: `artifacts/figures/<stage>`
 - Qwen cache: `artifacts/qwen/<stage>`
 

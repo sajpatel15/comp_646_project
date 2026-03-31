@@ -34,13 +34,179 @@ model:
   max_qwen_tokens: 96
 
 training:
-  batch_size: 16
   num_workers: 2
-  learning_rate: 0.0005
-  weight_decay: 0.01
-  epochs: 5
   device: "auto"
   log_every_epoch: true
+  selection_metric: "macro_f1"
+  clip_batch_size: 16
+  joint_feature_batch_size: 16
+  token_feature_batch_size: 8
+  sweeps:
+    prototype:
+      linear_probe:
+        trials:
+          - name: "lp_p1"
+            epochs: 5
+            batch_size: 16
+            learning_rate: 0.0005
+            weight_decay: 0.01
+          - name: "lp_p2"
+            epochs: 8
+            batch_size: 16
+            learning_rate: 0.0003
+            weight_decay: 0.01
+          - name: "lp_p3"
+            epochs: 10
+            batch_size: 32
+            learning_rate: 0.0003
+            weight_decay: 0.005
+      cross_attention:
+        trials:
+          - name: "ca_p1"
+            epochs: 5
+            batch_size: 8
+            learning_rate: 0.0005
+            weight_decay: 0.01
+          - name: "ca_p2"
+            epochs: 8
+            batch_size: 8
+            learning_rate: 0.0003
+            weight_decay: 0.01
+          - name: "ca_p3"
+            epochs: 10
+            batch_size: 4
+            learning_rate: 0.0001
+            weight_decay: 0.005
+    midscale:
+      linear_probe:
+        trials:
+          - name: "lp_m1"
+            epochs: 8
+            batch_size: 16
+            learning_rate: 0.0005
+            weight_decay: 0.01
+          - name: "lp_m2"
+            epochs: 12
+            batch_size: 16
+            learning_rate: 0.0003
+            weight_decay: 0.01
+          - name: "lp_m3"
+            epochs: 12
+            batch_size: 32
+            learning_rate: 0.0003
+            weight_decay: 0.005
+          - name: "lp_m4"
+            epochs: 16
+            batch_size: 32
+            learning_rate: 0.0001
+            weight_decay: 0.01
+          - name: "lp_m5"
+            epochs: 20
+            batch_size: 16
+            learning_rate: 0.0001
+            weight_decay: 0.005
+      cross_attention:
+        trials:
+          - name: "ca_m1"
+            epochs: 8
+            batch_size: 8
+            learning_rate: 0.0005
+            weight_decay: 0.01
+          - name: "ca_m2"
+            epochs: 12
+            batch_size: 8
+            learning_rate: 0.0003
+            weight_decay: 0.01
+          - name: "ca_m3"
+            epochs: 12
+            batch_size: 4
+            learning_rate: 0.0001
+            weight_decay: 0.01
+          - name: "ca_m4"
+            epochs: 16
+            batch_size: 8
+            learning_rate: 0.0001
+            weight_decay: 0.005
+          - name: "ca_m5"
+            epochs: 20
+            batch_size: 4
+            learning_rate: 0.0003
+            weight_decay: 0.001
+    final:
+      linear_probe:
+        trials:
+          - name: "lp_f1"
+            epochs: 10
+            batch_size: 16
+            learning_rate: 0.0005
+            weight_decay: 0.01
+          - name: "lp_f2"
+            epochs: 15
+            batch_size: 16
+            learning_rate: 0.0003
+            weight_decay: 0.01
+          - name: "lp_f3"
+            epochs: 20
+            batch_size: 32
+            learning_rate: 0.0003
+            weight_decay: 0.005
+          - name: "lp_f4"
+            epochs: 20
+            batch_size: 32
+            learning_rate: 0.0001
+            weight_decay: 0.01
+          - name: "lp_f5"
+            epochs: 25
+            batch_size: 16
+            learning_rate: 0.0001
+            weight_decay: 0.005
+          - name: "lp_f6"
+            epochs: 30
+            batch_size: 32
+            learning_rate: 0.0001
+            weight_decay: 0.001
+          - name: "lp_f7"
+            epochs: 24
+            batch_size: 64
+            learning_rate: 0.0003
+            weight_decay: 0.001
+      cross_attention:
+        trials:
+          - name: "ca_f1"
+            epochs: 10
+            batch_size: 8
+            learning_rate: 0.0005
+            weight_decay: 0.01
+          - name: "ca_f2"
+            epochs: 15
+            batch_size: 8
+            learning_rate: 0.0003
+            weight_decay: 0.01
+          - name: "ca_f3"
+            epochs: 20
+            batch_size: 4
+            learning_rate: 0.0001
+            weight_decay: 0.01
+          - name: "ca_f4"
+            epochs: 20
+            batch_size: 8
+            learning_rate: 0.0001
+            weight_decay: 0.005
+          - name: "ca_f5"
+            epochs: 24
+            batch_size: 8
+            learning_rate: 0.0003
+            weight_decay: 0.001
+          - name: "ca_f6"
+            epochs: 30
+            batch_size: 4
+            learning_rate: 0.0001
+            weight_decay: 0.001
+          - name: "ca_f7"
+            epochs: 24
+            batch_size: 4
+            learning_rate: 0.00005
+            weight_decay: 0.005
 
 evaluation:
   bootstrap_samples: 500
