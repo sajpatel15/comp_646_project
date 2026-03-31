@@ -5,6 +5,7 @@ from __future__ import annotations
 
 __all__ = [
     "AuditConfig",
+    "PerformanceConfig",
     "ProjectConfig",
     "RuntimeInfo",
     "auto_fill_audit_sheet",
@@ -26,11 +27,12 @@ def __getattr__(name: str):
         from .audit_ui import launch_audit_reviewer
 
         return launch_audit_reviewer
-    if name in {"AuditConfig", "ProjectConfig", "load_config"}:
-        from .config import AuditConfig, ProjectConfig, load_config
+    if name in {"AuditConfig", "PerformanceConfig", "ProjectConfig", "load_config"}:
+        from .config import AuditConfig, PerformanceConfig, ProjectConfig, load_config
 
         return {
             "AuditConfig": AuditConfig,
+            "PerformanceConfig": PerformanceConfig,
             "ProjectConfig": ProjectConfig,
             "load_config": load_config,
         }[name]

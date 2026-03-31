@@ -30,7 +30,8 @@ Build a reproducible COCO-derived benchmark for image-caption entailment, neutra
   - Mid-scale: `4,000` source families
   - Final-scale: `6,000` source families
 - Qwen subset: fixed `600` examples selected once by seed.
-- Qwen runtime: 4-bit quantized inference by default.
+- Qwen runtime: adaptive, profile-driven precision and batching by default, with a compatibility mode that preserves the older conservative `4bit` path when needed.
+- CLIP and learned-model performance tuning: config-driven and stage-aware through the runtime/performance layer rather than notebook-specific branching.
 - COCO access: check Drive cache first, otherwise download automatically.
 
 ## Acceptance Criteria

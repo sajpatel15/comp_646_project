@@ -13,6 +13,7 @@ import numpy as np
 import torch
 
 from .config import ProjectConfig
+from .performance import ResolvedPerformanceProfile, resolve_performance_profile
 
 
 @dataclass(slots=True)
@@ -20,6 +21,7 @@ class RuntimeInfo:
     project_root: Path
     is_colab: bool
     device: torch.device
+    performance: ResolvedPerformanceProfile
     cache_root: Path
     dataset_root: Path
     benchmark_root: Path
@@ -28,6 +30,7 @@ class RuntimeInfo:
     metrics_root: Path
     figure_root: Path
     qwen_root: Path
+    qwen_scratch_root: Path
 
 
 def scope_runtime(runtime: RuntimeInfo, stage: str) -> RuntimeInfo:
@@ -44,6 +47,7 @@ def scope_runtime(runtime: RuntimeInfo, stage: str) -> RuntimeInfo:
         metrics_root=runtime.metrics_root / normalized,
         figure_root=runtime.figure_root / normalized,
         qwen_root=runtime.qwen_root / normalized,
+        qwen_scratch_root=runtime.qwen_scratch_root / normalized,
     )
 
 
@@ -81,11 +85,21 @@ def detect_runtime(project_root: str | Path, config: ProjectConfig) -> RuntimeIn
     is_colab = _in_colab()
     mount_google_drive_if_needed(config)
     cache_root = _resolve_root(root, config, is_colab)
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    if config.training.device != "auto":
+        device = torch.device(config.training.device)
+    else:
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    performance = resolve_performance_profile(
+        config.performance,
+        device=device,
+        is_colab=is_colab,
+        cache_root=cache_root,
+    )
     return RuntimeInfo(
         project_root=root,
         is_colab=is_colab,
         device=device,
+        performance=performance,
         cache_root=cache_root,
         dataset_root=(
             Path(config.runtime.colab_dataset_root).expanduser()
@@ -98,6 +112,7 @@ def detect_runtime(project_root: str | Path, config: ProjectConfig) -> RuntimeIn
         metrics_root=_resolve_subpath(cache_root, config.paths.metrics_root),
         figure_root=_resolve_subpath(cache_root, config.paths.figure_root),
         qwen_root=_resolve_subpath(cache_root, config.paths.qwen_root),
+        qwen_scratch_root=performance.scratch_root / "qwen",
     )
 
 
@@ -131,3 +146,11 @@ def print_runtime_summary(runtime: RuntimeInfo) -> None:
     print(f"  figures:      {runtime.figure_root}")
     print(f"  colab:        {runtime.is_colab}")
     print(f"  device:       {runtime.device}")
+    print(f"  perf profile: {runtime.performance.name}")
+    print(f"  clip dtype:   {runtime.performance.clip_precision}")
+    print(f"  qwen dtype:   {runtime.performance.qwen_precision}")
+    print(f"  qwen batch:   {runtime.performance.qwen_batch_size}")
+    print(f"  qwen cache:   {runtime.performance.qwen_cache_mode}")
+    if runtime.performance.gpu_name:
+        memory = runtime.performance.gpu_total_memory_gb or 0.0
+        print(f"  gpu:          {runtime.performance.gpu_name} ({memory:.1f} GB)")
