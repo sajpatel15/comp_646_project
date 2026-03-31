@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -107,6 +108,7 @@ def train_model(
     history = []
     best_metrics: dict[str, float | list[list[int]]] = {"macro_f1": -1.0}
     best_checkpoint_path = Path(checkpoint_path) if checkpoint_path else None
+    best_state_dict: dict[str, torch.Tensor] | None = None
     best_logits = torch.empty(0)
     best_labels = torch.empty(0, dtype=torch.long)
 
@@ -134,6 +136,7 @@ def train_model(
             writer.add_scalar("val/macro_f1", float(val_metrics["macro_f1"]), epoch)
         if float(val_metrics["macro_f1"]) > float(best_metrics["macro_f1"]):
             best_metrics = val_metrics
+            best_state_dict = deepcopy(model.state_dict())
             best_logits = val_logits
             best_labels = val_labels
             if best_checkpoint_path:
@@ -142,6 +145,9 @@ def train_model(
 
     if writer:
         writer.close()
+
+    if best_state_dict is not None:
+        model.load_state_dict(best_state_dict)
 
     return TrainingResult(
         history=history,

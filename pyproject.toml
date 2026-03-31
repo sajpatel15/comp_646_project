@@ -10,6 +10,7 @@ readme = "IMPLEMENTATION_PLAN.md"
 requires-python = ">=3.10"
 dependencies = [
   "accelerate>=1.1.0",
+  "ipywidgets>=8.1.0",
   "matplotlib>=3.8.0",
   "numpy>=1.26.0",
   "pandas>=2.2.0",
