@@ -40,7 +40,7 @@ class PerformanceResolutionTests(unittest.TestCase):
         self.assertEqual("t4", profile.name)
         self.assertEqual("fp16", profile.qwen_precision)
         self.assertEqual("fp16", profile.training_amp_precision)
-        self.assertEqual(2, profile.qwen_batch_size)
+        self.assertEqual(4, profile.qwen_batch_size)
         self.assertEqual("scratch_then_sync", profile.qwen_cache_mode)
         self.assertEqual(Path("/content/comp646_scratch"), profile.scratch_root)
 

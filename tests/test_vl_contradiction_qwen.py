@@ -25,6 +25,9 @@ from vl_contradiction.qwen import (  # noqa: E402
 
 
 class FakeProcessor:
+    def __init__(self) -> None:
+        self.tokenizer = SimpleNamespace(padding_side="right")
+
     def apply_chat_template(self, messages, tokenize=False, add_generation_prompt=True):
         return messages[0]["content"][1]["text"]
 
@@ -85,7 +88,7 @@ class QwenTests(unittest.TestCase):
 
     def test_load_qwen_bundle_auto_precision_falls_back_to_4bit(self) -> None:
         FakeModelClass.calls = []
-        fake_processor = SimpleNamespace()
+        fake_processor = FakeProcessor()
 
         with mock.patch("vl_contradiction.qwen.AutoProcessor.from_pretrained", return_value=fake_processor), mock.patch(
             "vl_contradiction.qwen._resolve_qwen_model_cls", return_value=FakeModelClass
@@ -100,6 +103,7 @@ class QwenTests(unittest.TestCase):
             )
 
         self.assertIs(bundle.processor, fake_processor)
+        self.assertEqual("left", fake_processor.tokenizer.padding_side)
         self.assertEqual("4bit", bundle.policy.precision)
         self.assertGreaterEqual(len(FakeModelClass.calls), 2)
         self.assertIn("torch_dtype", FakeModelClass.calls[0])
@@ -159,12 +163,17 @@ class QwenTests(unittest.TestCase):
                 ),
             )
 
-            outputs = run_qwen_inference(records, bundle, final_dir, max_new_tokens=8)
+            with mock.patch("builtins.print") as fake_print:
+                outputs = run_qwen_inference(records, bundle, final_dir, max_new_tokens=8)
 
             self.assertEqual(records["sample_id"].tolist(), outputs["sample_id"].tolist())
             self.assertEqual([4, 2, 2, 1], model.generate_calls)
             self.assertEqual(5, len(list(final_dir.glob("*.json"))))
             self.assertEqual(5, len(list((scratch_root / final_dir.name).glob("*.json"))))
+            printed = "\n".join(" ".join(str(arg) for arg in call.args) for call in fake_print.call_args_list)
+            self.assertIn("[qwen] start total=5 cached=0 run=5 batch=4 precision=fp16", printed)
+            self.assertIn("[qwen] oom batch=4 -> 2", printed)
+            self.assertIn("[qwen] done profile=t4 precision=fp16 batch=2", printed)
 
     def test_run_qwen_inference_promotes_scratch_hits_into_canonical_cache(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:

@@ -127,7 +127,7 @@ def _resolve_qwen_batch_size(
     if "h100" in lowered_name:
         return 8
     if "t4" in lowered_name:
-        return 2 if precision == "fp16" else 4
+        return 4 if precision == "fp16" else 6
     if precision == "bf16":
         return 6 if memory_gb >= 40.0 else 4
     if precision == "fp16":
