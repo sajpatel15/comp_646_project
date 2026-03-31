@@ -71,6 +71,15 @@ class EvaluationConfig:
 
 
 @dataclass(slots=True)
+class AuditConfig:
+    overall_label_valid_threshold: float
+    overall_grammar_ok_threshold: float
+    per_family_label_valid_threshold: float
+    require_all_rows_reviewed: bool
+    require_qwen_for_readiness: bool
+
+
+@dataclass(slots=True)
 class ProjectConfig:
     runtime: RuntimeConfig
     paths: PathsConfig
@@ -78,6 +87,7 @@ class ProjectConfig:
     model: ModelConfig
     training: TrainingConfig
     evaluation: EvaluationConfig
+    audit: AuditConfig
     source_path: Path
 
     def as_dict(self) -> dict[str, Any]:
@@ -103,5 +113,6 @@ def load_config(config_path: str | Path) -> ProjectConfig:
         model=ModelConfig(**raw["model"]),
         training=TrainingConfig(**raw["training"]),
         evaluation=EvaluationConfig(**raw["evaluation"]),
+        audit=AuditConfig(**raw["audit"]),
         source_path=path,
     )

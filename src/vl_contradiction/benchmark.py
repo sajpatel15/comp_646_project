@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import re
+from collections import Counter
 from dataclasses import dataclass
-from typing import Iterable
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -24,14 +25,12 @@ HYPERNYM_MAP = {
     "dog": "animal",
     "cat": "animal",
     "horse": "animal",
+    "cow": "animal",
     "car": "vehicle",
     "truck": "vehicle",
     "bus": "vehicle",
     "bicycle": "vehicle",
     "motorcycle": "vehicle",
-    "apple": "fruit",
-    "banana": "fruit",
-    "orange": "fruit",
 }
 
 ATTRIBUTE_FLIPS = {
@@ -54,6 +53,21 @@ ACTION_FLIPS = {
     "riding": "pushing",
 }
 
+CONTRADICTION_OBJECT_MAP = {
+    "dog": "cat",
+    "cat": "dog",
+    "horse": "cow",
+    "cow": "horse",
+    "bicycle": "motorcycle",
+    "motorcycle": "bicycle",
+    "bus": "train",
+    "train": "bus",
+    "couch": "bench",
+    "bench": "couch",
+    "tv": "laptop",
+    "laptop": "tv",
+}
+
 NUMBER_WORDS = {
     "one": 1,
     "two": 2,
@@ -64,132 +78,369 @@ NUMBER_WORDS = {
 }
 
 NUMBER_LOOKUP = {value: key for key, value in NUMBER_WORDS.items()}
+IRREGULAR_PLURALS = {
+    "person": "people",
+    "man": "men",
+    "woman": "women",
+    "child": "children",
+    "sheep": "sheep",
+}
+IRREGULAR_SINGULARS = {plural: singular for singular, plural in IRREGULAR_PLURALS.items()}
+
 ATTRIBUTE_WORDS = set(ATTRIBUTE_FLIPS)
+NEUTRAL_FAMILIES = ("neutral_attribute_drop", "neutral_hypernym")
+CONTRADICTION_FAMILIES = (
+    "contradiction_action",
+    "contradiction_attribute",
+    "contradiction_count",
+    "contradiction_object",
+)
+PROTECTED_PHRASES = (
+    "old fashioned",
+    "black and white",
+    "white and black",
+    "hot dog",
+    "cell phone",
+    "traffic light",
+    "party bus",
+    "double decker bus",
+    "double decker",
+)
+ARTICLE_EXCEPTIONS = ("honest", "hour", "heir")
+CONSONANT_SOUND_EXCEPTIONS = ("uni", "use", "user", "euro", "one")
+SKIPPABLE_NUMBER_MODIFIERS = ATTRIBUTE_WORDS | {
+    "other",
+    "elder",
+    "elderly",
+    "single",
+    "double",
+    "mini",
+    "colorful",
+    "colored",
+    "brown",
+    "green",
+    "orange",
+    "yellow",
+    "gray",
+    "grey",
+}
 
 
 @dataclass(slots=True)
 class BenchmarkBuildResult:
     records: pd.DataFrame
     family_manifest: pd.DataFrame
+    coverage_summary: pd.DataFrame
 
 
-def _replace_first(text: str, source: str, target: str) -> str | None:
-    pattern = re.compile(rf"\b{re.escape(source)}\b", flags=re.IGNORECASE)
-    if not pattern.search(text):
-        return None
-    replaced = pattern.sub(target, text, count=1)
-    return _normalize_whitespace(replaced)
+@dataclass(slots=True)
+class _CandidatePack:
+    row: dict[str, Any]
+    entailment: tuple[str, str] | None
+    neutrals: dict[str, tuple[str, str]]
+    contradictions: dict[str, tuple[str, str]]
 
 
 def _normalize_whitespace(text: str) -> str:
-    return re.sub(r"\s+", " ", text).strip(" ,.")
+    compact = re.sub(r"\s+", " ", text)
+    compact = re.sub(r"\s+([,.;:!?])", r"\1", compact)
+    return compact.strip(" ,.")
 
 
-def _remove_attribute_word(text: str) -> tuple[str | None, str | None]:
+def _word_pattern(phrase: str) -> str:
+    parts = [re.escape(part) for part in phrase.split()]
+    return r"\b" + r"\s+".join(parts) + r"\b"
+
+
+def _token_key(token: str) -> str:
+    return re.sub(r"(^[^A-Za-z]+|[^A-Za-z]+$)", "", token).lower()
+
+
+def _replace_token_core(token: str, replacement: str) -> str:
+    match = re.match(r"(^[^A-Za-z]*)(.*?)([^A-Za-z]*$)", token)
+    if not match:
+        return replacement
+    prefix, core, suffix = match.groups()
+    if core.isupper():
+        replacement = replacement.upper()
+    elif core[:1].isupper():
+        replacement = replacement.capitalize()
+    return f"{prefix}{replacement}{suffix}"
+
+
+def _match_case(source: str, target: str) -> str:
+    if source.isupper():
+        return target.upper()
+    if source[:1].isupper():
+        return target.capitalize()
+    return target
+
+
+def _protected_spans(text: str) -> list[tuple[int, int]]:
+    spans: list[tuple[int, int]] = []
+    lower = text.lower()
+    for phrase in PROTECTED_PHRASES:
+        pattern = re.compile(_word_pattern(phrase), flags=re.IGNORECASE)
+        spans.extend(match.span() for match in pattern.finditer(lower))
+    return spans
+
+
+def _span_is_protected(span: tuple[int, int], protected_spans: list[tuple[int, int]]) -> bool:
+    return any(max(span[0], start) < min(span[1], end) for start, end in protected_spans)
+
+
+def _starts_with_vowel_sound(token: str) -> bool:
+    lowered = token.lower()
+    if lowered.startswith(ARTICLE_EXCEPTIONS):
+        return True
+    if lowered.startswith(CONSONANT_SOUND_EXCEPTIONS):
+        return False
+    return lowered[:1] in {"a", "e", "i", "o", "u"}
+
+
+def _singularize_word(word: str) -> str:
+    lowered = word.lower()
+    if lowered in IRREGULAR_SINGULARS:
+        return IRREGULAR_SINGULARS[lowered]
+    if lowered.endswith("ies") and len(lowered) > 3:
+        return lowered[:-3] + "y"
+    if lowered.endswith("es") and lowered[:-2].endswith(("s", "x", "z", "ch", "sh")):
+        return lowered[:-2]
+    if lowered.endswith("s") and len(lowered) > 1 and not lowered.endswith(("ss", "us")):
+        return lowered[:-1]
+    return lowered
+
+
+def _pluralize_word(word: str) -> str:
+    lowered = word.lower()
+    if lowered in IRREGULAR_PLURALS:
+        return IRREGULAR_PLURALS[lowered]
+    if lowered in IRREGULAR_SINGULARS:
+        return lowered
+    if _singularize_word(lowered) != lowered:
+        return lowered
+    if lowered.endswith(("s", "x", "z", "ch", "sh")):
+        return lowered + "es"
+    if lowered.endswith("y") and len(lowered) > 1 and lowered[-2] not in {"a", "e", "i", "o", "u"}:
+        return lowered[:-1] + "ies"
+    return lowered + "s"
+
+
+def _pluralize_phrase(phrase: str) -> str:
+    parts = phrase.split()
+    if not parts:
+        return phrase
+    parts[-1] = _pluralize_word(parts[-1])
+    return " ".join(parts)
+
+
+def _next_count_noun_index(tokens: list[str], start_index: int) -> int | None:
+    skips = 0
+    for index in range(start_index, len(tokens)):
+        core = _token_key(tokens[index])
+        if not core:
+            continue
+        if core in SKIPPABLE_NUMBER_MODIFIERS and skips < 3:
+            skips += 1
+            continue
+        return index
+    return None
+
+
+def _apply_article_agreement(text: str) -> str:
+    tokens = text.split()
+    for index in range(len(tokens) - 1):
+        article = _token_key(tokens[index])
+        if article not in {"a", "an"}:
+            continue
+        next_token = _token_key(tokens[index + 1])
+        if not next_token:
+            continue
+        expected = "an" if _starts_with_vowel_sound(next_token) else "a"
+        tokens[index] = _replace_token_core(tokens[index], expected)
+    return " ".join(tokens)
+
+
+def _apply_number_agreement(text: str) -> str:
     tokens = text.split()
     for index, token in enumerate(tokens):
-        normalized = re.sub(r"[^a-zA-Z]", "", token.lower())
-        if normalized in ATTRIBUTE_WORDS:
-            updated = tokens[:index] + tokens[index + 1 :]
-            return _normalize_whitespace(" ".join(updated)), normalized
-    return None, None
+        number_word = _token_key(token)
+        if number_word not in NUMBER_WORDS:
+            continue
+        noun_index = _next_count_noun_index(tokens, index + 1)
+        if noun_index is None:
+            continue
+        noun_core = _token_key(tokens[noun_index])
+        if not noun_core:
+            continue
+        singular = NUMBER_WORDS[number_word] == 1
+        replacement = _singularize_word(noun_core) if singular else _pluralize_word(noun_core)
+        tokens[noun_index] = _replace_token_core(tokens[noun_index], replacement)
+
+        if noun_index + 1 >= len(tokens):
+            continue
+        verb_core = _token_key(tokens[noun_index + 1])
+        if singular and verb_core in {"are", "were"}:
+            verb = "is" if verb_core == "are" else "was"
+            tokens[noun_index + 1] = _replace_token_core(tokens[noun_index + 1], verb)
+        if not singular and verb_core in {"is", "was"}:
+            verb = "are" if verb_core == "is" else "were"
+            tokens[noun_index + 1] = _replace_token_core(tokens[noun_index + 1], verb)
+    return " ".join(tokens)
 
 
-def _entailment_variant(caption: str) -> tuple[str | None, str | None]:
+def _normalize_caption(text: str) -> str:
+    normalized = _normalize_whitespace(text)
+    normalized = _apply_number_agreement(normalized)
+    normalized = _apply_article_agreement(normalized)
+    return _normalize_whitespace(normalized)
+
+
+def _replace_first_safe(text: str, source: str, target: str) -> str | None:
+    pattern = re.compile(_word_pattern(source), flags=re.IGNORECASE)
+    protected_spans = _protected_spans(text)
+    for match in pattern.finditer(text):
+        if _span_is_protected(match.span(), protected_spans):
+            continue
+        replacement = _match_case(match.group(0), target)
+        updated = text[: match.start()] + replacement + text[match.end() :]
+        return _normalize_caption(updated)
+    return None
+
+
+def _remove_first_safe(text: str, source: str) -> str | None:
+    pattern = re.compile(_word_pattern(source), flags=re.IGNORECASE)
+    protected_spans = _protected_spans(text)
+    for match in pattern.finditer(text):
+        if _span_is_protected(match.span(), protected_spans):
+            continue
+        updated = text[: match.start()] + text[match.end() :]
+        return _normalize_caption(updated)
+    return None
+
+
+def _entailment_candidate(caption: str) -> tuple[str | None, str | None]:
     lower = caption.lower()
     for source, target in SYNONYM_MAP.items():
-        if source in lower:
-            updated = _replace_first(caption, source, target)
+        if re.search(_word_pattern(source), lower):
+            updated = _replace_first_safe(caption, source, target)
             if updated and updated.lower() != caption.lower():
                 return updated, f"synonym:{source}->{target}"
     return None, None
 
 
-def _neutral_variant(caption: str) -> tuple[str | None, str | None, str | None]:
+def _neutral_candidates(caption: str) -> dict[str, tuple[str, str]]:
+    candidates: dict[str, tuple[str, str]] = {}
     lower = caption.lower()
+
     for source, target in HYPERNYM_MAP.items():
-        if re.search(rf"\b{re.escape(source)}\b", lower):
-            updated = _replace_first(caption, source, target)
+        if re.search(_word_pattern(source), lower):
+            updated = _replace_first_safe(caption, source, target)
             if updated and updated.lower() != caption.lower():
-                return updated, "neutral_hypernym", f"hypernym:{source}->{target}"
-    updated, removed = _remove_attribute_word(caption)
-    if updated and removed:
-        return updated, "neutral_attribute_drop", f"attribute_drop:{removed}"
-    return None, None, None
+                candidates["neutral_hypernym"] = (updated, f"hypernym:{source}->{target}")
+                break
+
+    removable_attributes: list[tuple[int, str]] = []
+    protected_spans = _protected_spans(caption)
+    for attribute in ATTRIBUTE_WORDS:
+        pattern = re.compile(_word_pattern(attribute), flags=re.IGNORECASE)
+        for match in pattern.finditer(caption):
+            if _span_is_protected(match.span(), protected_spans):
+                continue
+            removable_attributes.append((match.start(), attribute))
+            break
+    if removable_attributes:
+        _, attribute = min(removable_attributes, key=lambda item: item[0])
+        updated = _remove_first_safe(caption, attribute)
+        if updated and updated.lower() != caption.lower():
+            candidates["neutral_attribute_drop"] = (updated, f"attribute_drop:{attribute}")
+    return candidates
 
 
 def _count_contradiction(caption: str, object_counts: dict[str, int]) -> tuple[str | None, str | None]:
-    lower = caption.lower()
-    for word, value in NUMBER_WORDS.items():
-        if re.search(rf"\b{word}\b", lower):
-            replacement_value = 1 if value != 1 else 2
-            replacement_word = NUMBER_LOOKUP[replacement_value]
-            updated = _replace_first(caption, word, replacement_word)
-            if updated:
-                return updated, f"count:{word}->{replacement_word}"
-    for object_name, count in object_counts.items():
+    tokens = caption.split()
+    for index, token in enumerate(tokens):
+        number_word = _token_key(token)
+        if number_word not in NUMBER_WORDS:
+            continue
+        replacement_value = 1 if NUMBER_WORDS[number_word] != 1 else 2
+        tokens[index] = _replace_token_core(token, NUMBER_LOOKUP[replacement_value])
+        updated = _normalize_caption(" ".join(tokens))
+        return updated, f"count:{number_word}->{NUMBER_LOOKUP[replacement_value]}"
+
+    protected_spans = _protected_spans(caption)
+    for object_name, count in sorted(object_counts.items(), key=lambda item: (-len(item[0]), item[0])):
         if count <= 1:
             continue
-        article_pattern = re.compile(rf"\b(a|an)\s+{re.escape(object_name)}\b", flags=re.IGNORECASE)
-        if article_pattern.search(caption):
-            updated = article_pattern.sub(f"two {object_name}", caption, count=1)
-            return _normalize_whitespace(updated), f"count:article->{object_name}"
+        pattern = re.compile(rf"\b(a|an)\s+{re.escape(object_name)}\b", flags=re.IGNORECASE)
+        for match in pattern.finditer(caption):
+            if _span_is_protected(match.span(), protected_spans):
+                continue
+            replacement = f"two {_pluralize_phrase(object_name)}"
+            if match.group(0)[:1].isupper():
+                replacement = replacement.capitalize()
+            updated = caption[: match.start()] + replacement + caption[match.end() :]
+            return _normalize_caption(updated), f"count:article->{object_name}"
     return None, None
 
 
 def _attribute_contradiction(caption: str) -> tuple[str | None, str | None]:
     lower = caption.lower()
     for source, target in ATTRIBUTE_FLIPS.items():
-        if re.search(rf"\b{re.escape(source)}\b", lower):
-            updated = _replace_first(caption, source, target)
-            if updated:
+        if re.search(_word_pattern(source), lower):
+            updated = _replace_first_safe(caption, source, target)
+            if updated and updated.lower() != caption.lower():
                 return updated, f"attribute:{source}->{target}"
     return None, None
 
 
-def _object_contradiction(caption: str, present_objects: Iterable[str], absent_objects: Iterable[str]) -> tuple[str | None, str | None]:
+def _object_contradiction(caption: str, present_objects: list[str]) -> tuple[str | None, str | None]:
     lower = caption.lower()
-    for present in present_objects:
-        if not re.search(rf"\b{re.escape(present)}\b", lower):
+    present_set = set(present_objects)
+    for source, target in CONTRADICTION_OBJECT_MAP.items():
+        if source not in present_set or target in present_set:
             continue
-        for absent in absent_objects:
-            if absent == present:
-                continue
-            updated = _replace_first(caption, present, absent)
-            if updated:
-                return updated, f"object:{present}->{absent}"
+        if not re.search(_word_pattern(source), lower):
+            continue
+        updated = _replace_first_safe(caption, source, target)
+        if updated and updated.lower() != caption.lower():
+            return updated, f"object:{source}->{target}"
     return None, None
 
 
 def _action_contradiction(caption: str) -> tuple[str | None, str | None]:
     lower = caption.lower()
     for source, target in ACTION_FLIPS.items():
-        if re.search(rf"\b{re.escape(source)}\b", lower):
-            updated = _replace_first(caption, source, target)
-            if updated:
+        if re.search(_word_pattern(source), lower):
+            updated = _replace_first_safe(caption, source, target)
+            if updated and updated.lower() != caption.lower():
                 return updated, f"action:{source}->{target}"
     return None, None
 
 
-def _contradiction_variant(row: pd.Series, all_categories: list[str]) -> tuple[str | None, str | None, str | None]:
+def _contradiction_candidates(row: pd.Series) -> dict[str, tuple[str, str]]:
     caption = row["caption"]
-    object_counts = row["object_counts"]
-    present_objects = row["objects"]
-    absent_objects = [category for category in all_categories if category not in set(present_objects)]
+    candidates: dict[str, tuple[str, str]] = {}
 
-    for family, fn in (
-        ("contradiction_count", lambda: _count_contradiction(caption, object_counts)),
-        ("contradiction_attribute", lambda: _attribute_contradiction(caption)),
-        ("contradiction_object", lambda: _object_contradiction(caption, present_objects, absent_objects)),
-        ("contradiction_action", lambda: _action_contradiction(caption)),
-    ):
-        updated, rule = fn()
-        if updated:
-            return updated, family, rule
-    return None, None, None
+    count_candidate = _count_contradiction(caption, row["object_counts"])
+    if all(count_candidate):
+        candidates["contradiction_count"] = (count_candidate[0], count_candidate[1])
+
+    attribute_candidate = _attribute_contradiction(caption)
+    if all(attribute_candidate):
+        candidates["contradiction_attribute"] = (attribute_candidate[0], attribute_candidate[1])
+
+    object_candidate = _object_contradiction(caption, row["objects"])
+    if all(object_candidate):
+        candidates["contradiction_object"] = (object_candidate[0], object_candidate[1])
+
+    action_candidate = _action_contradiction(caption)
+    if all(action_candidate):
+        candidates["contradiction_action"] = (action_candidate[0], action_candidate[1])
+    return candidates
 
 
-def _make_record(row: pd.Series, edited_caption: str, label: str, edit_family: str, edit_rule: str) -> dict:
+def _make_record(row: dict[str, Any], edited_caption: str, label: str, edit_family: str, edit_rule: str) -> dict[str, Any]:
     sample_id = f"{row['family_id']}::{label}"
     return {
         "sample_id": sample_id,
@@ -207,17 +458,162 @@ def _make_record(row: pd.Series, edited_caption: str, label: str, edit_family: s
     }
 
 
-def _family_records(row: pd.Series, all_categories: list[str]) -> list[dict] | None:
-    entailment_text, entailment_rule = _entailment_variant(row["caption"])
-    neutral_text, neutral_family, neutral_rule = _neutral_variant(row["caption"])
-    contradiction_text, contradiction_family, contradiction_rule = _contradiction_variant(row, all_categories)
-    if not all([entailment_text, neutral_text, contradiction_text]):
+def _candidate_pack(row: pd.Series) -> _CandidatePack | None:
+    entailment = _entailment_candidate(row["caption"])
+    neutrals = _neutral_candidates(row["caption"])
+    contradictions = _contradiction_candidates(row)
+    if not all(entailment) or not neutrals or not contradictions:
         return None
-    return [
-        _make_record(row, entailment_text, "entailment", "entailment_synonym", entailment_rule or "synonym"),
-        _make_record(row, neutral_text, "neutral", neutral_family or "neutral", neutral_rule or "neutral"),
-        _make_record(row, contradiction_text, "contradiction", contradiction_family or "contradiction", contradiction_rule or "contradiction"),
+    return _CandidatePack(
+        row={
+            "family_id": row["family_id"],
+            "image_id": row["image_id"],
+            "caption": row["caption"],
+            "file_path": row["file_path"],
+            "objects": row["objects"],
+            "object_counts": row["object_counts"],
+        },
+        entailment=(entailment[0], entailment[1]),
+        neutrals=neutrals,
+        contradictions=contradictions,
+    )
+
+
+def _target_counts(total: int, families: tuple[str, ...]) -> dict[str, int]:
+    base, remainder = divmod(total, len(families))
+    targets = {family: base for family in families}
+    for family in families[:remainder]:
+        targets[family] += 1
+    return targets
+
+
+def _choose_combo(
+    pack: _CandidatePack,
+    neutral_targets: dict[str, int],
+    contradiction_targets: dict[str, int],
+    neutral_counts: Counter[str],
+    contradiction_counts: Counter[str],
+    require_deficit: bool,
+) -> tuple[str, str] | None:
+    best_choice: tuple[str, str] | None = None
+    best_score: tuple[int, int, int, int] | None = None
+    for neutral_family in pack.neutrals:
+        neutral_gap = neutral_targets[neutral_family] - neutral_counts[neutral_family]
+        for contradiction_family in pack.contradictions:
+            contradiction_gap = contradiction_targets[contradiction_family] - contradiction_counts[contradiction_family]
+            covered_gaps = int(neutral_gap > 0) + int(contradiction_gap > 0)
+            if require_deficit and covered_gaps == 0:
+                continue
+            score = (
+                covered_gaps,
+                contradiction_gap + neutral_gap,
+                -contradiction_counts[contradiction_family],
+                -neutral_counts[neutral_family],
+            )
+            if best_score is None or score > best_score:
+                best_score = score
+                best_choice = (neutral_family, contradiction_family)
+    return best_choice
+
+
+def _select_balanced_records(candidate_packs: list[_CandidatePack], family_limit: int) -> list[dict[str, Any]]:
+    neutral_targets = _target_counts(family_limit, NEUTRAL_FAMILIES)
+    contradiction_targets = _target_counts(family_limit, CONTRADICTION_FAMILIES)
+    neutral_counts: Counter[str] = Counter()
+    contradiction_counts: Counter[str] = Counter()
+    selected_records: list[dict[str, Any]] = []
+    used_family_ids: set[str] = set()
+    remaining: list[_CandidatePack] = []
+
+    for pack in candidate_packs:
+        if len(selected_records) >= family_limit * 3:
+            break
+        choice = _choose_combo(pack, neutral_targets, contradiction_targets, neutral_counts, contradiction_counts, require_deficit=True)
+        if choice is None:
+            remaining.append(pack)
+            continue
+        neutral_family, contradiction_family = choice
+        used_family_ids.add(pack.row["family_id"])
+        neutral_counts[neutral_family] += 1
+        contradiction_counts[contradiction_family] += 1
+        selected_records.extend(
+            [
+                _make_record(pack.row, pack.entailment[0], "entailment", "entailment_synonym", pack.entailment[1]),
+                _make_record(pack.row, pack.neutrals[neutral_family][0], "neutral", neutral_family, pack.neutrals[neutral_family][1]),
+                _make_record(pack.row, pack.contradictions[contradiction_family][0], "contradiction", contradiction_family, pack.contradictions[contradiction_family][1]),
+            ]
+        )
+
+    if len(selected_records) >= family_limit * 3:
+        return selected_records
+
+    for pack in remaining:
+        if len(selected_records) >= family_limit * 3:
+            break
+        if pack.row["family_id"] in used_family_ids:
+            continue
+        choice = _choose_combo(pack, neutral_targets, contradiction_targets, neutral_counts, contradiction_counts, require_deficit=False)
+        if choice is None:
+            continue
+        neutral_family, contradiction_family = choice
+        used_family_ids.add(pack.row["family_id"])
+        neutral_counts[neutral_family] += 1
+        contradiction_counts[contradiction_family] += 1
+        selected_records.extend(
+            [
+                _make_record(pack.row, pack.entailment[0], "entailment", "entailment_synonym", pack.entailment[1]),
+                _make_record(pack.row, pack.neutrals[neutral_family][0], "neutral", neutral_family, pack.neutrals[neutral_family][1]),
+                _make_record(pack.row, pack.contradictions[contradiction_family][0], "contradiction", contradiction_family, pack.contradictions[contradiction_family][1]),
+            ]
+        )
+    return selected_records
+
+
+def summarize_family_coverage(candidate_packs: list[_CandidatePack], records: pd.DataFrame, family_limit: int) -> pd.DataFrame:
+    """Summarize candidate availability and selected coverage for each edit family."""
+
+    neutral_targets = _target_counts(family_limit, NEUTRAL_FAMILIES)
+    contradiction_targets = _target_counts(family_limit, CONTRADICTION_FAMILIES)
+    candidate_counts: Counter[str] = Counter({"entailment_synonym": sum(1 for pack in candidate_packs if pack.entailment)})
+    for family in NEUTRAL_FAMILIES:
+        candidate_counts[family] = sum(1 for pack in candidate_packs if family in pack.neutrals)
+    for family in CONTRADICTION_FAMILIES:
+        candidate_counts[family] = sum(1 for pack in candidate_packs if family in pack.contradictions)
+
+    selected_counts = Counter(records["edit_family"]) if not records.empty else Counter()
+    rows = [
+        {
+            "label": "entailment",
+            "edit_family": "entailment_synonym",
+            "candidate_count": int(candidate_counts["entailment_synonym"]),
+            "selected_count": int(selected_counts["entailment_synonym"]),
+            "target_count": int(family_limit),
+            "meets_target": int(selected_counts["entailment_synonym"]) >= int(family_limit),
+        }
     ]
+    for family in NEUTRAL_FAMILIES:
+        rows.append(
+            {
+                "label": "neutral",
+                "edit_family": family,
+                "candidate_count": int(candidate_counts[family]),
+                "selected_count": int(selected_counts[family]),
+                "target_count": int(neutral_targets[family]),
+                "meets_target": int(selected_counts[family]) >= int(neutral_targets[family]),
+            }
+        )
+    for family in CONTRADICTION_FAMILIES:
+        rows.append(
+            {
+                "label": "contradiction",
+                "edit_family": family,
+                "candidate_count": int(candidate_counts[family]),
+                "selected_count": int(selected_counts[family]),
+                "target_count": int(contradiction_targets[family]),
+                "meets_target": int(selected_counts[family]) >= int(contradiction_targets[family]),
+            }
+        )
+    return pd.DataFrame(rows).sort_values(["label", "edit_family"]).reset_index(drop=True)
 
 
 def _assign_splits(family_ids: list[str], split_ratio: list[float], seed: int) -> dict[str, str]:
@@ -242,29 +638,29 @@ def build_benchmark(
     split_ratio: list[float],
     seed: int,
 ) -> BenchmarkBuildResult:
-    """Construct benchmark records from COCO caption rows."""
+    """Construct a balanced benchmark from COCO caption rows."""
 
     print(f"Building benchmark from {family_limit} source caption families")
     family_rows = coco_frame.sample(frac=1.0, random_state=seed).reset_index(drop=True)
-    categories = sorted({category for vocab in family_rows["category_vocab"] for category in vocab})
+    candidate_packs = [pack for _, row in family_rows.iterrows() if (pack := _candidate_pack(row)) is not None]
 
-    records: list[dict] = []
-    kept_families = 0
-    for _, row in family_rows.iterrows():
-        family_records = _family_records(row, categories)
-        if family_records is None:
-            continue
-        records.extend(family_records)
-        kept_families += 1
-        if kept_families >= family_limit:
-            break
+    selected_records = _select_balanced_records(candidate_packs, family_limit)
+    benchmark = pd.DataFrame(selected_records)
+    coverage_summary = summarize_family_coverage(candidate_packs, benchmark, family_limit)
 
-    benchmark = pd.DataFrame(records)
+    if benchmark.empty:
+        family_manifest = pd.DataFrame(columns=["family_id", "image_id", "split"])
+        print("Benchmark generation returned zero rows after safe edit filtering.")
+        print(coverage_summary)
+        return BenchmarkBuildResult(records=benchmark, family_manifest=family_manifest, coverage_summary=coverage_summary)
+
     split_lookup = _assign_splits(sorted(benchmark["family_id"].unique().tolist()), split_ratio, seed)
     benchmark["split"] = benchmark["family_id"].map(split_lookup)
     family_manifest = benchmark[["family_id", "image_id", "split"]].drop_duplicates().sort_values("family_id")
     print(f"Built {len(benchmark)} benchmark rows across {family_manifest.shape[0]} families")
-    return BenchmarkBuildResult(records=benchmark, family_manifest=family_manifest)
+    print("Family coverage summary")
+    print(coverage_summary)
+    return BenchmarkBuildResult(records=benchmark, family_manifest=family_manifest, coverage_summary=coverage_summary)
 
 
 def sample_qwen_subset(records: pd.DataFrame, subset_size: int, seed: int) -> pd.DataFrame:

@@ -115,7 +115,7 @@ def auto_fill_audit_sheet(
     *,
     overwrite_existing: bool = False,
 ) -> dict[str, int]:
-    """Prefill obvious audit decisions and leave risky rows unresolved."""
+    """Prefill only clearly safe audit rows and leave risky rows unresolved."""
 
     audit_path = Path(audit_csv_path)
     frame = pd.read_csv(audit_path, keep_default_na=False)
@@ -141,14 +141,14 @@ def auto_fill_audit_sheet(
         existing_notes = str(row.get("notes", "")).strip()
         frame.at[index, "reviewed_label"] = str(row.get("reviewed_label", "")).strip() or str(row["label"])
 
-        if review_reasons:
+        if review_reasons or issues:
             frame.at[index, "notes"] = _append_note(existing_notes, FLAG_PREFIX, review_reasons + issues)
             flagged += 1
             continue
 
         frame.at[index, "label_valid"] = str(row.get("label_valid", "")).strip() or "true"
-        frame.at[index, "grammar_ok"] = str(row.get("grammar_ok", "")).strip() or ("false" if issues else "true")
-        frame.at[index, "notes"] = _append_note(existing_notes, FILL_PREFIX, issues)
+        frame.at[index, "grammar_ok"] = str(row.get("grammar_ok", "")).strip() or "true"
+        frame.at[index, "notes"] = _append_note(existing_notes, FILL_PREFIX, ["no obvious issues detected"])
         auto_filled += 1
 
     frame.to_csv(audit_path, index=False)

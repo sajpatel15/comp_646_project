@@ -46,3 +46,10 @@ evaluation:
   bootstrap_samples: 500
   threshold_grid_size: 200
   save_figures_as_pdf: true
+
+audit:
+  overall_label_valid_threshold: 0.90
+  overall_grammar_ok_threshold: 0.90
+  per_family_label_valid_threshold: 0.80
+  require_all_rows_reviewed: true
+  require_qwen_for_readiness: true

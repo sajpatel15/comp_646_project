@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import numpy as np
+import pandas as pd
 import torch
 from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_recall_fscore_support
 
@@ -103,3 +104,26 @@ def expected_calibration_error(probabilities: np.ndarray, y_true: np.ndarray, n_
         bin_accuracy=bin_accuracy_array,
         bin_confidence=bin_confidence_array,
     )
+
+
+def per_edit_family_metrics(frame: pd.DataFrame, pred_col: str = "pred_label") -> pd.DataFrame:
+    """Compute accuracy and macro-F1 for each edit family in a labeled frame."""
+
+    rows: list[dict[str, float | int | str]] = []
+    label_to_index = {label: index for index, label in enumerate(CLASS_ORDER)}
+    for edit_family, group in frame.groupby("edit_family"):
+        y_true = group["label"].map(label_to_index).to_numpy()
+        y_pred = group[pred_col].map(label_to_index).to_numpy()
+        metrics = compute_classification_metrics(y_true, y_pred)
+        rows.append(
+            {
+                "edit_family": edit_family,
+                "count": int(len(group)),
+                "accuracy": float(metrics["accuracy"]),
+                "macro_f1": float(metrics["macro_f1"]),
+            }
+        )
+    columns = ["edit_family", "count", "accuracy", "macro_f1"]
+    if not rows:
+        return pd.DataFrame(columns=columns)
+    return pd.DataFrame(rows, columns=columns).sort_values("edit_family").reset_index(drop=True)

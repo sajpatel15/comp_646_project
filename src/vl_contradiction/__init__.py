@@ -1,11 +1,10 @@
 """Core helpers for the multimodal contradiction project."""
 
-from .audit_automation import auto_fill_audit_sheet
-from .audit_ui import launch_audit_reviewer
-from .config import ProjectConfig, load_config
-from .runtime import RuntimeInfo, detect_runtime, ensure_directories, set_global_seed
+from __future__ import annotations
+
 
 __all__ = [
+    "AuditConfig",
     "ProjectConfig",
     "RuntimeInfo",
     "auto_fill_audit_sheet",
@@ -15,3 +14,32 @@ __all__ = [
     "load_config",
     "set_global_seed",
 ]
+
+
+def __getattr__(name: str):
+    if name == "auto_fill_audit_sheet":
+        from .audit_automation import auto_fill_audit_sheet
+
+        return auto_fill_audit_sheet
+    if name == "launch_audit_reviewer":
+        from .audit_ui import launch_audit_reviewer
+
+        return launch_audit_reviewer
+    if name in {"AuditConfig", "ProjectConfig", "load_config"}:
+        from .config import AuditConfig, ProjectConfig, load_config
+
+        return {
+            "AuditConfig": AuditConfig,
+            "ProjectConfig": ProjectConfig,
+            "load_config": load_config,
+        }[name]
+    if name in {"RuntimeInfo", "detect_runtime", "ensure_directories", "set_global_seed"}:
+        from .runtime import RuntimeInfo, detect_runtime, ensure_directories, set_global_seed
+
+        return {
+            "RuntimeInfo": RuntimeInfo,
+            "detect_runtime": detect_runtime,
+            "ensure_directories": ensure_directories,
+            "set_global_seed": set_global_seed,
+        }[name]
+    raise AttributeError(f"module 'vl_contradiction' has no attribute {name!r}")
