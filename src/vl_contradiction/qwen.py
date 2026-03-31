@@ -214,6 +214,10 @@ def _resolve_precision_candidates(policy: QwenRuntimePolicy) -> list[str]:
             return ["4bit"]
         return ["fp32"]
     if precision != "auto":
+        if precision == "bf16" and policy.use_4bit and _cuda_available():
+            return ["bf16", "fp16", "4bit"]
+        if precision == "fp16" and policy.use_4bit and _cuda_available():
+            return ["fp16", "4bit"]
         return [precision]
 
     if not _cuda_available():
@@ -254,6 +258,8 @@ def _load_model_with_precision(model_cls: Any, model_name: str, policy: QwenRunt
             return model, precision
         except Exception as exc:  # pragma: no cover - exercised through monkeypatched tests
             last_error = exc
+            if not _is_out_of_memory_error(exc):
+                raise
             if len(candidates) == 1:
                 raise
     if last_error is not None:
@@ -304,15 +310,25 @@ def _cache_path(output_dir: Path, sample_id: str) -> Path:
     return output_dir / f"{safe_id}.json"
 
 
-def _read_cached_payload(sample_id: str, final_dir: Path, scratch_dir: Path | None) -> dict[str, Any] | None:
+def _resolve_scratch_dir(final_dir: Path, scratch_root: Path) -> Path:
+    if scratch_root.name == final_dir.name:
+        return scratch_root
+    return scratch_root / final_dir.name
+
+
+def _read_cached_payload(
+    sample_id: str,
+    final_dir: Path,
+    scratch_dir: Path | None,
+) -> tuple[dict[str, Any] | None, Path | None]:
     final_path = _cache_path(final_dir, sample_id)
     if final_path.exists():
-        return json.loads(final_path.read_text(encoding="utf-8"))
+        return json.loads(final_path.read_text(encoding="utf-8")), final_path
     if scratch_dir is not None:
         scratch_path = _cache_path(scratch_dir, sample_id)
         if scratch_path.exists():
-            return json.loads(scratch_path.read_text(encoding="utf-8"))
-    return None
+            return json.loads(scratch_path.read_text(encoding="utf-8")), scratch_path
+    return None, None
 
 
 def _build_inputs(bundle: QwenBundle, caption: str, image: Image.Image) -> dict[str, torch.Tensor]:
@@ -505,8 +521,8 @@ def run_qwen_inference(
     final_dir.mkdir(parents=True, exist_ok=True)
     scratch_dir = None
     if policy.cache_mode == "scratch_then_sync":
-        scratch_dir = policy.scratch_root or Path(tempfile.gettempdir()) / "vl_contradiction_qwen_cache"
-        scratch_dir = scratch_dir / final_dir.name
+        scratch_root = policy.scratch_root or Path(tempfile.gettempdir()) / "vl_contradiction_qwen_cache"
+        scratch_dir = _resolve_scratch_dir(final_dir, scratch_root)
         scratch_dir.mkdir(parents=True, exist_ok=True)
 
     records = records.reset_index(drop=True)
@@ -514,10 +530,12 @@ def run_qwen_inference(
     cache_hits = 0
     miss_entries: list[tuple[int, pd.Series]] = []
     for row_index, row in records.iterrows():
-        cached_payload = _read_cached_payload(str(row["sample_id"]), final_dir, scratch_dir)
+        cached_payload, cache_path = _read_cached_payload(str(row["sample_id"]), final_dir, scratch_dir)
         if cached_payload is not None:
             results[row_index] = cached_payload
             cache_hits += 1
+            if cache_path is not None and scratch_dir is not None and cache_path.parent == scratch_dir:
+                shutil.copy2(cache_path, _cache_path(final_dir, str(row["sample_id"])))
         else:
             miss_entries.append((row_index, row))
 

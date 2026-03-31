@@ -105,6 +105,26 @@ class QwenTests(unittest.TestCase):
         self.assertIn("torch_dtype", FakeModelClass.calls[0])
         self.assertIn("quantization_config", FakeModelClass.calls[-1])
 
+    def test_load_qwen_bundle_fp16_falls_back_to_4bit_on_oom(self) -> None:
+        FakeModelClass.calls = []
+        fake_processor = SimpleNamespace()
+
+        with mock.patch("vl_contradiction.qwen.AutoProcessor.from_pretrained", return_value=fake_processor), mock.patch(
+            "vl_contradiction.qwen._resolve_qwen_model_cls", return_value=FakeModelClass
+        ), mock.patch("vl_contradiction.qwen.torch.cuda.is_available", return_value=True), mock.patch(
+            "vl_contradiction.qwen.torch.cuda.is_bf16_supported", return_value=False, create=True
+        ), mock.patch("vl_contradiction.qwen.BitsAndBytesConfig") as fake_bnb:
+            fake_bnb.side_effect = lambda **kwargs: SimpleNamespace(**kwargs)
+            bundle = load_qwen_bundle(
+                "qwen/test-model",
+                use_4bit=True,
+                precision="fp16",
+            )
+
+        self.assertEqual("4bit", bundle.policy.precision)
+        self.assertEqual(torch.float16, FakeModelClass.calls[0]["torch_dtype"])
+        self.assertIn("quantization_config", FakeModelClass.calls[-1])
+
     def test_run_qwen_inference_batches_with_oom_backoff_and_scratch_sync(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
@@ -145,6 +165,53 @@ class QwenTests(unittest.TestCase):
             self.assertEqual([4, 2, 2, 1], model.generate_calls)
             self.assertEqual(5, len(list(final_dir.glob("*.json"))))
             self.assertEqual(5, len(list((scratch_root / final_dir.name).glob("*.json"))))
+
+    def test_run_qwen_inference_promotes_scratch_hits_into_canonical_cache(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            final_dir = root / "qwen" / "prototype"
+            scratch_root = root / "scratch" / "qwen" / "prototype"
+            scratch_root.mkdir(parents=True, exist_ok=True)
+
+            image_path = root / "promote.png"
+            _write_image(image_path, (10, 10, 10))
+            payload = {
+                "sample_id": "sample/0",
+                "label": "neutral",
+                "pred_label": "neutral",
+                "rationale": "cached",
+                "raw_output": '{"label": "neutral", "rationale": "cached"}',
+                "runtime_ms": 1.0,
+            }
+            (scratch_root / "sample_0.json").write_text(pd.Series(payload).to_json(), encoding="utf-8")
+            records = pd.DataFrame(
+                {
+                    "sample_id": ["sample/0"],
+                    "label": ["neutral"],
+                    "edited_caption": ["caption 0"],
+                    "file_path": [image_path],
+                }
+            )
+            model = FakeModel()
+            bundle = QwenBundle(
+                model=model,
+                processor=FakeProcessor(),
+                device=torch.device("cpu"),
+                policy=QwenRuntimePolicy(
+                    profile_name="t4",
+                    precision="fp16",
+                    batch_size=2,
+                    cache_mode="scratch_then_sync",
+                    cache_flush_every=1,
+                    scratch_root=scratch_root,
+                ),
+            )
+
+            outputs = run_qwen_inference(records, bundle, final_dir, max_new_tokens=8)
+
+            self.assertEqual(["sample/0"], outputs["sample_id"].tolist())
+            self.assertEqual([], model.generate_calls)
+            self.assertTrue((final_dir / "sample_0.json").exists())
 
     def test_run_qwen_inference_compatibility_mode_forces_single_row_direct_writes(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
