@@ -45,8 +45,8 @@ pip install -e .[qwen]
 
 Notes:
 
-- `configs/default.yaml` enables `use_qwen_4bit: true`.
-- That path relies on `bitsandbytes`, which is generally easiest to run in Colab or a Linux GPU environment.
+- `configs/default.yaml` still keeps `use_qwen_4bit: true` as a compatibility fallback, but the default runtime now resolves Qwen precision from the active performance profile.
+- The adaptive Qwen path still relies on `bitsandbytes` when it falls back to `4bit`, which is generally easiest to run in Colab or a Linux GPU environment.
 - The notebook bootstrap cell now installs `-e .[qwen]` automatically when running in Colab.
 
 ## Running The Notebook
@@ -102,6 +102,17 @@ The learned-model hyperparameters now come from `configs/default.yaml`:
 
 The notebook writes one sweep summary CSV and one best-trial JSON per learned model and stage, then keeps the best checkpoint under the existing canonical filename for downstream compatibility.
 
+## Performance Runtime
+
+The current runtime is T4-first and config-driven rather than hard-coded in the notebook:
+
+- `performance.active_profile` selects a named GPU profile or auto-matches the current GPU by name.
+- `performance.compatibility_mode` forces the old conservative Qwen path: single-sample inference, direct canonical cache writes, and `4bit` on CUDA.
+- `runtime.print_runtime_summary(...)` prints the resolved profile, CLIP precision, Qwen precision, Qwen batch size, and cache mode for the current run.
+- Qwen hot-path caching can use local scratch on Colab via `runtime.qwen_scratch_root`, but canonical artifacts still end up under `artifacts/qwen/<stage>`.
+- CLIP scoring, joint features, and token features are now prepared through one shared split extraction path and reused across the raw CLIP, linear probe, and cross-attention sections.
+- Learned-model sweeps keep the same artifact layout, but can now use AMP, tuned loader settings, and early stopping from the resolved performance profile.
+
 ## Testing
 
 ### Fast tests
@@ -112,7 +123,10 @@ These are the quickest checks to run after targeted code changes:
 python -m unittest tests.test_vl_contradiction_plotting
 python -m unittest tests.test_vl_contradiction_benchmark
 python -m unittest tests.test_vl_contradiction_config
+python -m unittest tests.test_vl_contradiction_runtime
 python -m unittest tests.test_vl_contradiction_training
+python -m unittest tests.test_vl_contradiction_clip_training_perf
+python -m unittest tests.test_vl_contradiction_qwen
 ```
 
 ### Audit tests
@@ -166,6 +180,6 @@ Resolved from `src/vl_contradiction/runtime.py`, the config, and the current not
 ## Known Practical Constraints
 
 - The notebook is the main deliverable, so readability matters.
-- Qwen inference is intentionally cached one sample per JSON file under `artifacts/qwen/<stage>`.
+- Qwen inference still emits one JSON artifact per sample under `artifacts/qwen/<stage>`, even when scratch caching is used internally for throughput.
 - The readiness gate expects Qwen metrics when `audit.require_qwen_for_readiness` is true.
 - Plotting code lives in helpers, but some figure assembly still happens directly in the notebook. When making notebook visualization changes, check both locations before deciding where the fix belongs.

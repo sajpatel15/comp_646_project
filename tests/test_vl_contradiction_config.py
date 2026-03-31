@@ -23,6 +23,10 @@ class ConfigLoadingTests(unittest.TestCase):
         self.assertEqual("ca_m5", config.training.sweeps["midscale"]["cross_attention"]["trials"][-1]["name"])
         self.assertEqual(7, len(config.training.sweeps["final"]["linear_probe"]["trials"]))
         self.assertEqual(7, len(config.training.sweeps["final"]["cross_attention"]["trials"]))
+        self.assertEqual("auto", config.performance.active_profile)
+        self.assertFalse(config.performance.compatibility_mode)
+        self.assertEqual("fp16", config.performance.gpu_profiles["t4"].qwen_precision)
+        self.assertEqual("bf16", config.performance.gpu_profiles["h100"].clip_precision)
 
 
 if __name__ == "__main__":

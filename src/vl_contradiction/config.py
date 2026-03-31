@@ -2,11 +2,60 @@
 
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
 import yaml
+
+
+DEFAULT_PERFORMANCE_PAYLOAD: dict[str, Any] = {
+    "active_profile": "auto",
+    "compatibility_mode": False,
+    "colab_scratch_root": "/content/comp646_scratch",
+    "gpu_profiles": {
+        "default": {
+            "clip_precision": "auto",
+            "qwen_precision": "auto",
+            "qwen_batch_size": "auto",
+            "clip_num_workers": 2,
+            "persistent_workers": False,
+            "prefetch_factor": None,
+            "amp_training": True,
+            "early_stopping_patience": 3,
+            "early_stopping_min_delta": 0.001,
+            "qwen_cache_mode": "direct",
+            "qwen_cache_flush_every": 8,
+        },
+        "t4": {
+            "clip_precision": "fp16",
+            "qwen_precision": "fp16",
+            "qwen_batch_size": "auto",
+            "clip_num_workers": 4,
+            "persistent_workers": True,
+            "prefetch_factor": 2,
+            "amp_training": True,
+            "early_stopping_patience": 2,
+            "early_stopping_min_delta": 0.001,
+            "qwen_cache_mode": "scratch_then_sync",
+            "qwen_cache_flush_every": 8,
+        },
+        "h100": {
+            "clip_precision": "bf16",
+            "qwen_precision": "bf16",
+            "qwen_batch_size": "auto",
+            "clip_num_workers": 8,
+            "persistent_workers": True,
+            "prefetch_factor": 4,
+            "amp_training": True,
+            "early_stopping_patience": 3,
+            "early_stopping_min_delta": 0.0005,
+            "qwen_cache_mode": "scratch_then_sync",
+            "qwen_cache_flush_every": 16,
+        },
+    },
+}
 
 
 @dataclass(slots=True)
@@ -81,6 +130,29 @@ class AuditConfig:
 
 
 @dataclass(slots=True)
+class GPUProfileConfig:
+    clip_precision: str
+    qwen_precision: str
+    qwen_batch_size: str | int
+    clip_num_workers: int
+    persistent_workers: bool
+    prefetch_factor: int | None
+    amp_training: bool
+    early_stopping_patience: int | None
+    early_stopping_min_delta: float
+    qwen_cache_mode: str
+    qwen_cache_flush_every: int
+
+
+@dataclass(slots=True)
+class PerformanceConfig:
+    active_profile: str
+    compatibility_mode: bool
+    colab_scratch_root: str
+    gpu_profiles: dict[str, GPUProfileConfig]
+
+
+@dataclass(slots=True)
 class ProjectConfig:
     runtime: RuntimeConfig
     paths: PathsConfig
@@ -89,6 +161,7 @@ class ProjectConfig:
     training: TrainingConfig
     evaluation: EvaluationConfig
     audit: AuditConfig
+    performance: PerformanceConfig
     source_path: Path
 
     def as_dict(self) -> dict[str, Any]:
@@ -100,6 +173,30 @@ class ProjectConfig:
 def _load_yaml(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as handle:
         return yaml.safe_load(handle)
+
+
+def _merge_dicts(base: dict[str, Any], overrides: dict[str, Any]) -> dict[str, Any]:
+    merged = deepcopy(base)
+    for key, value in overrides.items():
+        if isinstance(value, dict) and isinstance(merged.get(key), dict):
+            merged[key] = _merge_dicts(merged[key], value)
+        else:
+            merged[key] = value
+    return merged
+
+
+def _load_performance_config(raw: dict[str, Any]) -> PerformanceConfig:
+    merged = _merge_dicts(DEFAULT_PERFORMANCE_PAYLOAD, raw)
+    gpu_profiles = {
+        name: GPUProfileConfig(**profile_payload)
+        for name, profile_payload in merged["gpu_profiles"].items()
+    }
+    return PerformanceConfig(
+        active_profile=str(merged["active_profile"]),
+        compatibility_mode=bool(merged["compatibility_mode"]),
+        colab_scratch_root=str(merged["colab_scratch_root"]),
+        gpu_profiles=gpu_profiles,
+    )
 
 
 def load_config(config_path: str | Path) -> ProjectConfig:
@@ -115,5 +212,6 @@ def load_config(config_path: str | Path) -> ProjectConfig:
         training=TrainingConfig(**raw["training"]),
         evaluation=EvaluationConfig(**raw["evaluation"]),
         audit=AuditConfig(**raw["audit"]),
+        performance=_load_performance_config(raw.get("performance", {})),
         source_path=path,
     )

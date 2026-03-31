@@ -30,9 +30,11 @@ There is also a `src/multimodal_contradiction` tree in the repo. The current not
 
 - Keep the notebook readable. Push heavy logic into `src/vl_contradiction` helpers when cells start getting dense.
 - Preserve the config-driven runtime layout from `configs/default.yaml` and `src/vl_contradiction/runtime.py`.
+- GPU/runtime behavior is now resolved through the `performance` section in `configs/default.yaml` plus `src/vl_contradiction/runtime.py` and `src/vl_contradiction/performance.py`.
 - Stage outputs are now scoped under stage-specific subdirectories such as `artifacts/metrics/prototype` and `artifacts/figures/final`, while the COCO dataset cache remains shared.
 - Learned models no longer use one global set of hyperparameters. The notebook resolves stage-specific trial lists from `training.sweeps.<stage>.<model>.trials` and selects the best trial by validation macro-F1.
 - Treat the notebook as Colab-compatible first. The bootstrap cell now installs the `qwen` extra in Colab so `RUN_QWEN = True` works without a second manual install.
+- Qwen may use local scratch caching internally for throughput, but canonical per-sample artifacts still belong under `artifacts/qwen/<stage>`.
 - Avoid writing derived artifacts into the repo unless the user explicitly wants committed outputs. Runtime artifacts are expected under `artifacts/`.
 - When editing figures, check both the saved-figure layout and the inline notebook display path.
 
@@ -43,7 +45,10 @@ There is also a `src/multimodal_contradiction` tree in the repo. The current not
   - `python -m unittest tests.test_vl_contradiction_benchmark`
 - Config and sweep checks:
   - `python -m unittest tests.test_vl_contradiction_config`
+  - `python -m unittest tests.test_vl_contradiction_runtime`
   - `python -m unittest tests.test_vl_contradiction_training`
+  - `python -m unittest tests.test_vl_contradiction_clip_training_perf`
+  - `python -m unittest tests.test_vl_contradiction_qwen`
 - Audit tests import `vl_contradiction.metrics`, which currently pulls in `torch`, so they require the full runtime dependency set.
 
 ## Dependency Notes
@@ -51,7 +56,7 @@ There is also a `src/multimodal_contradiction` tree in the repo. The current not
 - Base editable install: `pip install -e .`
 - Local Qwen-capable install: `pip install -e .[qwen]`
 - `requirements.txt` includes a broader notebook/runtime stack, including `bitsandbytes`.
-- Qwen 4-bit inference is configured by default and is most practical in Colab or a Linux GPU environment.
+- Qwen now prefers the resolved performance profile by default and falls back to `4bit` for compatibility or memory pressure. The `4bit` path is still most practical in Colab or a Linux GPU environment.
 
 ## Common Paths
 

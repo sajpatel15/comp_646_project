@@ -6,6 +6,7 @@ from copy import deepcopy
 from dataclasses import dataclass
 from pathlib import Path
 import shutil
+from contextlib import nullcontext
 from typing import Callable
 
 import torch
@@ -80,33 +81,96 @@ class TrainingSweepResult:
     best_checkpoint: Path | None
 
 
-def create_loader(dataset: Dataset, batch_size: int, shuffle: bool, num_workers: int) -> DataLoader:
+def create_loader(
+    dataset: Dataset,
+    batch_size: int,
+    shuffle: bool,
+    num_workers: int,
+    *,
+    pin_memory: bool | None = None,
+    persistent_workers: bool | None = None,
+    prefetch_factor: int | None = None,
+) -> DataLoader:
     """Create a dataloader with sane notebook defaults."""
 
-    return DataLoader(dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers, pin_memory=torch.cuda.is_available())
+    resolved_pin_memory = torch.cuda.is_available() if pin_memory is None else pin_memory
+    loader_kwargs: dict[str, object] = {
+        "batch_size": batch_size,
+        "shuffle": shuffle,
+        "num_workers": num_workers,
+        "pin_memory": resolved_pin_memory,
+    }
+    if num_workers > 0:
+        loader_kwargs["persistent_workers"] = (
+            resolved_pin_memory if persistent_workers is None else persistent_workers
+        )
+        if prefetch_factor is not None:
+            loader_kwargs["prefetch_factor"] = prefetch_factor
+    return DataLoader(dataset, **loader_kwargs)
 
 
-def _forward_batch(model: nn.Module, batch: tuple[torch.Tensor, ...], device: torch.device) -> tuple[torch.Tensor, torch.Tensor]:
-    if len(batch) == 2:
-        features, labels = batch
-        logits = model(features.to(device))
-    elif len(batch) == 3:
-        image_tokens, text_tokens, labels = batch
-        logits = model(image_tokens.to(device), text_tokens.to(device))
-    else:
-        raise ValueError("Unexpected batch shape")
-    return logits, labels.to(device)
+def _resolve_amp_settings(device: torch.device, amp: bool | None) -> tuple[bool, torch.dtype | None]:
+    use_amp = device.type == "cuda" if amp is None else bool(amp) and device.type == "cuda"
+    if not use_amp:
+        return False, None
+    amp_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+    return True, amp_dtype
 
 
-def evaluate_model(model: nn.Module, loader: DataLoader, device: torch.device) -> tuple[dict[str, float | list[list[int]]], torch.Tensor, torch.Tensor]:
+def _forward_context(device: torch.device, amp_enabled: bool, amp_dtype: torch.dtype | None):
+    if not amp_enabled or device.type != "cuda" or amp_dtype is None:
+        return nullcontext()
+    return torch.autocast(device_type="cuda", dtype=amp_dtype)
+
+
+def _forward_batch(
+    model: nn.Module,
+    batch: tuple[torch.Tensor, ...],
+    device: torch.device,
+    *,
+    non_blocking: bool = False,
+    amp_enabled: bool = False,
+    amp_dtype: torch.dtype | None = None,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    with _forward_context(device, amp_enabled, amp_dtype):
+        if len(batch) == 2:
+            features, labels = batch
+            logits = model(features.to(device, non_blocking=non_blocking))
+        elif len(batch) == 3:
+            image_tokens, text_tokens, labels = batch
+            logits = model(
+                image_tokens.to(device, non_blocking=non_blocking),
+                text_tokens.to(device, non_blocking=non_blocking),
+            )
+        else:
+            raise ValueError("Unexpected batch shape")
+    return logits, labels.to(device, non_blocking=non_blocking)
+
+
+def evaluate_model(
+    model: nn.Module,
+    loader: DataLoader,
+    device: torch.device,
+    *,
+    amp: bool | None = None,
+) -> tuple[dict[str, float | list[list[int]]], torch.Tensor, torch.Tensor]:
     """Evaluate a model on a dataloader and return metrics, logits, and labels."""
 
     model.eval()
+    amp_enabled, amp_dtype = _resolve_amp_settings(device, amp)
+    non_blocking = device.type == "cuda"
     logits_rows = []
     label_rows = []
     with torch.inference_mode():
         for batch in loader:
-            logits, labels = _forward_batch(model, batch, device)
+            logits, labels = _forward_batch(
+                model,
+                batch,
+                device,
+                non_blocking=non_blocking,
+                amp_enabled=amp_enabled,
+                amp_dtype=amp_dtype,
+            )
             logits_rows.append(logits.detach().cpu())
             label_rows.append(labels.detach().cpu())
     logits_tensor = torch.cat(logits_rows, dim=0)
@@ -186,6 +250,9 @@ def train_model(
     selection_metric: str = "macro_f1",
     log_dir: str | Path | None = None,
     checkpoint_path: str | Path | None = None,
+    amp: bool | None = None,
+    early_stopping_patience: int | None = None,
+    early_stopping_min_delta: float = 0.0,
 ) -> TrainingResult:
     """Train a classifier and log one compact line per epoch."""
 
@@ -193,29 +260,50 @@ def train_model(
     optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
     criterion = nn.CrossEntropyLoss()
     writer = SummaryWriter(log_dir=str(log_dir)) if log_dir and SummaryWriter is not None else None
+    amp_enabled, amp_dtype = _resolve_amp_settings(device, amp)
+    scaler = (
+        torch.cuda.amp.GradScaler(enabled=amp_enabled and amp_dtype == torch.float16)
+        if device.type == "cuda"
+        else None
+    )
+    non_blocking = device.type == "cuda"
     history = []
     best_metrics: dict[str, float | list[list[int]]] = {selection_metric: -1.0}
     best_checkpoint_path = Path(checkpoint_path) if checkpoint_path else None
     best_state_dict: dict[str, torch.Tensor] | None = None
     best_logits = torch.empty(0)
     best_labels = torch.empty(0, dtype=torch.long)
+    best_selection_value = float("-inf")
+    epochs_without_improvement = 0
 
     for epoch in range(1, epochs + 1):
         model.train()
         epoch_loss = 0.0
         total_samples = 0
         for batch in train_loader:
-            logits, labels = _forward_batch(model, batch, device)
+            logits, labels = _forward_batch(
+                model,
+                batch,
+                device,
+                non_blocking=non_blocking,
+                amp_enabled=amp_enabled,
+                amp_dtype=amp_dtype,
+            )
             loss = criterion(logits, labels)
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
+            optimizer.zero_grad(set_to_none=True)
+            if scaler is not None and scaler.is_enabled():
+                scaler.scale(loss).backward()
+                scaler.step(optimizer)
+                scaler.update()
+            else:
+                loss.backward()
+                optimizer.step()
             batch_size = labels.shape[0]
             epoch_loss += float(loss.detach().cpu().item()) * batch_size
             total_samples += batch_size
 
         train_loss = epoch_loss / max(total_samples, 1)
-        val_metrics, val_logits, val_labels = evaluate_model(model, val_loader, device)
+        val_metrics, val_logits, val_labels = evaluate_model(model, val_loader, device, amp=amp)
         selection_value = _resolve_selection_value(val_metrics, selection_metric)
         epoch_row = {
             "epoch": float(epoch),
@@ -230,7 +318,9 @@ def train_model(
             writer.add_scalar(f"val/{selection_metric}", selection_value, epoch)
             if selection_metric != "macro_f1":
                 writer.add_scalar("val/macro_f1", float(val_metrics["macro_f1"]), epoch)
-        if selection_value > _resolve_selection_value(best_metrics, selection_metric):
+        if selection_value > best_selection_value + early_stopping_min_delta:
+            best_selection_value = selection_value
+            epochs_without_improvement = 0
             best_metrics = val_metrics
             best_state_dict = deepcopy(model.state_dict())
             best_logits = val_logits
@@ -238,6 +328,10 @@ def train_model(
             if best_checkpoint_path:
                 best_checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
                 torch.save(model.state_dict(), best_checkpoint_path)
+        else:
+            epochs_without_improvement += 1
+            if early_stopping_patience is not None and epochs_without_improvement >= early_stopping_patience:
+                break
 
     if writer:
         writer.close()
@@ -268,6 +362,12 @@ def run_training_sweep(
     log_root: str | Path,
     checkpoint_root: str | Path,
     canonical_checkpoint_path: str | Path | None = None,
+    amp: bool | None = None,
+    early_stopping_patience: int | None = None,
+    early_stopping_min_delta: float = 0.0,
+    pin_memory: bool | None = None,
+    persistent_workers: bool | None = None,
+    prefetch_factor: int | None = None,
 ) -> TrainingSweepResult:
     """Train and evaluate one model over an explicit list of trial settings."""
 
@@ -292,9 +392,33 @@ def run_training_sweep(
         log_dir = log_root_path / f"{model_name}__{trial.name}"
         checkpoint_path = checkpoint_root_path / f"{model_name}__{trial.name}.pt"
 
-        train_loader = create_loader(train_dataset, batch_size=trial.batch_size, shuffle=True, num_workers=num_workers)
-        val_loader = create_loader(val_dataset, batch_size=trial.batch_size, shuffle=False, num_workers=num_workers)
-        test_loader = create_loader(test_dataset, batch_size=trial.batch_size, shuffle=False, num_workers=num_workers)
+        train_loader = create_loader(
+            train_dataset,
+            batch_size=trial.batch_size,
+            shuffle=True,
+            num_workers=num_workers,
+            pin_memory=pin_memory,
+            persistent_workers=persistent_workers,
+            prefetch_factor=prefetch_factor,
+        )
+        val_loader = create_loader(
+            val_dataset,
+            batch_size=trial.batch_size,
+            shuffle=False,
+            num_workers=num_workers,
+            pin_memory=pin_memory,
+            persistent_workers=persistent_workers,
+            prefetch_factor=prefetch_factor,
+        )
+        test_loader = create_loader(
+            test_dataset,
+            batch_size=trial.batch_size,
+            shuffle=False,
+            num_workers=num_workers,
+            pin_memory=pin_memory,
+            persistent_workers=persistent_workers,
+            prefetch_factor=prefetch_factor,
+        )
 
         result = train_model(
             model=model,
@@ -307,8 +431,11 @@ def run_training_sweep(
             selection_metric=selection_metric,
             log_dir=log_dir,
             checkpoint_path=checkpoint_path,
+            amp=amp,
+            early_stopping_patience=early_stopping_patience,
+            early_stopping_min_delta=early_stopping_min_delta,
         )
-        test_metrics, test_logits, test_labels = evaluate_model(model.to(device), test_loader, device)
+        test_metrics, test_logits, test_labels = evaluate_model(model.to(device), test_loader, device, amp=amp)
         val_score = _resolve_selection_value(result.best_val_metrics, selection_metric)
         row = {
             "trial_name": trial.name,
