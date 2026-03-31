@@ -41,6 +41,9 @@ There is also a `src/multimodal_contradiction` tree in the repo. The current not
 - Minimal plotting and benchmark checks:
   - `python -m unittest tests.test_vl_contradiction_plotting`
   - `python -m unittest tests.test_vl_contradiction_benchmark`
+- Config and sweep checks:
+  - `python -m unittest tests.test_vl_contradiction_config`
+  - `python -m unittest tests.test_vl_contradiction_training`
 - Audit tests import `vl_contradiction.metrics`, which currently pulls in `torch`, so they require the full runtime dependency set.
 
 ## Dependency Notes
