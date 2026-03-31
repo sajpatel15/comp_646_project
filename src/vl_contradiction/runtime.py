@@ -5,7 +5,7 @@ from __future__ import annotations
 import os
 import random
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Iterable
 
@@ -28,6 +28,23 @@ class RuntimeInfo:
     metrics_root: Path
     figure_root: Path
     qwen_root: Path
+
+
+def scope_runtime(runtime: RuntimeInfo, stage: str) -> RuntimeInfo:
+    """Return a stage-scoped runtime so artifacts stay separated by experiment stage."""
+
+    normalized = stage.strip().lower().replace(" ", "_")
+    if not normalized:
+        raise ValueError("stage must be a non-empty string")
+    return replace(
+        runtime,
+        benchmark_root=runtime.benchmark_root / normalized,
+        checkpoint_root=runtime.checkpoint_root / normalized,
+        log_root=runtime.log_root / normalized,
+        metrics_root=runtime.metrics_root / normalized,
+        figure_root=runtime.figure_root / normalized,
+        qwen_root=runtime.qwen_root / normalized,
+    )
 
 
 def _in_colab() -> bool:

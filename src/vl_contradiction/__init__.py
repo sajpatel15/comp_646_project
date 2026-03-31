@@ -12,6 +12,7 @@ __all__ = [
     "ensure_directories",
     "launch_audit_reviewer",
     "load_config",
+    "scope_runtime",
     "set_global_seed",
 ]
 
@@ -33,13 +34,14 @@ def __getattr__(name: str):
             "ProjectConfig": ProjectConfig,
             "load_config": load_config,
         }[name]
-    if name in {"RuntimeInfo", "detect_runtime", "ensure_directories", "set_global_seed"}:
-        from .runtime import RuntimeInfo, detect_runtime, ensure_directories, set_global_seed
+    if name in {"RuntimeInfo", "detect_runtime", "ensure_directories", "scope_runtime", "set_global_seed"}:
+        from .runtime import RuntimeInfo, detect_runtime, ensure_directories, scope_runtime, set_global_seed
 
         return {
             "RuntimeInfo": RuntimeInfo,
             "detect_runtime": detect_runtime,
             "ensure_directories": ensure_directories,
+            "scope_runtime": scope_runtime,
             "set_global_seed": set_global_seed,
         }[name]
     raise AttributeError(f"module 'vl_contradiction' has no attribute {name!r}")

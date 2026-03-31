@@ -30,6 +30,7 @@ There is also a `src/multimodal_contradiction` tree in the repo. The current not
 
 - Keep the notebook readable. Push heavy logic into `src/vl_contradiction` helpers when cells start getting dense.
 - Preserve the config-driven runtime layout from `configs/default.yaml` and `src/vl_contradiction/runtime.py`.
+- Stage outputs are now scoped under stage-specific subdirectories such as `artifacts/metrics/prototype` and `artifacts/figures/final`, while the COCO dataset cache remains shared.
 - Treat the notebook as Colab-compatible first. The bootstrap cell now installs the `qwen` extra in Colab so `RUN_QWEN = True` works without a second manual install.
 - Avoid writing derived artifacts into the repo unless the user explicitly wants committed outputs. Runtime artifacts are expected under `artifacts/`.
 - When editing figures, check both the saved-figure layout and the inline notebook display path.
@@ -50,9 +51,9 @@ There is also a `src/multimodal_contradiction` tree in the repo. The current not
 
 ## Common Paths
 
-- Benchmark CSVs: `artifacts/benchmark`
-- Metrics JSON/CSVs: `artifacts/metrics`
-- Figures: `artifacts/figures`
-- Checkpoints: `artifacts/checkpoints`
-- Qwen cache/output JSON: `artifacts/qwen`
-- TensorBoard logs: `artifacts/logs`
+- Benchmark CSVs: `artifacts/benchmark/<stage>`
+- Metrics JSON/CSVs: `artifacts/metrics/<stage>`
+- Figures: `artifacts/figures/<stage>`
+- Checkpoints: `artifacts/checkpoints/<stage>`
+- Qwen cache/output JSON: `artifacts/qwen/<stage>`
+- TensorBoard logs: `artifacts/logs/<stage>`

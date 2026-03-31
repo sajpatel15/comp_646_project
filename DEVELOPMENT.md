@@ -62,6 +62,7 @@ jupyter lab
 Open `notebooks/multimodal_contradiction_project.ipynb` and run from the top.
 
 Local runs resolve the project root from the current working directory and store artifacts under the repo-local paths from `configs/default.yaml`.
+Experiment outputs are further separated by stage, so prototype, midscale, and final runs land in different subdirectories under each artifact root.
 
 ### Colab
 
@@ -131,15 +132,15 @@ python -m py_compile src/vl_contradiction/plotting.py
 
 ## Artifacts And Outputs
 
-Resolved from `src/vl_contradiction/runtime.py` and the config:
+Resolved from `src/vl_contradiction/runtime.py`, the config, and the current notebook stage:
 
-- `artifacts/datasets/coco2017`
-- `artifacts/benchmark`
-- `artifacts/checkpoints`
-- `artifacts/logs`
-- `artifacts/metrics`
-- `artifacts/figures`
-- `artifacts/qwen`
+- shared dataset cache: `artifacts/datasets/coco2017`
+- benchmark outputs: `artifacts/benchmark/<stage>`
+- checkpoints: `artifacts/checkpoints/<stage>`
+- TensorBoard logs: `artifacts/logs/<stage>`
+- metrics: `artifacts/metrics/<stage>`
+- figures: `artifacts/figures/<stage>`
+- Qwen cache: `artifacts/qwen/<stage>`
 
 ## Known Practical Constraints
 
