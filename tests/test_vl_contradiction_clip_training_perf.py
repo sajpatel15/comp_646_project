@@ -24,6 +24,7 @@ from vl_contradiction.clip_baselines import (  # noqa: E402
 )
 from vl_contradiction.models import LinearProbe  # noqa: E402
 from vl_contradiction.training import FeatureDataset, create_loader, train_model  # noqa: E402
+from vl_contradiction.training import _resolve_amp_settings  # noqa: E402
 
 
 class _FakeInputs(dict):
@@ -111,6 +112,20 @@ class ClipExtractionPerfTests(unittest.TestCase):
 
 
 class TrainingPerfTests(unittest.TestCase):
+    def test_explicit_amp_precision_uses_requested_dtype_without_probe(self) -> None:
+        with patch(
+            "vl_contradiction.training.torch.cuda.is_bf16_supported",
+            side_effect=AssertionError("bf16 probe should not run"),
+        ):
+            amp_enabled, amp_dtype = _resolve_amp_settings(
+                torch.device("cuda"),
+                amp=True,
+                amp_precision="fp16",
+            )
+
+        self.assertTrue(amp_enabled)
+        self.assertEqual(torch.float16, amp_dtype)
+
     def test_early_stopping_and_cpu_amp_fallback(self) -> None:
         torch.manual_seed(0)
         features = torch.tensor(
@@ -156,6 +171,7 @@ class TrainingPerfTests(unittest.TestCase):
                     weight_decay=0.0,
                     checkpoint_path=checkpoint_path,
                     amp=True,
+                    amp_precision=None,
                     early_stopping_patience=1,
                     early_stopping_min_delta=0.0,
                 )

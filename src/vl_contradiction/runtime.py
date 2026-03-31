@@ -149,6 +149,7 @@ def print_runtime_summary(runtime: RuntimeInfo) -> None:
     print(f"  perf profile: {runtime.performance.name}")
     print(f"  clip dtype:   {runtime.performance.clip_precision}")
     print(f"  qwen dtype:   {runtime.performance.qwen_precision}")
+    print(f"  train amp:    {runtime.performance.training_amp_precision or 'off'}")
     print(f"  qwen batch:   {runtime.performance.qwen_batch_size}")
     print(f"  qwen cache:   {runtime.performance.qwen_cache_mode}")
     if runtime.performance.gpu_name:

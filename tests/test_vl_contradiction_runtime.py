@@ -39,9 +39,32 @@ class PerformanceResolutionTests(unittest.TestCase):
 
         self.assertEqual("t4", profile.name)
         self.assertEqual("fp16", profile.qwen_precision)
+        self.assertEqual("fp16", profile.training_amp_precision)
         self.assertEqual(2, profile.qwen_batch_size)
         self.assertEqual("scratch_then_sync", profile.qwen_cache_mode)
         self.assertEqual(Path("/content/comp646_scratch"), profile.scratch_root)
+
+    def test_t4_training_amp_precision_does_not_drift_to_bf16_when_probe_is_true(self) -> None:
+        config = load_config(PROJECT_ROOT / "configs" / "default.yaml")
+
+        with (
+            mock.patch("vl_contradiction.performance.torch.cuda.is_available", return_value=True),
+            mock.patch("vl_contradiction.performance.torch.cuda.get_device_name", return_value="Tesla T4"),
+            mock.patch(
+                "vl_contradiction.performance.torch.cuda.get_device_properties",
+                return_value=SimpleNamespace(total_memory=16 * 1024**3),
+            ),
+            mock.patch("vl_contradiction.performance.torch.cuda.is_bf16_supported", return_value=True),
+        ):
+            profile = resolve_performance_profile(
+                config.performance,
+                device=torch.device("cuda"),
+                is_colab=True,
+                cache_root=PROJECT_ROOT / "artifacts",
+            )
+
+        self.assertTrue(profile.amp_training)
+        self.assertEqual("fp16", profile.training_amp_precision)
 
     def test_compatibility_mode_forces_conservative_qwen_settings(self) -> None:
         config = load_config(PROJECT_ROOT / "configs" / "default.yaml")
@@ -75,6 +98,7 @@ class PerformanceResolutionTests(unittest.TestCase):
 
         self.assertEqual("cpu", runtime.device.type)
         self.assertEqual("default", runtime.performance.name)
+        self.assertIsNone(runtime.performance.training_amp_precision)
         self.assertEqual(runtime.cache_root / ".scratch" / "qwen", runtime.qwen_scratch_root)
 
 

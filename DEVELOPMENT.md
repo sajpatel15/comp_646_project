@@ -108,10 +108,10 @@ The current runtime is T4-first and config-driven rather than hard-coded in the 
 
 - `performance.active_profile` selects a named GPU profile or auto-matches the current GPU by name.
 - `performance.compatibility_mode` forces the old conservative Qwen path: single-sample inference, direct canonical cache writes, and `4bit` on CUDA.
-- `runtime.print_runtime_summary(...)` prints the resolved profile, CLIP precision, Qwen precision, Qwen batch size, and cache mode for the current run.
+- `runtime.print_runtime_summary(...)` prints the resolved profile, CLIP precision, Qwen precision, learned-model AMP precision, Qwen batch size, and cache mode for the current run.
 - Qwen hot-path caching can use local scratch on Colab via `runtime.qwen_scratch_root`, but canonical artifacts still end up under `artifacts/qwen/<stage>`.
 - CLIP scoring, joint features, and token features are now prepared through one shared split extraction path and reused across the raw CLIP, linear probe, and cross-attention sections.
-- Learned-model sweeps keep the same artifact layout, but can now use AMP, tuned loader settings, and early stopping from the resolved performance profile.
+- Learned-model sweeps keep the same artifact layout, but now follow the resolved profile for AMP precision and export evaluation logits as CPU `float32` so notebook reporting remains NumPy-safe.
 
 ## Testing
 

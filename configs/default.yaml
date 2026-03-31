@@ -216,6 +216,7 @@ performance:
     default:
       clip_precision: "auto"
       qwen_precision: "auto"
+      training_amp_precision: "auto"
       qwen_batch_size: "auto"
       clip_num_workers: 2
       persistent_workers: false
@@ -228,6 +229,7 @@ performance:
     t4:
       clip_precision: "fp16"
       qwen_precision: "fp16"
+      training_amp_precision: "fp16"
       qwen_batch_size: "auto"
       clip_num_workers: 4
       persistent_workers: true
@@ -240,6 +242,7 @@ performance:
     h100:
       clip_precision: "bf16"
       qwen_precision: "bf16"
+      training_amp_precision: "bf16"
       qwen_batch_size: "auto"
       clip_num_workers: 8
       persistent_workers: true

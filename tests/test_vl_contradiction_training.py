@@ -16,6 +16,7 @@ from vl_contradiction.models import LinearProbe  # noqa: E402
 from vl_contradiction.training import (  # noqa: E402
     FeatureDataset,
     TrainingTrialConfig,
+    evaluate_model,
     get_stage_trials,
     run_training_sweep,
 )
@@ -75,6 +76,24 @@ class TrainingConfigTests(unittest.TestCase):
 
 
 class TrainingSweepTests(unittest.TestCase):
+    def test_evaluate_model_returns_float32_logits_for_numpy_safe_reporting(self) -> None:
+        class BF16ToyModel(torch.nn.Module):
+            def forward(self, features: torch.Tensor) -> torch.Tensor:
+                return torch.stack((features[:, 0], -features[:, 0]), dim=1).to(torch.bfloat16)
+
+        features = torch.tensor([[2.0], [-2.0]], dtype=torch.float32)
+        labels = torch.tensor([0, 1], dtype=torch.long)
+        loader = torch.utils.data.DataLoader(FeatureDataset(features, labels), batch_size=2, shuffle=False)
+
+        metrics, logits, returned_labels = evaluate_model(BF16ToyModel(), loader, torch.device("cpu"), amp=False)
+
+        self.assertEqual(torch.float32, logits.dtype)
+        self.assertEqual("cpu", logits.device.type)
+        self.assertEqual((2, 2), tuple(logits.shape))
+        self.assertEqual((2,), tuple(returned_labels.shape))
+        self.assertGreaterEqual(float(metrics["accuracy"]), 1.0)
+        self.assertEqual((2, 2), tuple(torch.softmax(logits, dim=1).numpy().shape))
+
     def test_run_training_sweep_selects_best_trial_and_writes_checkpoints(self) -> None:
         torch.manual_seed(0)
 
@@ -145,6 +164,7 @@ class TrainingSweepTests(unittest.TestCase):
             self.assertEqual(root / "checkpoints" / "linear_probe_best.pt", result.best_checkpoint)
             self.assertGreaterEqual(float(result.best_test_metrics["macro_f1"]), 0.95)
             self.assertEqual((3, 3), tuple(result.best_test_logits.shape))
+            self.assertEqual(torch.float32, result.best_test_logits.dtype)
 
 
 if __name__ == "__main__":

@@ -18,6 +18,7 @@ DEFAULT_PERFORMANCE_PAYLOAD: dict[str, Any] = {
         "default": {
             "clip_precision": "auto",
             "qwen_precision": "auto",
+            "training_amp_precision": "auto",
             "qwen_batch_size": "auto",
             "clip_num_workers": 2,
             "persistent_workers": False,
@@ -31,6 +32,7 @@ DEFAULT_PERFORMANCE_PAYLOAD: dict[str, Any] = {
         "t4": {
             "clip_precision": "fp16",
             "qwen_precision": "fp16",
+            "training_amp_precision": "fp16",
             "qwen_batch_size": "auto",
             "clip_num_workers": 4,
             "persistent_workers": True,
@@ -44,6 +46,7 @@ DEFAULT_PERFORMANCE_PAYLOAD: dict[str, Any] = {
         "h100": {
             "clip_precision": "bf16",
             "qwen_precision": "bf16",
+            "training_amp_precision": "bf16",
             "qwen_batch_size": "auto",
             "clip_num_workers": 8,
             "persistent_workers": True,
@@ -133,6 +136,7 @@ class AuditConfig:
 class GPUProfileConfig:
     clip_precision: str
     qwen_precision: str
+    training_amp_precision: str
     qwen_batch_size: str | int
     clip_num_workers: int
     persistent_workers: bool

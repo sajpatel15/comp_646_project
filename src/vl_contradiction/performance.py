@@ -18,6 +18,7 @@ class ResolvedPerformanceProfile:
     gpu_total_memory_gb: float | None
     clip_precision: str
     qwen_precision: str
+    training_amp_precision: str | None
     qwen_batch_size: int
     clip_num_workers: int
     persistent_workers: bool
@@ -88,6 +89,20 @@ def _resolve_precision(mode: str, *, device: torch.device, prefer_bf16: bool) ->
     return "fp16"
 
 
+def _resolve_training_amp_precision(mode: str, *, device: torch.device, amp_enabled: bool) -> str | None:
+    if not amp_enabled or device.type != "cuda":
+        return None
+
+    normalized = mode.strip().lower()
+    if normalized not in {"auto", "fp16", "bf16"}:
+        raise ValueError(
+            f"Unsupported training_amp_precision '{mode}'. Expected one of: auto, fp16, bf16"
+        )
+    if normalized == "auto":
+        return "bf16" if _cuda_bf16_supported() else "fp16"
+    return normalized
+
+
 def _resolve_qwen_batch_size(
     raw_value: str | int,
     *,
@@ -142,6 +157,12 @@ def resolve_performance_profile(
         device=device,
         prefer_bf16=profile_name == "h100",
     )
+    amp_training = bool(selected.amp_training and device.type == "cuda")
+    training_amp_precision = _resolve_training_amp_precision(
+        selected.training_amp_precision,
+        device=device,
+        amp_enabled=amp_training,
+    )
     if config.compatibility_mode:
         qwen_precision = "4bit" if device.type == "cuda" else "fp32"
 
@@ -163,11 +184,12 @@ def resolve_performance_profile(
         gpu_total_memory_gb=total_memory_gb,
         clip_precision=clip_precision,
         qwen_precision=qwen_precision,
+        training_amp_precision=training_amp_precision,
         qwen_batch_size=qwen_batch_size,
         clip_num_workers=max(int(selected.clip_num_workers), 0),
         persistent_workers=bool(selected.persistent_workers),
         prefetch_factor=selected.prefetch_factor,
-        amp_training=bool(selected.amp_training and device.type == "cuda"),
+        amp_training=amp_training,
         early_stopping_patience=selected.early_stopping_patience,
         early_stopping_min_delta=float(selected.early_stopping_min_delta),
         qwen_cache_mode="direct" if config.compatibility_mode else selected.qwen_cache_mode,

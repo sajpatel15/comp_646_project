@@ -109,10 +109,26 @@ def create_loader(
     return DataLoader(dataset, **loader_kwargs)
 
 
-def _resolve_amp_settings(device: torch.device, amp: bool | None) -> tuple[bool, torch.dtype | None]:
+def _resolve_amp_settings(
+    device: torch.device,
+    amp: bool | None,
+    amp_precision: str | None = None,
+) -> tuple[bool, torch.dtype | None]:
     use_amp = device.type == "cuda" if amp is None else bool(amp) and device.type == "cuda"
     if not use_amp:
         return False, None
+
+    if amp_precision is not None:
+        normalized = amp_precision.strip().lower()
+        if normalized == "auto":
+            amp_precision = None
+        elif normalized == "fp16":
+            return True, torch.float16
+        elif normalized == "bf16":
+            return True, torch.bfloat16
+        else:
+            raise ValueError(f"Unsupported amp_precision '{amp_precision}'. Expected one of: auto, fp16, bf16")
+
     amp_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
     return True, amp_dtype
 
@@ -153,11 +169,12 @@ def evaluate_model(
     device: torch.device,
     *,
     amp: bool | None = None,
+    amp_precision: str | None = None,
 ) -> tuple[dict[str, float | list[list[int]]], torch.Tensor, torch.Tensor]:
     """Evaluate a model on a dataloader and return metrics, logits, and labels."""
 
     model.eval()
-    amp_enabled, amp_dtype = _resolve_amp_settings(device, amp)
+    amp_enabled, amp_dtype = _resolve_amp_settings(device, amp, amp_precision)
     non_blocking = device.type == "cuda"
     logits_rows = []
     label_rows = []
@@ -173,7 +190,7 @@ def evaluate_model(
             )
             logits_rows.append(logits.detach().cpu())
             label_rows.append(labels.detach().cpu())
-    logits_tensor = torch.cat(logits_rows, dim=0)
+    logits_tensor = torch.cat(logits_rows, dim=0).to(dtype=torch.float32)
     labels_tensor = torch.cat(label_rows, dim=0)
     predictions = logits_tensor.argmax(dim=1).numpy()
     metrics = compute_classification_metrics(labels_tensor.numpy(), predictions)
@@ -251,6 +268,7 @@ def train_model(
     log_dir: str | Path | None = None,
     checkpoint_path: str | Path | None = None,
     amp: bool | None = None,
+    amp_precision: str | None = None,
     early_stopping_patience: int | None = None,
     early_stopping_min_delta: float = 0.0,
 ) -> TrainingResult:
@@ -260,7 +278,7 @@ def train_model(
     optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
     criterion = nn.CrossEntropyLoss()
     writer = SummaryWriter(log_dir=str(log_dir)) if log_dir and SummaryWriter is not None else None
-    amp_enabled, amp_dtype = _resolve_amp_settings(device, amp)
+    amp_enabled, amp_dtype = _resolve_amp_settings(device, amp, amp_precision)
     scaler = (
         torch.cuda.amp.GradScaler(enabled=amp_enabled and amp_dtype == torch.float16)
         if device.type == "cuda"
@@ -303,7 +321,13 @@ def train_model(
             total_samples += batch_size
 
         train_loss = epoch_loss / max(total_samples, 1)
-        val_metrics, val_logits, val_labels = evaluate_model(model, val_loader, device, amp=amp)
+        val_metrics, val_logits, val_labels = evaluate_model(
+            model,
+            val_loader,
+            device,
+            amp=amp,
+            amp_precision=amp_precision,
+        )
         selection_value = _resolve_selection_value(val_metrics, selection_metric)
         epoch_row = {
             "epoch": float(epoch),
@@ -363,6 +387,7 @@ def run_training_sweep(
     checkpoint_root: str | Path,
     canonical_checkpoint_path: str | Path | None = None,
     amp: bool | None = None,
+    amp_precision: str | None = None,
     early_stopping_patience: int | None = None,
     early_stopping_min_delta: float = 0.0,
     pin_memory: bool | None = None,
@@ -432,10 +457,17 @@ def run_training_sweep(
             log_dir=log_dir,
             checkpoint_path=checkpoint_path,
             amp=amp,
+            amp_precision=amp_precision,
             early_stopping_patience=early_stopping_patience,
             early_stopping_min_delta=early_stopping_min_delta,
         )
-        test_metrics, test_logits, test_labels = evaluate_model(model.to(device), test_loader, device, amp=amp)
+        test_metrics, test_logits, test_labels = evaluate_model(
+            model.to(device),
+            test_loader,
+            device,
+            amp=amp,
+            amp_precision=amp_precision,
+        )
         val_score = _resolve_selection_value(result.best_val_metrics, selection_metric)
         row = {
             "trial_name": trial.name,
