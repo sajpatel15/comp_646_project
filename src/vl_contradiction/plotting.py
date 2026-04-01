@@ -29,10 +29,24 @@ def _prepare_output(path: str | Path) -> Path:
     return output
 
 
+def _place_bottom_legend(ax: plt.Axes, handles: list[object], labels: list[str]) -> None:
+    ax.legend(
+        handles,
+        labels,
+        loc="upper center",
+        bbox_to_anchor=(0.5, -0.18),
+        borderaxespad=0.0,
+        frameon=True,
+        ncol=max(1, len(labels)),
+        columnspacing=1.6,
+        handlelength=2.4,
+    )
+
+
 def save_training_curves(history: list[dict[str, float]], output_path: str | Path, title: str) -> None:
     frame = pd.DataFrame(history)
     output = _prepare_output(output_path)
-    fig, ax1 = plt.subplots(figsize=(8.5, 4.6))
+    fig, ax1 = plt.subplots(figsize=(8.4, 4.8))
     train_line = ax1.plot(frame["epoch"], frame["train_loss"], label="Train Loss", linewidth=2)[0]
     ax1.set_xlabel("Epoch")
     ax1.set_ylabel("Loss")
@@ -46,15 +60,8 @@ def save_training_curves(history: list[dict[str, float]], output_path: str | Pat
     )[0]
     ax2.set_ylabel("Macro-F1")
     ax1.set_title(title)
-    ax1.legend(
-        [train_line, val_line],
-        ["Train Loss", "Val Macro-F1"],
-        loc="upper left",
-        bbox_to_anchor=(1.02, 1.0),
-        borderaxespad=0.0,
-        frameon=True,
-    )
-    fig.tight_layout(rect=(0, 0, 0.82, 1))
+    _place_bottom_legend(ax1, [train_line, val_line], ["Train Loss", "Val Macro-F1"])
+    fig.tight_layout(rect=(0, 0.14, 1, 1))
     fig.savefig(output, bbox_inches="tight")
     plt.close(fig)
 
@@ -182,7 +189,7 @@ def save_bar_chart(frame: pd.DataFrame, x: str, y: str, output_path: str | Path,
 
 def save_reliability_diagram(bin_centers: np.ndarray, bin_accuracy: np.ndarray, bin_confidence: np.ndarray, output_path: str | Path, title: str) -> None:
     output = _prepare_output(output_path)
-    fig, ax = plt.subplots(figsize=(6.5, 5.2))
+    fig, ax = plt.subplots(figsize=(6.8, 5.4))
     perfect_line = ax.plot(
         [0, 1],
         [0, 1],
@@ -203,15 +210,8 @@ def save_reliability_diagram(bin_centers: np.ndarray, bin_accuracy: np.ndarray, 
     ax.set_title(title)
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
-    ax.legend(
-        [perfect_line, observed_line],
-        ["Perfect Calibration", "Observed Accuracy"],
-        loc="upper left",
-        bbox_to_anchor=(1.02, 1.0),
-        borderaxespad=0.0,
-        frameon=True,
-    )
-    fig.tight_layout(rect=(0, 0, 0.78, 1))
+    _place_bottom_legend(ax, [perfect_line, observed_line], ["Perfect Calibration", "Observed Accuracy"])
+    fig.tight_layout(rect=(0, 0.14, 1, 1))
     fig.savefig(output, bbox_inches="tight")
     plt.close(fig)
 

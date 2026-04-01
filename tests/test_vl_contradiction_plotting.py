@@ -52,7 +52,7 @@ class PlottingTests(unittest.TestCase):
         legend = axes[0].get_legend()
         self.assertIsNotNone(legend)
         self.assertEqual(["Train Loss", "Val Macro-F1"], [text.get_text() for text in legend.get_texts()])
-        self.assertEqual((1.02, 1.0), tuple(legend.get_bbox_to_anchor()._bbox.p1))
+        self.assertEqual((0.5, -0.18), tuple(legend.get_bbox_to_anchor()._bbox.p1))
 
     def test_save_score_histogram_writes_nonempty_image(self) -> None:
         frame = pd.DataFrame(
@@ -100,7 +100,7 @@ class PlottingTests(unittest.TestCase):
             ["Perfect Calibration", "Observed Accuracy"],
             [text.get_text() for text in legend.get_texts()],
         )
-        self.assertEqual((1.02, 1.0), tuple(legend.get_bbox_to_anchor()._bbox.p1))
+        self.assertEqual((0.5, -0.18), tuple(legend.get_bbox_to_anchor()._bbox.p1))
 
     def test_save_threshold_sweep_marks_best_pair_and_writes_image(self) -> None:
         rows = []
