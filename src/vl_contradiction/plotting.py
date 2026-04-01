@@ -29,13 +29,12 @@ def _prepare_output(path: str | Path) -> Path:
     return output
 
 
-def _place_bottom_legend(ax: plt.Axes, handles: list[object], labels: list[str]) -> None:
-    ax.legend(
+def _add_footer_legend(legend_ax: plt.Axes, handles: list[object], labels: list[str]) -> None:
+    legend_ax.set_axis_off()
+    legend_ax.legend(
         handles,
         labels,
-        loc="upper center",
-        bbox_to_anchor=(0.5, -0.18),
-        borderaxespad=0.0,
+        loc="center",
         frameon=True,
         ncol=max(1, len(labels)),
         columnspacing=1.6,
@@ -46,7 +45,10 @@ def _place_bottom_legend(ax: plt.Axes, handles: list[object], labels: list[str])
 def save_training_curves(history: list[dict[str, float]], output_path: str | Path, title: str) -> None:
     frame = pd.DataFrame(history)
     output = _prepare_output(output_path)
-    fig, ax1 = plt.subplots(figsize=(8.4, 4.8))
+    fig = plt.figure(figsize=(8.8, 6.2))
+    grid = fig.add_gridspec(2, 1, height_ratios=[1.0, 0.22], hspace=0.28)
+    ax1 = fig.add_subplot(grid[0])
+    legend_ax = fig.add_subplot(grid[1])
     train_line = ax1.plot(frame["epoch"], frame["train_loss"], label="Train Loss", linewidth=2)[0]
     ax1.set_xlabel("Epoch")
     ax1.set_ylabel("Loss")
@@ -60,8 +62,8 @@ def save_training_curves(history: list[dict[str, float]], output_path: str | Pat
     )[0]
     ax2.set_ylabel("Macro-F1")
     ax1.set_title(title)
-    _place_bottom_legend(ax1, [train_line, val_line], ["Train Loss", "Val Macro-F1"])
-    fig.tight_layout(rect=(0, 0.14, 1, 1))
+    _add_footer_legend(legend_ax, [train_line, val_line], ["Train Loss", "Val Macro-F1"])
+    fig.subplots_adjust(left=0.14, right=0.86, top=0.88, bottom=0.10, hspace=0.25)
     fig.savefig(output, bbox_inches="tight")
     plt.close(fig)
 
@@ -189,7 +191,10 @@ def save_bar_chart(frame: pd.DataFrame, x: str, y: str, output_path: str | Path,
 
 def save_reliability_diagram(bin_centers: np.ndarray, bin_accuracy: np.ndarray, bin_confidence: np.ndarray, output_path: str | Path, title: str) -> None:
     output = _prepare_output(output_path)
-    fig, ax = plt.subplots(figsize=(6.8, 5.4))
+    fig = plt.figure(figsize=(7.2, 6.4))
+    grid = fig.add_gridspec(2, 1, height_ratios=[1.0, 0.22], hspace=0.28)
+    ax = fig.add_subplot(grid[0])
+    legend_ax = fig.add_subplot(grid[1])
     perfect_line = ax.plot(
         [0, 1],
         [0, 1],
@@ -210,8 +215,8 @@ def save_reliability_diagram(bin_centers: np.ndarray, bin_accuracy: np.ndarray, 
     ax.set_title(title)
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
-    _place_bottom_legend(ax, [perfect_line, observed_line], ["Perfect Calibration", "Observed Accuracy"])
-    fig.tight_layout(rect=(0, 0.14, 1, 1))
+    _add_footer_legend(legend_ax, [perfect_line, observed_line], ["Perfect Calibration", "Observed Accuracy"])
+    fig.subplots_adjust(left=0.14, right=0.96, top=0.88, bottom=0.10, hspace=0.25)
     fig.savefig(output, bbox_inches="tight")
     plt.close(fig)
 

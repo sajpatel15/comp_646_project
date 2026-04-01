@@ -26,7 +26,7 @@ from vl_contradiction.plotting import (  # noqa: E402
 
 
 class PlottingTests(unittest.TestCase):
-    def test_save_training_curves_writes_image_and_places_legend_on_right(self) -> None:
+    def test_save_training_curves_writes_image_and_places_legend_below_plot(self) -> None:
         history = [
             {"epoch": 1.0, "train_loss": 1.2, "val_macro_f1": 0.32},
             {"epoch": 2.0, "train_loss": 0.8, "val_macro_f1": 0.47},
@@ -49,10 +49,14 @@ class PlottingTests(unittest.TestCase):
 
         figure = captured["figure"]
         axes = figure.axes
-        legend = axes[0].get_legend()
+        legend_axes = [axis for axis in axes if axis.get_legend() is not None]
+        self.assertEqual(1, len(legend_axes))
+        legend_axis = legend_axes[0]
+        legend = legend_axis.get_legend()
         self.assertIsNotNone(legend)
         self.assertEqual(["Train Loss", "Val Macro-F1"], [text.get_text() for text in legend.get_texts()])
-        self.assertEqual((0.5, -0.18), tuple(legend.get_bbox_to_anchor()._bbox.p1))
+        self.assertFalse(legend_axis.axison)
+        self.assertLess(legend_axis.get_position().y1, axes[0].get_position().y0)
 
     def test_save_score_histogram_writes_nonempty_image(self) -> None:
         frame = pd.DataFrame(
@@ -72,7 +76,7 @@ class PlottingTests(unittest.TestCase):
             self.assertTrue(output_path.exists())
             self.assertGreater(output_path.stat().st_size, 0)
 
-    def test_save_reliability_diagram_writes_image_and_places_legend_on_right(self) -> None:
+    def test_save_reliability_diagram_writes_image_and_places_legend_below_plot(self) -> None:
         captured: dict[str, object] = {}
         original_close = plt.close
 
@@ -94,13 +98,17 @@ class PlottingTests(unittest.TestCase):
             self.assertGreater(output_path.stat().st_size, 0)
 
         figure = captured["figure"]
-        legend = figure.axes[0].get_legend()
+        legend_axes = [axis for axis in figure.axes if axis.get_legend() is not None]
+        self.assertEqual(1, len(legend_axes))
+        legend_axis = legend_axes[0]
+        legend = legend_axis.get_legend()
         self.assertIsNotNone(legend)
         self.assertEqual(
             ["Perfect Calibration", "Observed Accuracy"],
             [text.get_text() for text in legend.get_texts()],
         )
-        self.assertEqual((0.5, -0.18), tuple(legend.get_bbox_to_anchor()._bbox.p1))
+        self.assertFalse(legend_axis.axison)
+        self.assertLess(legend_axis.get_position().y1, figure.axes[0].get_position().y0)
 
     def test_save_threshold_sweep_marks_best_pair_and_writes_image(self) -> None:
         rows = []
