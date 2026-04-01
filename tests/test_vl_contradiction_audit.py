@@ -68,6 +68,36 @@ class AuditWorkflowTests(unittest.TestCase):
         self.assertTrue(readiness["passed"])
         self.assertEqual([], readiness["reasons"])
 
+    def test_audit_readiness_can_pass_with_unresolved_rows_when_manual_review_is_optional(self) -> None:
+        frame = pd.DataFrame(
+            [
+                {
+                    "sample_id": "a",
+                    "edit_family": "neutral_hypernym",
+                    "reviewed_label": "neutral",
+                    "label_valid": "true",
+                    "grammar_ok": "true",
+                },
+                {
+                    "sample_id": "b",
+                    "edit_family": "contradiction_object",
+                    "reviewed_label": "",
+                    "label_valid": "",
+                    "grammar_ok": "",
+                },
+            ]
+        )
+        readiness = audit_readiness(
+            frame,
+            overall_label_valid_threshold=0.9,
+            overall_grammar_ok_threshold=0.9,
+            per_family_label_valid_threshold=0.8,
+            require_all_rows_reviewed=False,
+        )
+        self.assertTrue(readiness["passed"])
+        self.assertEqual(1, readiness["unresolved_rows"])
+        self.assertEqual([], readiness["reasons"])
+
     def test_auto_fill_only_completes_clearly_safe_rows(self) -> None:
         frame = pd.DataFrame(
             [

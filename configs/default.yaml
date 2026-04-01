@@ -262,5 +262,6 @@ audit:
   overall_label_valid_threshold: 0.90
   overall_grammar_ok_threshold: 0.90
   per_family_label_valid_threshold: 0.80
-  require_all_rows_reviewed: true
+  launch_review_ui: false
+  require_all_rows_reviewed: false
   require_qwen_for_readiness: true

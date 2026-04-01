@@ -128,6 +128,7 @@ class AuditConfig:
     overall_label_valid_threshold: float
     overall_grammar_ok_threshold: float
     per_family_label_valid_threshold: float
+    launch_review_ui: bool
     require_all_rows_reviewed: bool
     require_qwen_for_readiness: bool
 

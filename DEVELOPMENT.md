@@ -180,6 +180,7 @@ Resolved from `src/vl_contradiction/runtime.py`, the config, and the current not
 ## Known Practical Constraints
 
 - The notebook is the main deliverable, so readability matters.
+- Audit sheet generation and auto-fill remain part of the workflow, but manual review is now optional by default. `config.audit.launch_review_ui` re-enables the widget reviewer, and `config.audit.require_all_rows_reviewed` restores the older hard gate if you want unresolved flagged rows to block readiness.
 - Qwen inference still emits one JSON artifact per sample under `artifacts/qwen/<stage>`, even when scratch caching is used internally for throughput.
 - The readiness gate expects Qwen metrics when `audit.require_qwen_for_readiness` is true.
 - Plotting code lives in helpers, but some figure assembly still happens directly in the notebook. When making notebook visualization changes, check both locations before deciding where the fix belongs.
