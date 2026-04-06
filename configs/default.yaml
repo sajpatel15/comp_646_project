@@ -1,10 +1,7 @@
 runtime:
   seed: 42
   split_seed: 7
-  auto_mount_drive: true
   local_root: "."
-  colab_drive_root: "/content/drive/MyDrive/comp646_multimodal_contradiction"
-  colab_dataset_root: "/content/comp646_datasets/coco2017"
 
 paths:
   dataset_root: "artifacts/datasets/coco2017"

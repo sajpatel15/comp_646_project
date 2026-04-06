@@ -55,10 +55,8 @@ def _in_colab() -> bool:
     return "google.colab" in sys.modules
 
 
-def _resolve_root(project_root: Path, config: ProjectConfig, is_colab: bool) -> Path:
-    if is_colab:
-        return Path(config.runtime.colab_drive_root).expanduser()
-    return project_root / config.runtime.local_root
+def _resolve_root(project_root: Path, config: ProjectConfig) -> Path:
+    return _resolve_subpath(project_root, config.runtime.local_root)
 
 
 def _resolve_subpath(root: Path, value: str) -> Path:
@@ -66,25 +64,12 @@ def _resolve_subpath(root: Path, value: str) -> Path:
     return path if path.is_absolute() else root / path
 
 
-def mount_google_drive_if_needed(config: ProjectConfig) -> None:
-    """Mount Google Drive when running inside Colab."""
-
-    if not config.runtime.auto_mount_drive or not _in_colab():
-        return
-    try:
-        from google.colab import drive  # type: ignore
-    except ImportError:
-        return
-    drive.mount("/content/drive", force_remount=False)
-
-
 def detect_runtime(project_root: str | Path, config: ProjectConfig) -> RuntimeInfo:
     """Resolve runtime information and artifact directories."""
 
     root = Path(project_root).expanduser().resolve()
     is_colab = _in_colab()
-    mount_google_drive_if_needed(config)
-    cache_root = _resolve_root(root, config, is_colab)
+    cache_root = _resolve_root(root, config)
     if config.training.device != "auto":
         device = torch.device(config.training.device)
     else:
@@ -101,11 +86,7 @@ def detect_runtime(project_root: str | Path, config: ProjectConfig) -> RuntimeIn
         device=device,
         performance=performance,
         cache_root=cache_root,
-        dataset_root=(
-            Path(config.runtime.colab_dataset_root).expanduser()
-            if is_colab
-            else _resolve_subpath(cache_root, config.paths.dataset_root)
-        ),
+        dataset_root=_resolve_subpath(cache_root, config.paths.dataset_root),
         benchmark_root=_resolve_subpath(cache_root, config.paths.benchmark_root),
         checkpoint_root=_resolve_subpath(cache_root, config.paths.checkpoint_root),
         log_root=_resolve_subpath(cache_root, config.paths.log_root),

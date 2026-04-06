@@ -6,7 +6,7 @@ Build a reproducible COCO-derived benchmark for image-caption entailment, neutra
 ## Project Structure
 - Main deliverable: one primary notebook that runs both locally and on Colab.
 - Supporting code: helper Python modules for data loading, benchmark generation, models, training, evaluation, and plotting.
-- Persistent cache: Google Drive for datasets, split manifests, generated benchmark files, checkpoints, metrics, TensorBoard logs, Qwen outputs, and exported figures.
+- Persistent cache: local runtime storage under the execution environment, with datasets and derived artifacts kept under the configured local artifact roots.
 - Final report: not implemented until the experiment pipeline and outputs are complete.
 
 ## Priority Order
@@ -32,7 +32,7 @@ Build a reproducible COCO-derived benchmark for image-caption entailment, neutra
 - Qwen subset: fixed `600` examples selected once by seed.
 - Qwen runtime: adaptive, profile-driven precision and batching by default, with a compatibility mode that preserves the older conservative `4bit` path when needed.
 - CLIP and learned-model performance tuning: config-driven and stage-aware through the runtime/performance layer rather than notebook-specific branching.
-- COCO access: check Drive cache first, otherwise download automatically.
+- COCO access: check the configured local dataset cache first, otherwise download automatically.
 
 ## Acceptance Criteria
 - Notebook runs both locally and in Colab with the same config schema.

@@ -69,14 +69,14 @@ Experiment outputs are further separated by stage, so prototype, midscale, and f
 The notebook is designed to:
 
 - clone or fast-forward the repo into `/content/project`
-- mount Google Drive when `auto_mount_drive` is enabled
-- keep COCO image files on Colab disk
-- write smaller derived artifacts to the configured Drive root
+- keep COCO image files and derived artifacts on the Colab runtime filesystem
+- store benchmark, metrics, figures, checkpoints, logs, and Qwen outputs under the repo-local `artifacts/` tree
+- keep prototype, midscale, and final outputs separated by stage-specific subdirectories under each artifact root
 
 Current defaults from `configs/default.yaml`:
 
-- Drive artifact root: `/content/drive/MyDrive/comp646_multimodal_contradiction`
-- Colab dataset root: `/content/comp646_datasets/coco2017`
+- Local artifact roots: `./artifacts/*`
+- COCO dataset root: `./artifacts/datasets/coco2017`
 - Qwen model: `Qwen/Qwen2.5-VL-3B-Instruct`
 - Qwen subset size: `600`
 

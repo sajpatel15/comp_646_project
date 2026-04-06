@@ -65,10 +65,7 @@ DEFAULT_PERFORMANCE_PAYLOAD: dict[str, Any] = {
 class RuntimeConfig:
     seed: int
     split_seed: int
-    auto_mount_drive: bool
     local_root: str
-    colab_drive_root: str
-    colab_dataset_root: str
 
 
 @dataclass(slots=True)

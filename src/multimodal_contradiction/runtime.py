@@ -27,15 +27,6 @@ def detect_environment() -> str:
     return "colab" if is_colab() else "local"
 
 
-def mount_google_drive(mount_point: str = "/content/drive") -> Path | None:
-    if not is_colab():
-        return None
-    from google.colab import drive  # type: ignore
-
-    drive.mount(mount_point, force_remount=False)
-    return Path(mount_point)
-
-
 def discover_project_root(start: Path | None = None) -> Path:
     cursor = (start or Path.cwd()).resolve()
     candidates = [cursor, *cursor.parents]
@@ -45,9 +36,7 @@ def discover_project_root(start: Path | None = None) -> Path:
     return cursor
 
 
-def resolve_cache_root(project_root: Path, drive_root: Path | None, cache_in_drive: bool) -> Path:
-    if cache_in_drive and drive_root is not None:
-        return drive_root / "MyDrive" / "comp646_multimodal_contradiction"
+def resolve_cache_root(project_root: Path) -> Path:
     return project_root / "output" / "cache"
 
 
@@ -96,25 +85,14 @@ def prepare_runtime(
     *,
     config_path: Path | None = None,
     project_root: Path | None = None,
-    mount_drive_if_needed: bool = True,
 ) -> ProjectConfig:
     root = discover_project_root(project_root)
     env = detect_environment()
-    drive_root = mount_google_drive() if env == "colab" and mount_drive_if_needed else None
-
-    config_probe = load_project_config(
-        env=env,
-        project_root=root,
-        cache_root=root / "output" / "cache",
-        drive_root=drive_root,
-        config_path=config_path,
-    )
-    cache_root = resolve_cache_root(root, drive_root, config_probe.cache_in_drive)
+    cache_root = resolve_cache_root(root)
     config = load_project_config(
         env=env,
         project_root=root,
         cache_root=cache_root,
-        drive_root=drive_root,
         config_path=config_path,
     )
 

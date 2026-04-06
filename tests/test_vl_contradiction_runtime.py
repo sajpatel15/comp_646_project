@@ -124,6 +124,20 @@ class PerformanceResolutionTests(unittest.TestCase):
         self.assertIsNone(runtime.performance.training_amp_precision)
         self.assertEqual(runtime.cache_root / ".scratch" / "qwen", runtime.qwen_scratch_root)
 
+    def test_detect_runtime_keeps_colab_storage_on_local_runtime_filesystem(self) -> None:
+        config = load_config(PROJECT_ROOT / "configs" / "default.yaml")
+        config.training.device = "cpu"
+
+        with mock.patch("vl_contradiction.runtime._in_colab", return_value=True):
+            runtime = detect_runtime(PROJECT_ROOT, config)
+
+        self.assertTrue(runtime.is_colab)
+        self.assertEqual(PROJECT_ROOT, runtime.cache_root)
+        self.assertEqual(PROJECT_ROOT / "artifacts" / "datasets" / "coco2017", runtime.dataset_root)
+        self.assertEqual(PROJECT_ROOT / "artifacts" / "benchmark", runtime.benchmark_root)
+        self.assertEqual(PROJECT_ROOT / "artifacts" / "metrics", runtime.metrics_root)
+        self.assertEqual(Path("/content/comp646_scratch") / "qwen", runtime.qwen_scratch_root)
+
 
 if __name__ == "__main__":
     unittest.main()

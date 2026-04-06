@@ -1,7 +1,6 @@
 project_name: multimodal_contradiction_project
 seed: 646
 split_seed: 646
-cache_in_drive: true
 prototype_family_count: 1200
 mid_family_count: 4000
 final_family_count: 6000

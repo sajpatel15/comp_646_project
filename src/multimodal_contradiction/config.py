@@ -30,7 +30,6 @@ class ProjectPaths:
     qwen_cache_root: Path
     checkpoint_root: Path
     output_root: Path
-    drive_root: Path | None = None
 
 
 @dataclass(slots=True)
@@ -39,7 +38,6 @@ class ProjectConfig:
     env: str
     seed: int
     split_seed: int
-    cache_in_drive: bool
     prototype_family_count: int
     mid_family_count: int
     final_family_count: int
@@ -79,7 +77,6 @@ def load_project_config(
     env: str,
     project_root: Path,
     cache_root: Path,
-    drive_root: Path | None = None,
     config_path: Path | None = None,
 ) -> ProjectConfig:
     config_file = config_path or project_root / "config" / "defaults.yaml"
@@ -97,7 +94,6 @@ def load_project_config(
         qwen_cache_root=cache_root / "qwen",
         checkpoint_root=cache_root / "checkpoints",
         output_root=project_root / "output",
-        drive_root=drive_root,
     )
 
     return ProjectConfig(
@@ -105,7 +101,6 @@ def load_project_config(
         env=env,
         seed=int(payload["seed"]),
         split_seed=int(payload["split_seed"]),
-        cache_in_drive=bool(payload["cache_in_drive"]),
         prototype_family_count=int(payload["prototype_family_count"]),
         mid_family_count=int(payload["mid_family_count"]),
         final_family_count=int(payload["final_family_count"]),
