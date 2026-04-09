@@ -11,6 +11,8 @@ import pandas as pd
 from IPython.display import clear_output, display
 from PIL import Image
 
+from .labels import CLASS_ORDER
+
 
 TRUE_VALUES = {"1", "true", "yes", "y"}
 FALSE_VALUES = {"0", "false", "no", "n"}
@@ -44,12 +46,7 @@ class AuditReviewSession:
         self.details_html = widgets.HTML(layout=widgets.Layout(width="100%"))
         self.image_output = widgets.Output(layout=widgets.Layout(border="1px solid #ddd", padding="8px"))
         self.reviewed_label = widgets.Dropdown(
-            options=[
-                ("Keep assigned label", ""),
-                ("Contradiction", "contradiction"),
-                ("Neutral", "neutral"),
-                ("Entailment", "entailment"),
-            ],
+            options=[("Keep assigned label", "")] + [(label.title(), label) for label in CLASS_ORDER],
             description="Reviewed",
             layout=widgets.Layout(width="320px"),
         )
@@ -132,7 +129,8 @@ class AuditReviewSession:
     def _render_row(self) -> None:
         row = self.review_frame.iloc[self.index]
         self.index_input.value = self.index + 1
-        self.reviewed_label.value = str(row.get("reviewed_label", "") or "")
+        reviewed_label = str(row.get("reviewed_label", "") or "")
+        self.reviewed_label.value = reviewed_label if reviewed_label in CLASS_ORDER or reviewed_label == "" else ""
         self.label_valid.value = _normalize_flag(row.get("label_valid", ""))
         self.grammar_ok.value = _normalize_flag(row.get("grammar_ok", ""))
         self.notes.value = str(row.get("notes", "") or "")

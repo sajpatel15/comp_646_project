@@ -9,8 +9,7 @@ import pandas as pd
 import torch
 from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, precision_recall_fscore_support
 
-
-CLASS_ORDER = ["contradiction", "neutral", "entailment"]
+from .labels import CLASS_ORDER, LABEL_TO_INDEX
 
 
 @dataclass(slots=True)
@@ -35,11 +34,9 @@ def compute_classification_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> di
         "accuracy": float(accuracy_score(y_true, y_pred)),
         "macro_f1": float(f1_score(y_true, y_pred, average="macro")),
         "precision_contradiction": float(precision[0]),
-        "precision_neutral": float(precision[1]),
-        "precision_entailment": float(precision[2]),
+        "precision_entailment": float(precision[1]),
         "recall_contradiction": float(recall[0]),
-        "recall_neutral": float(recall[1]),
-        "recall_entailment": float(recall[2]),
+        "recall_entailment": float(recall[1]),
         "confusion_matrix": confusion_matrix(y_true, y_pred, labels=list(range(len(CLASS_ORDER)))).tolist(),
     }
 
@@ -110,10 +107,9 @@ def per_edit_family_metrics(frame: pd.DataFrame, pred_col: str = "pred_label") -
     """Compute accuracy and macro-F1 for each edit family in a labeled frame."""
 
     rows: list[dict[str, float | int | str]] = []
-    label_to_index = {label: index for index, label in enumerate(CLASS_ORDER)}
     for edit_family, group in frame.groupby("edit_family"):
-        y_true = group["label"].map(label_to_index).to_numpy()
-        y_pred = group[pred_col].map(label_to_index).to_numpy()
+        y_true = group["label"].map(LABEL_TO_INDEX).to_numpy()
+        y_pred = group[pred_col].map(LABEL_TO_INDEX).to_numpy()
         metrics = compute_classification_metrics(y_true, y_pred)
         rows.append(
             {

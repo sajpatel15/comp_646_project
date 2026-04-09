@@ -78,12 +78,16 @@ def _write_image(path: Path, color: tuple[int, int, int]) -> None:
 class QwenTests(unittest.TestCase):
     def test_parse_qwen_output_handles_json_and_keyword_fallback(self) -> None:
         self.assertEqual(
-            {"label": "neutral", "rationale": "because"},
-            parse_qwen_output('prefix {"label": "neutral", "rationale": "because"} suffix'),
+            {"label": "contradiction", "rationale": "because"},
+            parse_qwen_output('prefix {"label": "contradiction", "rationale": "because"} suffix'),
         )
         self.assertEqual(
             {"label": "entailment", "rationale": "entailment appears in text"},
             parse_qwen_output("entailment appears in text"),
+        )
+        self.assertEqual(
+            {"label": "unparsed", "rationale": "neutral appears in text"},
+            parse_qwen_output("neutral appears in text"),
         )
 
     def test_load_qwen_bundle_auto_precision_falls_back_to_4bit(self) -> None:
@@ -190,17 +194,17 @@ class QwenTests(unittest.TestCase):
             _write_image(image_path, (10, 10, 10))
             payload = {
                 "sample_id": "sample/0",
-                "label": "neutral",
-                "pred_label": "neutral",
+                "label": "contradiction",
+                "pred_label": "contradiction",
                 "rationale": "cached",
-                "raw_output": '{"label": "neutral", "rationale": "cached"}',
+                "raw_output": '{"label": "contradiction", "rationale": "cached"}',
                 "runtime_ms": 1.0,
             }
             (scratch_root / "sample_0.json").write_text(pd.Series(payload).to_json(), encoding="utf-8")
             records = pd.DataFrame(
                 {
                     "sample_id": ["sample/0"],
-                    "label": ["neutral"],
+                    "label": ["contradiction"],
                     "edited_caption": ["caption 0"],
                     "file_path": [image_path],
                 }
@@ -226,6 +230,50 @@ class QwenTests(unittest.TestCase):
             self.assertEqual([], model.generate_calls)
             self.assertTrue((final_dir / "sample_0.json").exists())
 
+    def test_run_qwen_inference_invalid_neutral_cache_is_regenerated(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            final_dir = root / "qwen"
+            image_path = root / "neutral.png"
+            _write_image(image_path, (5, 5, 5))
+
+            stale_payload = {
+                "sample_id": "sample/0",
+                "label": "neutral",
+                "pred_label": "neutral",
+                "rationale": "stale",
+                "raw_output": '{"label": "neutral", "rationale": "stale"}',
+                "runtime_ms": 1.0,
+            }
+            final_dir.mkdir(parents=True, exist_ok=True)
+            (final_dir / "sample_0.json").write_text(pd.Series(stale_payload).to_json(), encoding="utf-8")
+
+            records = pd.DataFrame(
+                {
+                    "sample_id": ["sample/0"],
+                    "label": ["entailment"],
+                    "edited_caption": ["caption 0"],
+                    "file_path": [image_path],
+                }
+            )
+            model = FakeModel()
+            bundle = QwenBundle(
+                model=model,
+                processor=FakeProcessor(),
+                device=torch.device("cpu"),
+                policy=QwenRuntimePolicy(
+                    profile_name="t4",
+                    precision="fp16",
+                    batch_size=1,
+                ),
+            )
+
+            outputs = run_qwen_inference(records, bundle, final_dir, max_new_tokens=8)
+
+            self.assertEqual(["sample/0"], outputs["sample_id"].tolist())
+            self.assertEqual([1], model.generate_calls)
+            self.assertEqual("contradiction", outputs.loc[0, "pred_label"])
+
     def test_run_qwen_inference_compatibility_mode_forces_single_row_direct_writes(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
@@ -240,7 +288,7 @@ class QwenTests(unittest.TestCase):
             records = pd.DataFrame(
                 {
                     "sample_id": [f"compat/{i}" for i in range(3)],
-                    "label": ["neutral"] * 3,
+                    "label": ["contradiction"] * 3,
                     "edited_caption": [f"caption {i}" for i in range(3)],
                     "file_path": image_paths,
                 }

@@ -81,7 +81,7 @@ class ClipExtractionPerfTests(unittest.TestCase):
                     "sample_id": ["s2", "s0", "s1"],
                     "file_path": [str(path) for path in image_paths],
                     "edited_caption": ["caption 2", "caption 0", "caption 1"],
-                    "label": ["contradiction", "neutral", "entailment"],
+                    "label": ["contradiction", "entailment", "contradiction"],
                 }
             )
             bundle = ClipBundle(
@@ -100,7 +100,7 @@ class ClipExtractionPerfTests(unittest.TestCase):
             image_tokens, text_tokens, token_labels = extract_token_features(records, bundle, batch_size=2)
 
             self.assertEqual(["s2", "s0", "s1"], scores["sample_id"].tolist())
-            self.assertEqual(["contradiction", "neutral", "entailment"], scores["label"].tolist())
+            self.assertEqual(["contradiction", "entailment", "contradiction"], scores["label"].tolist())
             self.assertEqual((3,), tuple(scores["raw_score"].shape))
             self.assertEqual((3, 3), tuple(scores.shape))
             self.assertEqual((3, 5), tuple(joint_features.shape))

@@ -105,33 +105,28 @@ class TrainingSweepTests(unittest.TestCase):
                 [2.0, -2.0],
                 [1.8, -2.2],
                 [2.2, -1.9],
-                [0.0, 2.2],
-                [-0.2, 1.9],
-                [0.2, 2.1],
             ],
             dtype=torch.float32,
         )
-        train_labels = torch.tensor([0, 0, 0, 1, 1, 1, 2, 2, 2], dtype=torch.long)
+        train_labels = torch.tensor([0, 0, 0, 1, 1, 1], dtype=torch.long)
 
         val_features = torch.tensor(
             [
                 [-2.1, -2.1],
                 [2.1, -2.1],
-                [0.0, 2.0],
             ],
             dtype=torch.float32,
         )
-        val_labels = torch.tensor([0, 1, 2], dtype=torch.long)
+        val_labels = torch.tensor([0, 1], dtype=torch.long)
 
         test_features = torch.tensor(
             [
                 [-1.9, -2.0],
                 [2.0, -1.8],
-                [0.1, 2.2],
             ],
             dtype=torch.float32,
         )
-        test_labels = torch.tensor([0, 1, 2], dtype=torch.long)
+        test_labels = torch.tensor([0, 1], dtype=torch.long)
 
         trials = [
             TrainingTrialConfig(name="weak", epochs=1, batch_size=4, learning_rate=1e-6, weight_decay=0.01),
@@ -163,7 +158,7 @@ class TrainingSweepTests(unittest.TestCase):
             self.assertTrue((root / "checkpoints" / "linear_probe_best.pt").exists())
             self.assertEqual(root / "checkpoints" / "linear_probe_best.pt", result.best_checkpoint)
             self.assertGreaterEqual(float(result.best_test_metrics["macro_f1"]), 0.95)
-            self.assertEqual((3, 3), tuple(result.best_test_logits.shape))
+            self.assertEqual((2, 2), tuple(result.best_test_logits.shape))
             self.assertEqual(torch.float32, result.best_test_logits.dtype)
 
 

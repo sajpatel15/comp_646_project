@@ -1,4 +1,4 @@
-"""Benchmark generation helpers for entailment, neutral, and contradiction labels."""
+"""Benchmark generation helpers for binary entailment and contradiction labels."""
 
 from __future__ import annotations
 
@@ -9,6 +9,8 @@ from typing import Any
 
 import numpy as np
 import pandas as pd
+
+from .labels import CLASS_ORDER
 
 
 SYNONYM_MAP = {
@@ -88,7 +90,6 @@ IRREGULAR_PLURALS = {
 IRREGULAR_SINGULARS = {plural: singular for singular, plural in IRREGULAR_PLURALS.items()}
 
 ATTRIBUTE_WORDS = set(ATTRIBUTE_FLIPS)
-NEUTRAL_FAMILIES = ("neutral_attribute_drop", "neutral_hypernym")
 CONTRADICTION_FAMILIES = (
     "contradiction_action",
     "contradiction_attribute",
@@ -137,7 +138,6 @@ class BenchmarkBuildResult:
 class _CandidatePack:
     row: dict[str, Any]
     entailment: tuple[str, str] | None
-    neutrals: dict[str, tuple[str, str]]
     contradictions: dict[str, tuple[str, str]]
 
 
@@ -329,34 +329,6 @@ def _entailment_candidate(caption: str) -> tuple[str | None, str | None]:
     return None, None
 
 
-def _neutral_candidates(caption: str) -> dict[str, tuple[str, str]]:
-    candidates: dict[str, tuple[str, str]] = {}
-    lower = caption.lower()
-
-    for source, target in HYPERNYM_MAP.items():
-        if re.search(_word_pattern(source), lower):
-            updated = _replace_first_safe(caption, source, target)
-            if updated and updated.lower() != caption.lower():
-                candidates["neutral_hypernym"] = (updated, f"hypernym:{source}->{target}")
-                break
-
-    removable_attributes: list[tuple[int, str]] = []
-    protected_spans = _protected_spans(caption)
-    for attribute in ATTRIBUTE_WORDS:
-        pattern = re.compile(_word_pattern(attribute), flags=re.IGNORECASE)
-        for match in pattern.finditer(caption):
-            if _span_is_protected(match.span(), protected_spans):
-                continue
-            removable_attributes.append((match.start(), attribute))
-            break
-    if removable_attributes:
-        _, attribute = min(removable_attributes, key=lambda item: item[0])
-        updated = _remove_first_safe(caption, attribute)
-        if updated and updated.lower() != caption.lower():
-            candidates["neutral_attribute_drop"] = (updated, f"attribute_drop:{attribute}")
-    return candidates
-
-
 def _count_contradiction(caption: str, object_counts: dict[str, int]) -> tuple[str | None, str | None]:
     tokens = caption.split()
     for index, token in enumerate(tokens):
@@ -460,9 +432,8 @@ def _make_record(row: dict[str, Any], edited_caption: str, label: str, edit_fami
 
 def _candidate_pack(row: pd.Series) -> _CandidatePack | None:
     entailment = _entailment_candidate(row["caption"])
-    neutrals = _neutral_candidates(row["caption"])
     contradictions = _contradiction_candidates(row)
-    if not all(entailment) or not neutrals or not contradictions:
+    if not all(entailment) or not contradictions:
         return None
     return _CandidatePack(
         row={
@@ -474,7 +445,6 @@ def _candidate_pack(row: pd.Series) -> _CandidatePack | None:
             "object_counts": row["object_counts"],
         },
         entailment=(entailment[0], entailment[1]),
-        neutrals=neutrals,
         contradictions=contradictions,
     )
 
@@ -487,83 +457,68 @@ def _target_counts(total: int, families: tuple[str, ...]) -> dict[str, int]:
     return targets
 
 
-def _choose_combo(
+def _choose_contradiction(
     pack: _CandidatePack,
-    neutral_targets: dict[str, int],
     contradiction_targets: dict[str, int],
-    neutral_counts: Counter[str],
     contradiction_counts: Counter[str],
     require_deficit: bool,
-) -> tuple[str, str] | None:
-    best_choice: tuple[str, str] | None = None
-    best_score: tuple[int, int, int, int] | None = None
-    for neutral_family in pack.neutrals:
-        neutral_gap = neutral_targets[neutral_family] - neutral_counts[neutral_family]
-        for contradiction_family in pack.contradictions:
-            contradiction_gap = contradiction_targets[contradiction_family] - contradiction_counts[contradiction_family]
-            covered_gaps = int(neutral_gap > 0) + int(contradiction_gap > 0)
-            if require_deficit and covered_gaps == 0:
-                continue
-            score = (
-                covered_gaps,
-                contradiction_gap + neutral_gap,
-                -contradiction_counts[contradiction_family],
-                -neutral_counts[neutral_family],
-            )
-            if best_score is None or score > best_score:
-                best_score = score
-                best_choice = (neutral_family, contradiction_family)
+) -> str | None:
+    best_choice: str | None = None
+    best_score: tuple[int, int] | None = None
+    for contradiction_family in pack.contradictions:
+        contradiction_gap = contradiction_targets[contradiction_family] - contradiction_counts[contradiction_family]
+        if require_deficit and contradiction_gap <= 0:
+            continue
+        score = (
+            contradiction_gap,
+            -contradiction_counts[contradiction_family],
+        )
+        if best_score is None or score > best_score:
+            best_score = score
+            best_choice = contradiction_family
     return best_choice
 
 
 def _select_balanced_records(candidate_packs: list[_CandidatePack], family_limit: int) -> list[dict[str, Any]]:
-    neutral_targets = _target_counts(family_limit, NEUTRAL_FAMILIES)
     contradiction_targets = _target_counts(family_limit, CONTRADICTION_FAMILIES)
-    neutral_counts: Counter[str] = Counter()
     contradiction_counts: Counter[str] = Counter()
     selected_records: list[dict[str, Any]] = []
     used_family_ids: set[str] = set()
     remaining: list[_CandidatePack] = []
 
     for pack in candidate_packs:
-        if len(selected_records) >= family_limit * 3:
+        if len(selected_records) >= family_limit * 2:
             break
-        choice = _choose_combo(pack, neutral_targets, contradiction_targets, neutral_counts, contradiction_counts, require_deficit=True)
+        choice = _choose_contradiction(pack, contradiction_targets, contradiction_counts, require_deficit=True)
         if choice is None:
             remaining.append(pack)
             continue
-        neutral_family, contradiction_family = choice
         used_family_ids.add(pack.row["family_id"])
-        neutral_counts[neutral_family] += 1
-        contradiction_counts[contradiction_family] += 1
+        contradiction_counts[choice] += 1
         selected_records.extend(
             [
                 _make_record(pack.row, pack.entailment[0], "entailment", "entailment_synonym", pack.entailment[1]),
-                _make_record(pack.row, pack.neutrals[neutral_family][0], "neutral", neutral_family, pack.neutrals[neutral_family][1]),
-                _make_record(pack.row, pack.contradictions[contradiction_family][0], "contradiction", contradiction_family, pack.contradictions[contradiction_family][1]),
+                _make_record(pack.row, pack.contradictions[choice][0], "contradiction", choice, pack.contradictions[choice][1]),
             ]
         )
 
-    if len(selected_records) >= family_limit * 3:
+    if len(selected_records) >= family_limit * 2:
         return selected_records
 
     for pack in remaining:
-        if len(selected_records) >= family_limit * 3:
+        if len(selected_records) >= family_limit * 2:
             break
         if pack.row["family_id"] in used_family_ids:
             continue
-        choice = _choose_combo(pack, neutral_targets, contradiction_targets, neutral_counts, contradiction_counts, require_deficit=False)
+        choice = _choose_contradiction(pack, contradiction_targets, contradiction_counts, require_deficit=False)
         if choice is None:
             continue
-        neutral_family, contradiction_family = choice
         used_family_ids.add(pack.row["family_id"])
-        neutral_counts[neutral_family] += 1
-        contradiction_counts[contradiction_family] += 1
+        contradiction_counts[choice] += 1
         selected_records.extend(
             [
                 _make_record(pack.row, pack.entailment[0], "entailment", "entailment_synonym", pack.entailment[1]),
-                _make_record(pack.row, pack.neutrals[neutral_family][0], "neutral", neutral_family, pack.neutrals[neutral_family][1]),
-                _make_record(pack.row, pack.contradictions[contradiction_family][0], "contradiction", contradiction_family, pack.contradictions[contradiction_family][1]),
+                _make_record(pack.row, pack.contradictions[choice][0], "contradiction", choice, pack.contradictions[choice][1]),
             ]
         )
     return selected_records
@@ -572,11 +527,8 @@ def _select_balanced_records(candidate_packs: list[_CandidatePack], family_limit
 def summarize_family_coverage(candidate_packs: list[_CandidatePack], records: pd.DataFrame, family_limit: int) -> pd.DataFrame:
     """Summarize candidate availability and selected coverage for each edit family."""
 
-    neutral_targets = _target_counts(family_limit, NEUTRAL_FAMILIES)
     contradiction_targets = _target_counts(family_limit, CONTRADICTION_FAMILIES)
     candidate_counts: Counter[str] = Counter({"entailment_synonym": sum(1 for pack in candidate_packs if pack.entailment)})
-    for family in NEUTRAL_FAMILIES:
-        candidate_counts[family] = sum(1 for pack in candidate_packs if family in pack.neutrals)
     for family in CONTRADICTION_FAMILIES:
         candidate_counts[family] = sum(1 for pack in candidate_packs if family in pack.contradictions)
 
@@ -591,17 +543,6 @@ def summarize_family_coverage(candidate_packs: list[_CandidatePack], records: pd
             "meets_target": int(selected_counts["entailment_synonym"]) >= int(family_limit),
         }
     ]
-    for family in NEUTRAL_FAMILIES:
-        rows.append(
-            {
-                "label": "neutral",
-                "edit_family": family,
-                "candidate_count": int(candidate_counts[family]),
-                "selected_count": int(selected_counts[family]),
-                "target_count": int(neutral_targets[family]),
-                "meets_target": int(selected_counts[family]) >= int(neutral_targets[family]),
-            }
-        )
     for family in CONTRADICTION_FAMILIES:
         rows.append(
             {
@@ -663,12 +604,19 @@ def build_benchmark(
     return BenchmarkBuildResult(records=benchmark, family_manifest=family_manifest, coverage_summary=coverage_summary)
 
 
-def sample_qwen_subset(records: pd.DataFrame, subset_size: int, seed: int) -> pd.DataFrame:
-    """Draw a fixed stratified subset for Qwen evaluation."""
+def sample_comparison_subset(records: pd.DataFrame, subset_size: int, seed: int) -> pd.DataFrame:
+    """Draw a fixed stratified subset for apples-to-apples model comparison."""
 
-    grouped = records.groupby(["label", "edit_family"], group_keys=False)
+    filtered = records.loc[records["label"].isin(CLASS_ORDER)].copy()
+    grouped = filtered.groupby(["label", "edit_family"], group_keys=False)
     target_per_group = max(subset_size // max(grouped.ngroups, 1), 1)
     sampled = grouped.apply(lambda frame: frame.sample(min(len(frame), target_per_group), random_state=seed))
     if len(sampled) > subset_size:
         sampled = sampled.sample(subset_size, random_state=seed)
     return sampled.sort_values("sample_id").reset_index(drop=True)
+
+
+def sample_qwen_subset(records: pd.DataFrame, subset_size: int, seed: int) -> pd.DataFrame:
+    """Backward-compatible alias for the shared comparison subset sampler."""
+
+    return sample_comparison_subset(records, subset_size=subset_size, seed=seed)

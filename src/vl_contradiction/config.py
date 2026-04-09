@@ -7,7 +7,10 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
-import yaml
+try:
+    import yaml
+except ModuleNotFoundError:  # pragma: no cover - exercised in dependency-light test environments
+    yaml = None
 
 
 DEFAULT_PERFORMANCE_PAYLOAD: dict[str, Any] = {
@@ -173,6 +176,8 @@ class ProjectConfig:
 
 
 def _load_yaml(path: Path) -> dict[str, Any]:
+    if yaml is None:
+        raise ModuleNotFoundError("PyYAML is required to load project configuration files.")
     with path.open("r", encoding="utf-8") as handle:
         return yaml.safe_load(handle)
 

@@ -13,7 +13,6 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 from vl_contradiction.benchmark import (  # noqa: E402
     _attribute_contradiction,
     _count_contradiction,
-    _neutral_candidates,
     _normalize_caption,
     _object_contradiction,
     build_benchmark,
@@ -22,9 +21,6 @@ from vl_contradiction.benchmark import (  # noqa: E402
 
 class BenchmarkRuleTests(unittest.TestCase):
     def test_protected_phrases_skip_broken_edits(self) -> None:
-        neutral_candidates = _neutral_candidates("A living room with an old fashioned TV and a couch.")
-        self.assertNotIn("neutral_attribute_drop", neutral_candidates)
-
         attribute_candidate = _attribute_contradiction("A black and white photo of a dog.")
         self.assertEqual((None, None), attribute_candidate)
 
@@ -59,10 +55,6 @@ class BenchmarkRuleTests(unittest.TestCase):
         self.assertIn("one man", updated.lower())
         self.assertNotIn("one men", updated.lower())
 
-    def test_fruit_hypernyms_are_removed_from_neutral_generation(self) -> None:
-        candidates = _neutral_candidates("A person tossing an orange frisbee on top of a green field.")
-        self.assertNotIn("neutral_hypernym", candidates)
-
     def test_object_contradictions_are_curated_and_skip_present_targets(self) -> None:
         updated, rule = _object_contradiction("A dog on a couch.", ["dog", "couch"])
         self.assertEqual("object:dog->cat", rule)
@@ -90,14 +82,13 @@ class BenchmarkRuleTests(unittest.TestCase):
         benchmark = result.records
         coverage = result.coverage_summary.set_index("edit_family")
 
-        self.assertEqual(24, len(benchmark))
+        self.assertEqual(16, len(benchmark))
         self.assertEqual(8, benchmark.loc[benchmark["edit_family"] == "entailment_synonym"].shape[0])
-        self.assertEqual(4, benchmark.loc[benchmark["edit_family"] == "neutral_attribute_drop"].shape[0])
-        self.assertEqual(4, benchmark.loc[benchmark["edit_family"] == "neutral_hypernym"].shape[0])
         self.assertEqual(2, benchmark.loc[benchmark["edit_family"] == "contradiction_action"].shape[0])
         self.assertEqual(2, benchmark.loc[benchmark["edit_family"] == "contradiction_attribute"].shape[0])
         self.assertEqual(2, benchmark.loc[benchmark["edit_family"] == "contradiction_count"].shape[0])
         self.assertEqual(2, benchmark.loc[benchmark["edit_family"] == "contradiction_object"].shape[0])
+        self.assertEqual({"contradiction", "entailment"}, set(benchmark["label"]))
         self.assertTrue(bool(coverage["meets_target"].all()))
 
 

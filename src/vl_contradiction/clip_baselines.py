@@ -17,10 +17,13 @@ from PIL import Image
 from sklearn.metrics import f1_score
 from torch.utils.data import DataLoader, Dataset
 from tqdm.auto import tqdm
-from transformers import AutoProcessor, CLIPModel
+try:
+    from transformers import AutoProcessor, CLIPModel
+except ModuleNotFoundError:  # pragma: no cover - exercised in dependency-light test environments
+    AutoProcessor = Any  # type: ignore[assignment]
+    CLIPModel = Any  # type: ignore[assignment]
 
-
-CLASS_ORDER = ["contradiction", "neutral", "entailment"]
+from .labels import CLASS_ORDER, LABEL_TO_INDEX
 
 
 @dataclass(slots=True)
@@ -269,39 +272,66 @@ def compute_similarity_scores(records: pd.DataFrame, bundle: ClipBundle, batch_s
     )
 
 
-def fit_similarity_thresholds(labels: list[str], scores: np.ndarray, grid_size: int = 200) -> tuple[dict[str, float], pd.DataFrame]:
-    """Fit two thresholds that maximize macro-F1 on validation labels."""
+def _encode_labels(labels: list[str]) -> np.ndarray:
+    try:
+        return np.array([LABEL_TO_INDEX[label] for label in labels], dtype=np.int64)
+    except KeyError as exc:  # pragma: no cover - defensive validation
+        raise ValueError(f"Unsupported label '{exc.args[0]}'. Expected one of: {CLASS_ORDER}") from exc
 
-    numeric_labels = np.array([CLASS_ORDER.index(label) for label in labels])
-    grid = np.linspace(float(scores.min()), float(scores.max()), num=grid_size)
-    best = {"tau_low": float(grid[0]), "tau_high": float(grid[-1]), "macro_f1": -1.0}
+
+def fit_binary_similarity_threshold(labels: list[str], scores: np.ndarray, grid_size: int = 200) -> tuple[dict[str, float], pd.DataFrame]:
+    """Fit a single threshold that maximizes macro-F1 on validation labels."""
+
+    numeric_labels = _encode_labels(labels)
+    flattened_scores = np.asarray(scores, dtype=float).reshape(-1)
+    if flattened_scores.size == 0:
+        raise ValueError("Cannot fit a threshold on an empty score array")
+    grid = np.linspace(float(flattened_scores.min()), float(flattened_scores.max()), num=grid_size)
+    best = {"tau": float(grid[0]), "macro_f1": -1.0, "accuracy": 0.0}
     search_rows = []
-    for tau_low in grid:
-        for tau_high in grid:
-            if tau_low >= tau_high:
-                continue
-            predictions = predict_with_thresholds(scores, tau_low, tau_high)
-            macro_f1 = f1_score(numeric_labels, predictions, average="macro")
-            search_rows.append({"tau_low": tau_low, "tau_high": tau_high, "macro_f1": macro_f1})
-            if macro_f1 > best["macro_f1"]:
-                best = {"tau_low": float(tau_low), "tau_high": float(tau_high), "macro_f1": float(macro_f1)}
+    for tau in grid:
+        predictions = predict_with_threshold(flattened_scores, tau)
+        macro_f1 = f1_score(numeric_labels, predictions, average="macro", labels=[0, 1], zero_division=0)
+        accuracy = float((predictions == numeric_labels).mean())
+        search_rows.append({"tau": tau, "macro_f1": macro_f1, "accuracy": accuracy})
+        if macro_f1 > best["macro_f1"]:
+            best = {"tau": float(tau), "macro_f1": float(macro_f1), "accuracy": accuracy}
     return best, pd.DataFrame(search_rows)
 
 
-def predict_with_thresholds(scores: np.ndarray, tau_low: float, tau_high: float) -> np.ndarray:
-    """Map cosine similarity scores onto three classes."""
+def fit_similarity_thresholds(labels: list[str], scores: np.ndarray, grid_size: int = 200) -> tuple[dict[str, float], pd.DataFrame]:
+    """Compatibility wrapper for the binary threshold fitter."""
 
-    predictions = np.full(shape=scores.shape, fill_value=1, dtype=np.int64)
-    predictions[scores < tau_low] = 0
-    predictions[scores >= tau_high] = 2
+    best, search_frame = fit_binary_similarity_threshold(labels, scores, grid_size=grid_size)
+    best_compat = {
+        "tau": float(best["tau"]),
+        "tau_low": float(best["tau"]),
+        "tau_high": float(best["tau"]),
+        "macro_f1": float(best["macro_f1"]),
+    }
+    return best_compat, search_frame.assign(tau_low=search_frame["tau"], tau_high=search_frame["tau"])
+
+
+def predict_with_threshold(scores: np.ndarray, tau: float) -> np.ndarray:
+    """Map cosine similarity scores onto the binary class order."""
+
+    scores_array = np.asarray(scores, dtype=float)
+    predictions = np.full(shape=scores_array.shape, fill_value=LABEL_TO_INDEX["entailment"], dtype=np.int64)
+    predictions[scores_array < tau] = LABEL_TO_INDEX["contradiction"]
     return predictions
+
+
+def predict_with_thresholds(scores: np.ndarray, tau_low: float, tau_high: float) -> np.ndarray:
+    """Compatibility wrapper for the binary predictor."""
+
+    return predict_with_threshold(scores, float((tau_low + tau_high) / 2.0))
 
 
 def extract_joint_features(records: pd.DataFrame, bundle: ClipBundle, batch_size: int = 8) -> tuple[torch.Tensor, torch.Tensor]:
     """Extract frozen CLIP image/text features and append cosine score."""
 
     outputs = extract_clip_split_outputs(records, bundle, batch_size=batch_size)
-    labels = torch.tensor([CLASS_ORDER.index(label) for label in outputs.labels], dtype=torch.long)
+    labels = torch.tensor(_encode_labels(outputs.labels), dtype=torch.long)
     return outputs.joint_features, labels
 
 
@@ -309,5 +339,5 @@ def extract_token_features(records: pd.DataFrame, bundle: ClipBundle, batch_size
     """Extract frozen CLIP token states for cross-attention models."""
 
     outputs = extract_clip_split_outputs(records, bundle, batch_size=batch_size)
-    labels = torch.tensor([CLASS_ORDER.index(label) for label in outputs.labels], dtype=torch.long)
+    labels = torch.tensor(_encode_labels(outputs.labels), dtype=torch.long)
     return outputs.image_tokens, outputs.text_tokens, labels

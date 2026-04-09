@@ -5,14 +5,13 @@ from __future__ import annotations
 import torch
 from torch import nn
 
-
-CLASS_ORDER = ["contradiction", "neutral", "entailment"]
+from .labels import CLASS_ORDER
 
 
 class LinearProbe(nn.Module):
     """A simple linear probe over frozen CLIP features."""
 
-    def __init__(self, input_dim: int, num_classes: int = 3) -> None:
+    def __init__(self, input_dim: int, num_classes: int = 2) -> None:
         super().__init__()
         self.classifier = nn.Linear(input_dim, num_classes)
 
@@ -23,7 +22,7 @@ class LinearProbe(nn.Module):
 class MLPProbe(nn.Module):
     """A small MLP ablation for frozen CLIP features."""
 
-    def __init__(self, input_dim: int, hidden_dim: int = 256, dropout: float = 0.1, num_classes: int = 3) -> None:
+    def __init__(self, input_dim: int, hidden_dim: int = 256, dropout: float = 0.1, num_classes: int = 2) -> None:
         super().__init__()
         self.network = nn.Sequential(
             nn.Linear(input_dim, hidden_dim),
@@ -46,7 +45,7 @@ class CrossAttentionFusionClassifier(nn.Module):
         hidden_dim: int = 256,
         num_heads: int = 4,
         dropout: float = 0.1,
-        num_classes: int = 3,
+        num_classes: int = 2,
     ) -> None:
         super().__init__()
         resolved_text_dim = text_input_dim if text_input_dim is not None else image_input_dim

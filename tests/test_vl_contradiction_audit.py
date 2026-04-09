@@ -22,7 +22,7 @@ class AuditWorkflowTests(unittest.TestCase):
             [
                 {
                     "sample_id": "a",
-                    "edit_family": "neutral_hypernym",
+                    "edit_family": "entailment_synonym",
                     "reviewed_label": "",
                     "label_valid": "",
                     "grammar_ok": "",
@@ -44,8 +44,8 @@ class AuditWorkflowTests(unittest.TestCase):
             [
                 {
                     "sample_id": "a",
-                    "edit_family": "neutral_hypernym",
-                    "reviewed_label": "neutral",
+                    "edit_family": "entailment_synonym",
+                    "reviewed_label": "entailment",
                     "label_valid": "true",
                     "grammar_ok": "true",
                 },
@@ -73,8 +73,8 @@ class AuditWorkflowTests(unittest.TestCase):
             [
                 {
                     "sample_id": "a",
-                    "edit_family": "neutral_hypernym",
-                    "reviewed_label": "neutral",
+                    "edit_family": "entailment_synonym",
+                    "reviewed_label": "entailment",
                     "label_valid": "true",
                     "grammar_ok": "true",
                 },
@@ -155,13 +155,13 @@ class AuditWorkflowTests(unittest.TestCase):
             [
                 {
                     "sample_id": "a",
-                    "edit_family": "neutral_hypernym",
+                    "edit_family": "entailment_synonym",
                     "label_valid": "true",
                     "grammar_ok": "true",
                 },
                 {
                     "sample_id": "b",
-                    "edit_family": "neutral_hypernym",
+                    "edit_family": "entailment_synonym",
                     "label_valid": "false",
                     "grammar_ok": "true",
                 },
@@ -173,14 +173,14 @@ class AuditWorkflowTests(unittest.TestCase):
 
         metrics_frame = pd.DataFrame(
             [
-                {"edit_family": "neutral_hypernym", "label": "neutral", "pred_label": "neutral"},
-                {"edit_family": "neutral_hypernym", "label": "neutral", "pred_label": "contradiction"},
+                {"edit_family": "entailment_synonym", "label": "entailment", "pred_label": "entailment"},
+                {"edit_family": "entailment_synonym", "label": "entailment", "pred_label": "contradiction"},
                 {"edit_family": "contradiction_object", "label": "contradiction", "pred_label": "contradiction"},
             ]
         )
         family_metrics = per_edit_family_metrics(metrics_frame)
         self.assertEqual(["edit_family", "count", "accuracy", "macro_f1"], family_metrics.columns.tolist())
-        self.assertEqual(2, int(family_metrics.loc[family_metrics["edit_family"] == "neutral_hypernym", "count"].iloc[0]))
+        self.assertEqual(2, int(family_metrics.loc[family_metrics["edit_family"] == "entailment_synonym", "count"].iloc[0]))
 
 
 if __name__ == "__main__":

@@ -16,16 +16,28 @@ import pandas as pd
 import torch
 from PIL import Image
 from tqdm.auto import tqdm
-from transformers import AutoProcessor, BitsAndBytesConfig
+try:
+    from transformers import AutoProcessor, BitsAndBytesConfig
+except ModuleNotFoundError:  # pragma: no cover - exercised in dependency-light test environments
+    class AutoProcessor:  # type: ignore[no-redef]
+        @classmethod
+        def from_pretrained(cls, *args, **kwargs):
+            raise ModuleNotFoundError("transformers is required for Qwen processor loading")
+
+    class BitsAndBytesConfig:  # type: ignore[no-redef]
+        def __init__(self, **kwargs):
+            raise ModuleNotFoundError("transformers is required for quantized Qwen loading")
+
+from .labels import CLASS_ORDER, VALID_LABELS
 
 
 DEFAULT_QWEN_PROMPT = """You are evaluating whether a caption matches an image.
 Return strict JSON with keys "label" and "rationale".
-The label must be exactly one of: contradiction, neutral, entailment.
+The label must be exactly one of: contradiction, entailment.
 Caption: {caption}
 """
 
-_VALID_LABELS = {"contradiction", "neutral", "entailment"}
+_VALID_LABELS = set(VALID_LABELS)
 _VALID_PRECISIONS = {"auto", "bf16", "fp16", "fp32", "4bit"}
 _VALID_CACHE_MODES = {"direct", "scratch_then_sync"}
 
@@ -328,12 +340,22 @@ def _read_cached_payload(
 ) -> tuple[dict[str, Any] | None, Path | None]:
     final_path = _cache_path(final_dir, sample_id)
     if final_path.exists():
-        return json.loads(final_path.read_text(encoding="utf-8")), final_path
+        payload = json.loads(final_path.read_text(encoding="utf-8"))
+        if _payload_is_binary_compatible(payload):
+            return payload, final_path
     if scratch_dir is not None:
         scratch_path = _cache_path(scratch_dir, sample_id)
         if scratch_path.exists():
-            return json.loads(scratch_path.read_text(encoding="utf-8")), scratch_path
+            payload = json.loads(scratch_path.read_text(encoding="utf-8"))
+            if _payload_is_binary_compatible(payload):
+                return payload, scratch_path
     return None, None
+
+
+def _payload_is_binary_compatible(payload: dict[str, Any]) -> bool:
+    label = str(payload.get("label", "")).strip().lower()
+    pred_label = str(payload.get("pred_label", "")).strip().lower()
+    return label in _VALID_LABELS and pred_label in (_VALID_LABELS | {"unparsed"})
 
 
 def _build_inputs(bundle: QwenBundle, caption: str, image: Image.Image) -> dict[str, torch.Tensor]:
@@ -390,7 +412,7 @@ def parse_qwen_output(raw_text: str) -> dict[str, str]:
         except json.JSONDecodeError:
             pass
     lowered = raw_text.lower()
-    for label in ("contradiction", "neutral", "entailment"):
+    for label in CLASS_ORDER:
         if label in lowered:
             return {"label": label, "rationale": raw_text.strip()}
     return {"label": "unparsed", "rationale": raw_text.strip()}
