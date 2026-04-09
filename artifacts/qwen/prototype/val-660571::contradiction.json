@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-660571::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The people are indeed floating in the water in the large wooden boat as described in the caption.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The people are indeed floating in the water in the large wooden boat as described in the caption.\"}",
+  "runtime_ms": 601.6554484000153
+}

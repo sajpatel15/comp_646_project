@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-658865::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes the scene accurately as it mentions an individual with a bicycle and people rowing in a boat, which is consistent with the image.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the scene accurately as it mentions an individual with a bicycle and people rowing in a boat, which is consistent with the image.\"}",
+  "runtime_ms": 601.6554484000153
+}

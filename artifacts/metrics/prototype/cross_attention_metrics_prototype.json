@@ -1,0 +1,34 @@
+{
+  "accuracy": 0.9027777777777778,
+  "macro_f1": 0.9027169758877076,
+  "precision_contradiction": 0.9239766081871345,
+  "precision_entailment": 0.8835978835978836,
+  "recall_contradiction": 0.8777777777777778,
+  "recall_entailment": 0.9277777777777778,
+  "confusion_matrix": [
+    [
+      158,
+      22
+    ],
+    [
+      13,
+      167
+    ]
+  ],
+  "temperature": 0.9449199438095093,
+  "ece": 0.02709315601322387,
+  "best_trial": {
+    "trial_name": "ca_p1",
+    "epochs": 5,
+    "batch_size": 8,
+    "learning_rate": 0.0005,
+    "weight_decay": 0.01,
+    "val_accuracy": 0.9305555555555556,
+    "test_macro_f1": 0.9027169758877076,
+    "test_accuracy": 0.9027777777777778,
+    "checkpoint_path": "/content/project/artifacts/checkpoints/prototype/cross_attention__ca_p1.pt",
+    "log_dir": "/content/project/artifacts/logs/prototype/cross_attention__ca_p1"
+  },
+  "selection_metric": "accuracy",
+  "best_checkpoint": "/content/project/artifacts/checkpoints/prototype/cross_attention_prototype.pt"
+}

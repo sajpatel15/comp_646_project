@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-505989::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a bicycle being locked to a pole in front of a red building, which is consistent with the image content.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a bicycle being locked to a pole in front of a red building, which is consistent with the image content.\"}",
+  "runtime_ms": 611.3906013500127
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-453755::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the bus is orange and white, not a metro train",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the bus is orange and white, not a metro train\"}",
+  "runtime_ms": 591.8848619000073
+}

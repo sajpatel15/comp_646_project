@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-712526::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that the dogs are white, but the image shows two black dogs.",
+  "raw_output": "{\n    \"label\": \"contradiction\",\n    \"rationale\": \"The caption states that the dogs are white, but the image shows two black dogs.\"\n}",
+  "runtime_ms": 820.0722485999904
+}

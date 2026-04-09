@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-87740::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes the scene accurately, mentioning the presence of two airplanes and two people sitting in chairs.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the scene accurately, mentioning the presence of two airplanes and two people sitting in chairs.\"}",
+  "runtime_ms": 725.9123901000294
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-394117::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the person in the image is standing on the beach and flying a kite",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the person in the image is standing on the beach and flying a kite\"}",
+  "runtime_ms": 574.3628471000193
+}

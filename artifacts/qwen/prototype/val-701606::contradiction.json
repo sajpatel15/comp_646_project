@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-701606::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows a living room with a couch and a chair, which is consistent with the caption mentioning a bench and chair.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows a living room with a couch and a chair, which is consistent with the caption mentioning a bench and chair.\"}",
+  "runtime_ms": 601.6554484000153
+}

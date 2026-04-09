@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-273003::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes two people eating at a table with plates, a fork, knife, spoon, cup, and cell phone on it which is consistent with the image where there is a person eating at a table with plates, a fork, knife, spoon, cup, and cell phone on it.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes two people eating at a table with plates, a fork, knife, spoon, cup, and cell phone on it which is consistent with the image where there is a person eating at a table with plates, a fork, knife, spoon, cup, and cell phone on it.\"}",
+  "runtime_ms": 619.7854021500007
+}

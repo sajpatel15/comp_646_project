@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-633041::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The motorcycle in the image is red and white, not blue.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The motorcycle in the image is red and white, not blue.\"}",
+  "runtime_ms": 644.32791764998
+}

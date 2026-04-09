@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-217615::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the people are standing near the bench and there are kites in the sky",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people are standing near the bench and there are kites in the sky\"}",
+  "runtime_ms": 649.7239887999967
+}

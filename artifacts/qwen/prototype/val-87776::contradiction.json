@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-87776::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a person standing on a beach next to the ocean, which is consistent with the image where there is a person standing on the beach near the water.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a person standing on a beach next to the ocean, which is consistent with the image where there is a person standing on the beach near the water.\"}",
+  "runtime_ms": 725.9123901000294
+}

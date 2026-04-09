@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-716417::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows a group of people standing in line at a bus stop, waiting to board a city bus. This directly supports the statement that individuals are lining up to take a city bus.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows a group of people standing in line at a bus stop, waiting to board a city bus. This directly supports the statement that individuals are lining up to take a city bus.\"}",
+  "runtime_ms": 820.0722485999904
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-642906::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows people sitting at tables inside a building that has a large clock on the wall, which is consistent with the caption mentioning a 'large clock tower'.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows people sitting at tables inside a building that has a large clock on the wall, which is consistent with the caption mentioning a 'large clock tower'.\"}",
+  "runtime_ms": 601.6554484000153
+}

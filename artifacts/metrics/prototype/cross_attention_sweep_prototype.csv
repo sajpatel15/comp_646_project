@@ -1,0 +1,4 @@
+trial_name,epochs,batch_size,learning_rate,weight_decay,val_accuracy,test_macro_f1,test_accuracy,checkpoint_path,log_dir
+ca_p2,8,8,0.0003,0.01,0.9305555555555556,0.9221837944664031,0.9222222222222223,/content/project/artifacts/checkpoints/prototype/cross_attention__ca_p2.pt,/content/project/artifacts/logs/prototype/cross_attention__ca_p2
+ca_p1,5,8,0.0005,0.01,0.9305555555555556,0.9027169758877076,0.9027777777777778,/content/project/artifacts/checkpoints/prototype/cross_attention__ca_p1.pt,/content/project/artifacts/logs/prototype/cross_attention__ca_p1
+ca_p3,10,4,0.0001,0.005,0.9277777777777778,0.9052631578947369,0.9055555555555556,/content/project/artifacts/checkpoints/prototype/cross_attention__ca_p3.pt,/content/project/artifacts/logs/prototype/cross_attention__ca_p3

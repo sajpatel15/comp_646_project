@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-273003::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes the scene accurately and includes all objects mentioned in the image.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the scene accurately and includes all objects mentioned in the image.\"}",
+  "runtime_ms": 619.7854021500007
+}

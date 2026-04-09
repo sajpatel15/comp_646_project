@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-582686::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "A boy is sitting on a couch covered by a pink blanket and holding a remote control. The couch is a bench, so the caption is correct.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"A boy is sitting on a couch covered by a pink blanket and holding a remote control. The couch is a bench, so the caption is correct.\"}",
+  "runtime_ms": 651.0731214500083
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-128837::entailment",
+  "label": "entailment",
+  "pred_label": "contradiction",
+  "rationale": "the caption does not describe the entire scene but only a close-up view of individuals sitting on a public transit train",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption does not describe the entire scene but only a close-up view of individuals sitting on a public transit train\"}",
+  "runtime_ms": 570.6522192500415
+}

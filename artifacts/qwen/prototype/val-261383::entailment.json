@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-261383::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "A boy is riding a bike with a teddy bear as an individual sitting is toasting a beer",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"A boy is riding a bike with a teddy bear as an individual sitting is toasting a beer\"}",
+  "runtime_ms": 656.2599291999959
+}

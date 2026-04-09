@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-622128::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the man is placing flowers into the vase",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the man is placing flowers into the vase\"}",
+  "runtime_ms": 644.32791764998
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-182042::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the image shows two people skateboarding on a rail",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the image shows two people skateboarding on a rail\"}",
+  "runtime_ms": 612.6621215500109
+}

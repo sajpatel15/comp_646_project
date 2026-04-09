@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-159770::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the person is crossing the street and there is a traffic light in the background",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the person is crossing the street and there is a traffic light in the background\"}",
+  "runtime_ms": 570.6522192500415
+}

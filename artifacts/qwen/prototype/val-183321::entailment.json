@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-183321::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes two people skiing down a small hill, which is consistent with the image showing two people on skis in a snowy landscape. The presence of tracks in the snow also supports the idea of skiing down a hill.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes two people skiing down a small hill, which is consistent with the image showing two people on skis in a snowy landscape. The presence of tracks in the snow also supports the idea of skiing down a hill.\"}",
+  "runtime_ms": 612.6621215500109
+}

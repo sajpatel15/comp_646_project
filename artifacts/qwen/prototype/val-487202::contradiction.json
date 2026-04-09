@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-487202::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows two people walking on a sidewalk, with one person holding a colorful umbrella. This directly entails the statement that 'Two people walking while carrying a rainbow umbrella'.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people walking on a sidewalk, with one person holding a colorful umbrella. This directly entails the statement that 'Two people walking while carrying a rainbow umbrella'.\"}",
+  "runtime_ms": 591.8848619000073
+}

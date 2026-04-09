@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-807607::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "contradiction\nThe given caption states that the people are sleeping, but the image shows people feeding sheep, which contradicts the idea of them sleeping.",
+  "raw_output": "contradiction\nThe given caption states that the people are sleeping, but the image shows people feeding sheep, which contradicts the idea of them sleeping.",
+  "runtime_ms": 653.4524329000305
+}

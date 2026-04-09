@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-393360::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a group of young individuals playing baseball in a field, which is consistent with the image where multiple players are on a baseball field engaged in a game.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a group of young individuals playing baseball in a field, which is consistent with the image where multiple players are on a baseball field engaged in a game.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
+  "runtime_ms": 574.3628471000193
+}

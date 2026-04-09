@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-501571::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes two people playing an interactive game, which is consistent with the image where two individuals are engaged in a video game session. The third person is sitting on a couch observing the game.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes two people playing an interactive game, which is consistent with the image where two individuals are engaged in a video game session. The third person is sitting on a couch observing the game.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
+  "runtime_ms": 611.3906013500127
+}

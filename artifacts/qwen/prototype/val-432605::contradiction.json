@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-432605::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the surfer is riding the wave and pushing it forward",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the surfer is riding the wave and pushing it forward\"}",
+  "runtime_ms": 538.4679950499958
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-737977::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows two people sitting on a train or bus, with their legs hanging over the side of their seats, which is consistent with being in bunk beds. The caption accurately describes this scenario.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people sitting on a train or bus, with their legs hanging over the side of their seats, which is consistent with being in bunk beds. The caption accurately describes this scenario.\"}",
+  "runtime_ms": 631.5604861500105
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-355434::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes the objects present in the kitchen which are consistent with the image",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the objects present in the kitchen which are consistent with the image\"}",
+  "runtime_ms": 574.3628471000193
+}

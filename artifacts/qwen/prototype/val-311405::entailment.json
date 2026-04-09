@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-311405::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes an individual using a laptop while sitting on a bench, which is consistent with the image content.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes an individual using a laptop while sitting on a bench, which is consistent with the image content.\"}",
+  "runtime_ms": 619.7854021500007
+}

@@ -57,6 +57,9 @@ def _add_footer_legend(legend_ax: plt.Axes, handles: list[object], labels: list[
 def save_training_curves(history: list[dict[str, float]], output_path: str | Path, title: str) -> None:
     frame = pd.DataFrame(history)
     output = _prepare_output(output_path)
+    metric_column = "val_accuracy" if "val_accuracy" in frame.columns else "val_macro_f1"
+    metric_label = "Val Accuracy" if metric_column == "val_accuracy" else "Val Macro-F1"
+    axis_label = "Accuracy" if metric_column == "val_accuracy" else "Macro-F1"
     fig = plt.figure(figsize=(8.8, 6.2))
     grid = fig.add_gridspec(2, 1, height_ratios=[1.0, 0.22], hspace=0.28)
     ax1 = fig.add_subplot(grid[0])
@@ -67,14 +70,14 @@ def save_training_curves(history: list[dict[str, float]], output_path: str | Pat
     ax2 = ax1.twinx()
     val_line = ax2.plot(
         frame["epoch"],
-        frame["val_macro_f1"],
+        frame[metric_column],
         color="tab:orange",
-        label="Val Macro-F1",
+        label=metric_label,
         linewidth=2,
     )[0]
-    ax2.set_ylabel("Macro-F1")
+    ax2.set_ylabel(axis_label)
     ax1.set_title(title)
-    _add_footer_legend(legend_ax, [train_line, val_line], ["Train Loss", "Val Macro-F1"])
+    _add_footer_legend(legend_ax, [train_line, val_line], ["Train Loss", metric_label])
     fig.subplots_adjust(left=0.14, right=0.86, top=0.88, bottom=0.10, hspace=0.25)
     fig.savefig(output, bbox_inches="tight")
     plt.close(fig)

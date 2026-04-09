@@ -335,6 +335,7 @@ def train_model(
         epoch_row = {
             "epoch": float(epoch),
             "train_loss": train_loss,
+            "val_accuracy": float(val_metrics["accuracy"]),
             "val_macro_f1": float(val_metrics["macro_f1"]),
             f"val_{selection_metric}": selection_value,
         }
@@ -343,6 +344,8 @@ def train_model(
         if writer:
             writer.add_scalar("train/loss", train_loss, epoch)
             writer.add_scalar(f"val/{selection_metric}", selection_value, epoch)
+            if selection_metric != "accuracy":
+                writer.add_scalar("val/accuracy", float(val_metrics["accuracy"]), epoch)
             if selection_metric != "macro_f1":
                 writer.add_scalar("val/macro_f1", float(val_metrics["macro_f1"]), epoch)
         if selection_value > best_selection_value + early_stopping_min_delta:

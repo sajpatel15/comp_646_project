@@ -1,0 +1,12 @@
+{
+  "trial_name": "ca_p1",
+  "epochs": 5,
+  "batch_size": 8,
+  "learning_rate": 0.0005,
+  "weight_decay": 0.01,
+  "val_accuracy": 0.9305555555555556,
+  "test_macro_f1": 0.9027169758877076,
+  "test_accuracy": 0.9027777777777778,
+  "checkpoint_path": "/content/project/artifacts/checkpoints/prototype/cross_attention__ca_p1.pt",
+  "log_dir": "/content/project/artifacts/logs/prototype/cross_attention__ca_p1"
+}

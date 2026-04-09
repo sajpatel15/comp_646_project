@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-130361::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that there are two people riding a horse, but the image shows a carriage with three people, including a man waving to the crowd.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that there are two people riding a horse, but the image shows a carriage with three people, including a man waving to the crowd.\"}",
+  "runtime_ms": 570.6522192500415
+}

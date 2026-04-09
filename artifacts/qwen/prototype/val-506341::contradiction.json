@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-506341::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption says two people but the image only shows one hand holding a pastry",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption says two people but the image only shows one hand holding a pastry\"}",
+  "runtime_ms": 611.3906013500127
+}

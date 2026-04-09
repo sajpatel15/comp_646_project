@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-743264::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the image shows a person playing tennis on a grass court",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the image shows a person playing tennis on a grass court\"}",
+  "runtime_ms": 631.5604861500105
+}

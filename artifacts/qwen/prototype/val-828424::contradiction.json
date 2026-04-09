@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-828424::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "Both people are wearing helmets and riding motorbikes in the woods.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"Both people are wearing helmets and riding motorbikes in the woods.\"}",
+  "runtime_ms": 725.9123901000294
+}

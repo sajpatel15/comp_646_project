@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-642906::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the people are in a restaurant not a clock tower",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the people are in a restaurant not a clock tower\"}",
+  "runtime_ms": 601.6554484000153
+}

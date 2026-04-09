@@ -152,9 +152,9 @@ class PlottingTests(unittest.TestCase):
 
     def test_save_training_curves_writes_image_and_places_legend_below_plot(self) -> None:
         history = [
-            {"epoch": 1.0, "train_loss": 1.2, "val_macro_f1": 0.32},
-            {"epoch": 2.0, "train_loss": 0.8, "val_macro_f1": 0.47},
-            {"epoch": 3.0, "train_loss": 0.5, "val_macro_f1": 0.61},
+            {"epoch": 1.0, "train_loss": 1.2, "val_accuracy": 0.32, "val_macro_f1": 0.28},
+            {"epoch": 2.0, "train_loss": 0.8, "val_accuracy": 0.47, "val_macro_f1": 0.41},
+            {"epoch": 3.0, "train_loss": 0.5, "val_accuracy": 0.61, "val_macro_f1": 0.54},
         ]
 
         captured: dict[str, object] = {}
@@ -178,7 +178,7 @@ class PlottingTests(unittest.TestCase):
         legend_axis = legend_axes[0]
         legend = legend_axis.get_legend()
         self.assertIsNotNone(legend)
-        self.assertEqual(["Train Loss", "Val Macro-F1"], [text.get_text() for text in legend.get_texts()])
+        self.assertEqual(["Train Loss", "Val Accuracy"], [text.get_text() for text in legend.get_texts()])
         self.assertFalse(legend_axis.axison)
         self.assertLess(legend_axis.get_position().y1, axes[0].get_position().y0)
 

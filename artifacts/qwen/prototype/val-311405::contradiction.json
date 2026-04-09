@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-311405::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the person is sitting on a bench not a couch",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the person is sitting on a bench not a couch\"}",
+  "runtime_ms": 619.7854021500007
+}

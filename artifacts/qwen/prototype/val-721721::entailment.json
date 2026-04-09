@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-721721::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the truck has an open door and there are two people sitting on top",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the truck has an open door and there are two people sitting on top\"}",
+  "runtime_ms": 820.0722485999904
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-647151::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the two people in the image are indeed on a skateboard and a bike, which is consistent with the caption's description of them being at a skate park.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the two people in the image are indeed on a skateboard and a bike, which is consistent with the caption's description of them being at a skate park.\"}",
+  "runtime_ms": 601.6554484000153
+}

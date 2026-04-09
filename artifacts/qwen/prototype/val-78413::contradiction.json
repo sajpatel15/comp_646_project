@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-78413::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the image shows a batter swinging at the ball while a catcher is crouched behind him, with two other people in the background who appear to be watching the game.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the image shows a batter swinging at the ball while a catcher is crouched behind him, with two other people in the background who appear to be watching the game.\"}",
+  "runtime_ms": 653.4524329000305
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-393360::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the players in the image are young men, not old people",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the players in the image are young men, not old people\"}",
+  "runtime_ms": 574.3628471000193
+}

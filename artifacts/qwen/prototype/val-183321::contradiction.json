@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-183321::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes two people skiing down a hill, which is consistent with the image showing two people on skis in a snowy landscape.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes two people skiing down a hill, which is consistent with the image showing two people on skis in a snowy landscape.\"}",
+  "runtime_ms": 612.6621215500109
+}

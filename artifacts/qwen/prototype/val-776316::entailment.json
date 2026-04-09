@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-776316::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the image shows two hands toasting wine glasses and a person wearing a black jacket.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the image shows two hands toasting wine glasses and a person wearing a black jacket.\"}",
+  "runtime_ms": 631.5604861500105
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-712526::entailment",
+  "label": "entailment",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that the dogs are black, but the image shows two dogs, one black and one white, which contradicts the color description in the caption.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that the dogs are black, but the image shows two dogs, one black and one white, which contradicts the color description in the caption.\"}",
+  "runtime_ms": 820.0722485999904
+}

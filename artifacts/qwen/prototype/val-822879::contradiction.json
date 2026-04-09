@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-822879::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The person in the image is not sleeping but standing and appears to be a train conductor. The caption suggests that the person is sleeping, which contradicts the actual scene.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The person in the image is not sleeping but standing and appears to be a train conductor. The caption suggests that the person is sleeping, which contradicts the actual scene.\"}",
+  "runtime_ms": 725.9123901000294
+}

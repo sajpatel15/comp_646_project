@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-609157::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows people on a beach flying kites, which is consistent with the caption's description of people flying kites near the water.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows people on a beach flying kites, which is consistent with the caption's description of people flying kites near the water.\"}",
+  "runtime_ms": 571.0362761500164
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-777988::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the image shows a bus at a bus stop with people boarding the bus",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the image shows a bus at a bus stop with people boarding the bus\"}",
+  "runtime_ms": 631.5604861500105
+}

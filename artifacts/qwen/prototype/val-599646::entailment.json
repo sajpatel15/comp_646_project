@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-599646::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the horse is running fast as it is in the air",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the horse is running fast as it is in the air\"}",
+  "runtime_ms": 571.0362761500164
+}

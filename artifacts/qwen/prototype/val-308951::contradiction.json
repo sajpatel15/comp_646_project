@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-308951::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that the people are 'running', but the image shows them sitting at a table in a restaurant setting. This is a clear contradiction as they cannot be both running and sitting simultaneously.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that the people are 'running', but the image shows them sitting at a table in a restaurant setting. This is a clear contradiction as they cannot be both running and sitting simultaneously.\"}",
+  "runtime_ms": 619.7854021500007
+}

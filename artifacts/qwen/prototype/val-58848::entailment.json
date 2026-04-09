@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-58848::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the person is standing in the snow holding ski poles and has skis attached to their feet",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the person is standing in the snow holding ski poles and has skis attached to their feet\"}",
+  "runtime_ms": 651.0731214500083
+}

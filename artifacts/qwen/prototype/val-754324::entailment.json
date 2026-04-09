@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-754324::entailment",
+  "label": "entailment",
+  "pred_label": "contradiction",
+  "rationale": "the caption mentions a television remote but the image does not show any television or remote",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption mentions a television remote but the image does not show any television or remote\"}",
+  "runtime_ms": 631.5604861500105
+}

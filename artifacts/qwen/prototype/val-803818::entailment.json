@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-803818::entailment",
+  "label": "entailment",
+  "pred_label": "contradiction",
+  "rationale": "the caption states that the bicyclist is resting, but in the image, the bicyclist is riding the bike.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption states that the bicyclist is resting, but in the image, the bicyclist is riding the bike.\"}",
+  "runtime_ms": 653.4524329000305
+}

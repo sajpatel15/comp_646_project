@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-267318::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that the person is \"dropping\" a piece of paper, but the image shows the person holding the paper and cutting it with scissors. These actions do not match the description in the caption.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that the person is \\\"dropping\\\" a piece of paper, but the image shows the person holding the paper and cutting it with scissors. These actions do not match the description in the caption.\"}",
+  "runtime_ms": 656.2599291999959
+}

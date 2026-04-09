@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-271137::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes several people standing around a table where two of them are cutting a cake, which is consistent with the image content.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes several people standing around a table where two of them are cutting a cake, which is consistent with the image content.\"}",
+  "runtime_ms": 656.2599291999959
+}

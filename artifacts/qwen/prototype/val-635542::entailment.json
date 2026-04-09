@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-635542::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes three people playing with a red kickball, which is consistent with the image where multiple people are seen in motion on a sandy surface, suggesting they are playing with a ball.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes three people playing with a red kickball, which is consistent with the image where multiple people are seen in motion on a sandy surface, suggesting they are playing with a ball.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
+  "runtime_ms": 644.32791764998
+}

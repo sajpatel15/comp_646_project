@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-426573::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that people are sitting in front of some shops, but the image shows people walking on the sidewalk and standing near the shops. There is no indication of people sitting in the image.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that people are sitting in front of some shops, but the image shows people walking on the sidewalk and standing near the shops. There is no indication of people sitting in the image.\"}",
+  "runtime_ms": 538.4679950499958
+}

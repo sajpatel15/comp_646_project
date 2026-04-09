@@ -158,6 +158,7 @@ class TrainingSweepTests(unittest.TestCase):
             self.assertTrue((root / "checkpoints" / "linear_probe_best.pt").exists())
             self.assertEqual(root / "checkpoints" / "linear_probe_best.pt", result.best_checkpoint)
             self.assertGreaterEqual(float(result.best_test_metrics["macro_f1"]), 0.95)
+            self.assertIn("val_accuracy", result.best_result.history[0])
             self.assertEqual((2, 2), tuple(result.best_test_logits.shape))
             self.assertEqual(torch.float32, result.best_test_logits.dtype)
 

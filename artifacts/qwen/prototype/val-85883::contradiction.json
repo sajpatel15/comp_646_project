@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-85883::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a city street with carts being pedaled by men on bikes, which is consistent with the image where people are riding tricycles in a busy street.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a city street with carts being pedaled by men on bikes, which is consistent with the image where people are riding tricycles in a busy street.\"}",
+  "runtime_ms": 725.9123901000294
+}

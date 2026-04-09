@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-325865::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the image shows two men standing next to a bicycle parked on a street corner",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the image shows two men standing next to a bicycle parked on a street corner\"}",
+  "runtime_ms": 574.3628471000193
+}

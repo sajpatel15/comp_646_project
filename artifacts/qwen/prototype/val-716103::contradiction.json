@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-716103::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a person carrying a clear box kite, which is consistent with the image where two people are holding a large kite in the street.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a person carrying a clear box kite, which is consistent with the image where two people are holding a large kite in the street.\"}",
+  "runtime_ms": 820.0722485999904
+}

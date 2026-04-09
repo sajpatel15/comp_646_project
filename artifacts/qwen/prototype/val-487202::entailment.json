@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-487202::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows a person walking on a sidewalk while holding a colorful umbrella. The umbrella is described as rainbow-colored, which aligns with the description in the caption.\"",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows a person walking on a sidewalk while holding a colorful umbrella. The umbrella is described as rainbow-colored, which aligns with the description in the caption.\\\"\"}",
+  "runtime_ms": 591.8848619000073
+}

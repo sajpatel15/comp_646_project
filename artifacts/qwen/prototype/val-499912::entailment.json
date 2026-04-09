@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-499912::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the people are on the beach and there is a kite in the air",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people are on the beach and there is a kite in the air\"}",
+  "runtime_ms": 611.3906013500127
+}

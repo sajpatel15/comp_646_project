@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-775064::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes an individual riding a skateboard down a ramp, which is consistent with the image where a person is seen riding a skateboard down a ramp. The presence of multiple people in the background does not contradict this description but rather provides context to the setting.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes an individual riding a skateboard down a ramp, which is consistent with the image where a person is seen riding a skateboard down a ramp. The presence of multiple people in the background does not contradict this description but rather provides context to the setting.\"}",
+  "runtime_ms": 631.5604861500105
+}

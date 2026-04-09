@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-394117::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the person is only flying one kite",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the person is only flying one kite\"}",
+  "runtime_ms": 574.3628471000193
+}

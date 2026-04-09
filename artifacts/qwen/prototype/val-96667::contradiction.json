@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-96667::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows multiple giraffes in a zoo setting, with one giraffe being fed leaves by a person. The giraffes appear to be of varying ages, including both young and old individuals. Therefore, the caption accurately describes the scene as it pertains to the number of giraffes and their age range.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows multiple giraffes in a zoo setting, with one giraffe being fed leaves by a person. The giraffes appear to be of varying ages, including both young and old individuals. Therefore, the caption accurately describes the scene as it pertains to the number of giraffes and their age range.\"}",
+  "runtime_ms": 725.9123901000294
+}

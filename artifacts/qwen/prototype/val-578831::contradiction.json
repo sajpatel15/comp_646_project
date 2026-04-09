@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-578831::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "contradiction\n\nRationale: The caption suggests that the people are sleeping, which contradicts the image where two individuals are actively playing a video game using Wii controllers.",
+  "raw_output": "contradiction\n\nRationale: The caption suggests that the people are sleeping, which contradicts the image where two individuals are actively playing a video game using Wii controllers.",
+  "runtime_ms": 651.0731214500083
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-487112::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows several people walking on a sidewalk, with the focus on a person holding a colorful umbrella. This aligns with the caption's description of people walking on a sidewalk and two men holding an umbrella.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows several people walking on a sidewalk, with the focus on a person holding a colorful umbrella. This aligns with the caption's description of people walking on a sidewalk and two men holding an umbrella.\"}",
+  "runtime_ms": 591.8848619000073
+}

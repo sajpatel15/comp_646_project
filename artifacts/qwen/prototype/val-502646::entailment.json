@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-502646::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes an individual stretching to catch a red Frisbee, which is consistent with the image where a person appears to be reaching out for a red frisbee in mid-air.\"",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes an individual stretching to catch a red Frisbee, which is consistent with the image where a person appears to be reaching out for a red frisbee in mid-air.\\\"\"}",
+  "runtime_ms": 611.3906013500127
+}

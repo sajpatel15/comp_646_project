@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-362994::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a dog laying on a sofa next to remotes, which is consistent with the image where a dog is sitting on a red couch with a remote control in front of it.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a dog laying on a sofa next to remotes, which is consistent with the image where a dog is sitting on a red couch with a remote control in front of it.\"}",
+  "runtime_ms": 574.3628471000193
+}

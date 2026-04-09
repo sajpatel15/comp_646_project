@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-209650::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes the dog sitting while being brushed by an individual, which is consistent with the image where a dog is being brushed by a person's hand holding a toothbrush.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the dog sitting while being brushed by an individual, which is consistent with the image where a dog is being brushed by a person's hand holding a toothbrush.\"}",
+  "runtime_ms": 649.7239887999967
+}

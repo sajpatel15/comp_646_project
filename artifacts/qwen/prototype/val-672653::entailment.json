@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-672653::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a small child wearing a helmet and riding a bicycle, which is consistent with the image where a child is riding a bike on a paved surface.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a small child wearing a helmet and riding a bicycle, which is consistent with the image where a child is riding a bike on a paved surface.\"}",
+  "runtime_ms": 601.6554484000153
+}

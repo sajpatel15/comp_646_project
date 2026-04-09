@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-706054::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a scene where several people are standing in a green field, which is consistent with the image description of a group of people flying kites in a field. The presence of multiple kites in the sky further supports this interpretation.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a scene where several people are standing in a green field, which is consistent with the image description of a group of people flying kites in a field. The presence of multiple kites in the sky further supports this interpretation.\"}",
+  "runtime_ms": 820.0722485999904
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-431295::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows people walking on a sidewalk in front of buildings, which is consistent with the caption's description of individuals walking on a sidewalk next to buildings.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows people walking on a sidewalk in front of buildings, which is consistent with the caption's description of individuals walking on a sidewalk next to buildings.\"}",
+  "runtime_ms": 538.4679950499958
+}

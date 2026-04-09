@@ -1,0 +1,32 @@
+{
+  "accuracy": 0.7666666666666667,
+  "macro_f1": 0.7662048490846116,
+  "precision_contradiction": 0.7448979591836735,
+  "precision_entailment": 0.7926829268292683,
+  "recall_contradiction": 0.8111111111111111,
+  "recall_entailment": 0.7222222222222222,
+  "confusion_matrix": [
+    [
+      146,
+      34
+    ],
+    [
+      50,
+      130
+    ]
+  ],
+  "best_trial": {
+    "trial_name": "lp_p2",
+    "epochs": 8,
+    "batch_size": 16,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.01,
+    "val_accuracy": 0.7916666666666666,
+    "test_macro_f1": 0.7662048490846116,
+    "test_accuracy": 0.7666666666666667,
+    "checkpoint_path": "/content/project/artifacts/checkpoints/prototype/linear_probe__lp_p2.pt",
+    "log_dir": "/content/project/artifacts/logs/prototype/linear_probe__lp_p2"
+  },
+  "selection_metric": "accuracy",
+  "best_checkpoint": "/content/project/artifacts/checkpoints/prototype/linear_probe_prototype.pt"
+}

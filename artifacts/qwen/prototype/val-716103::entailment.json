@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-716103::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows two people holding a large kite, which is described as a 'clear box' in the caption. The description matches the visual content of the image.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people holding a large kite, which is described as a 'clear box' in the caption. The description matches the visual content of the image.\"}",
+  "runtime_ms": 820.0722485999904
+}

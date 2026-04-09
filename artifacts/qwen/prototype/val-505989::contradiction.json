@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-505989::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states the bike is in front of a blue building, but the image shows a red building with green doors.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states the bike is in front of a blue building, but the image shows a red building with green doors.\"}",
+  "runtime_ms": 611.3906013500127
+}

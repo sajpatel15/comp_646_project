@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-579048::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows multiple people riding motorcycles on a bridge, which aligns with the statement that individuals are riding motorcycles across a bridge beside each other.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows multiple people riding motorcycles on a bridge, which aligns with the statement that individuals are riding motorcycles across a bridge beside each other.\"}",
+  "runtime_ms": 651.0731214500083
+}

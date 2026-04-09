@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-575496::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption mentions a cow while the image shows a horse",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption mentions a cow while the image shows a horse\"}",
+  "runtime_ms": 651.0731214500083
+}

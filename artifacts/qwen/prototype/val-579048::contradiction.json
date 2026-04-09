@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-579048::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The people in the image are riding motorcycles, not pushing them. The caption suggests they are pushing motorcycles, which is incorrect.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The people in the image are riding motorcycles, not pushing them. The caption suggests they are pushing motorcycles, which is incorrect.\"}",
+  "runtime_ms": 651.0731214500083
+}

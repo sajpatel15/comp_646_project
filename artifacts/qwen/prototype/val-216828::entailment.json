@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-216828::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the people in the picture are wearing blue and black clothing and there is a woman in a blue dress and a man in a black shirt standing in front of an oven.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people in the picture are wearing blue and black clothing and there is a woman in a blue dress and a man in a black shirt standing in front of an oven.\"}",
+  "runtime_ms": 649.7239887999967
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-775064::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes two people riding a skateboard down a ramp, which is consistent with the image where multiple individuals are seen skateboarding on a ramp.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes two people riding a skateboard down a ramp, which is consistent with the image where multiple individuals are seen skateboarding on a ramp.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
+  "runtime_ms": 631.5604861500105
+}

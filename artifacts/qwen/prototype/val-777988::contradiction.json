@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-777988::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "contradiction\nThe given caption mentions a train, which is not present in the image. The image shows a double-decker bus at a bus stop, not a train.",
+  "raw_output": "contradiction\nThe given caption mentions a train, which is not present in the image. The image shows a double-decker bus at a bus stop, not a train.",
+  "runtime_ms": 631.5604861500105
+}

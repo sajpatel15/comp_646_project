@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-561460::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows a large crowd of people in a public space, which implies that there is a small group of people on a city street.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows a large crowd of people in a public space, which implies that there is a small group of people on a city street.\"}",
+  "runtime_ms": 648.3929867999905
+}

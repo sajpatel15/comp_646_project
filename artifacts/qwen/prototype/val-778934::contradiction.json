@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-778934::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that there is only one person in the photo, but the image shows three men standing together.",
+  "raw_output": "{\n    \"label\": \"contradiction\",\n    \"rationale\": \"The caption states that there is only one person in the photo, but the image shows three men standing together.\"\n}",
+  "runtime_ms": 653.4524329000305
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-140661::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the bride is with a man with red hair holding a piece of cake",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the bride is with a man with red hair holding a piece of cake\"}",
+  "runtime_ms": 570.6522192500415
+}

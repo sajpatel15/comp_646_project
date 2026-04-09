@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-496016::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a man flying through the air while pushing a bike, which is consistent with the image where a person is airborne on a motorcycle. The action described in the caption aligns with the dynamic scene captured in the image.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a man flying through the air while pushing a bike, which is consistent with the image where a person is airborne on a motorcycle. The action described in the caption aligns with the dynamic scene captured in the image.\"}",
+  "runtime_ms": 591.8848619000073
+}

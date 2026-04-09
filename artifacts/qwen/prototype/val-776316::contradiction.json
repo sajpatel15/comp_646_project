@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-776316::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the person is wearing a black shirt not a white jacket",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the person is wearing a black shirt not a white jacket\"}",
+  "runtime_ms": 631.5604861500105
+}

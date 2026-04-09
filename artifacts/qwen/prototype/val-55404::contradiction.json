@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-55404::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes the same scene as the image, including the futon couch, sewing machine, and flat screen TV.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the same scene as the image, including the futon couch, sewing machine, and flat screen TV.\"}",
+  "runtime_ms": 648.3929867999905
+}

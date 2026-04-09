@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-430124::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the people in the picture are sitting on a large brown sectional sofa",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people in the picture are sitting on a large brown sectional sofa\"}",
+  "runtime_ms": 538.4679950499958
+}

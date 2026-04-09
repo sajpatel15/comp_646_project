@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-777680::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes two people sitting on a bench in front of the water, which is consistent with the image where two people are sitting on a bench facing the ocean.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes two people sitting on a bench in front of the water, which is consistent with the image where two people are sitting on a bench facing the ocean.\"}",
+  "runtime_ms": 631.5604861500105
+}

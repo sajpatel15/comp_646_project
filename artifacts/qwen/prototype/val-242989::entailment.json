@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-242989::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the man is wearing a shirt and tie, not a suit. the couch is in the background behind him.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the man is wearing a shirt and tie, not a suit. the couch is in the background behind him.\"}",
+  "runtime_ms": 656.2599291999959
+}

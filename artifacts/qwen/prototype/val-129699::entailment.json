@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-129699::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a television screen displaying a person's face, which is consistent with the image where a man is shown on the TV screen.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a television screen displaying a person's face, which is consistent with the image where a man is shown on the TV screen.\"}",
+  "runtime_ms": 570.6522192500415
+}

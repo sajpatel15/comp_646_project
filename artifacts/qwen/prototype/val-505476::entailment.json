@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-505476::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the people in the picture are walking around a food truck and a building",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people in the picture are walking around a food truck and a building\"}",
+  "runtime_ms": 611.3906013500127
+}

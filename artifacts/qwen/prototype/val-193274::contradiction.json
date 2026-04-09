@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-193274::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the person is only on one skateboard",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the person is only on one skateboard\"}",
+  "runtime_ms": 612.6621215500109
+}

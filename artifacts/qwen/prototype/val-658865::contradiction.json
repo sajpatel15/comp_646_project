@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-658865::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption mentions a motorcycle which is not present in the image",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption mentions a motorcycle which is not present in the image\"}",
+  "runtime_ms": 601.6554484000153
+}

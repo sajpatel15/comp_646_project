@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-304770::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the person in the picture is wearing a blue jacket and standing on skis while surrounded by snow-covered trees.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the person in the picture is wearing a blue jacket and standing on skis while surrounded by snow-covered trees.\"}",
+  "runtime_ms": 619.7854021500007
+}

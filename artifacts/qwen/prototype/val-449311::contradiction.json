@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-449311::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the couch is black not white",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the couch is black not white\"}",
+  "runtime_ms": 591.8848619000073
+}

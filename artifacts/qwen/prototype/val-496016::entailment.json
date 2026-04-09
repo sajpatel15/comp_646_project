@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-496016::entailment",
+  "label": "entailment",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that the person is riding a bicycle, but the image shows a motorcycle, which contradicts the information provided in the caption.",
+  "raw_output": "{\n    \"label\": \"contradiction\",\n    \"rationale\": \"The caption states that the person is riding a bicycle, but the image shows a motorcycle, which contradicts the information provided in the caption.\"\n}",
+  "runtime_ms": 591.8848619000073
+}

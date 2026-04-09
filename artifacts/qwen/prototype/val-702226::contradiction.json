@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-702226::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a group of people posing for a photograph, which is consistent with the image where multiple individuals are seated together. The mention of 'white tie' suggests a formal event, which aligns with the attire seen in the image. The presence of a baby and adults dressed in black and white further supports the idea of a formal gathering or event. Therefore, the caption logically follows from the image.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a group of people posing for a photograph, which is consistent with the image where multiple individuals are seated together. The mention of 'white tie' suggests a formal event, which aligns with the attire seen in the image. The presence of a baby and adults dressed in black and white further supports the idea of a formal gathering or event. Therefore, the caption logically follows from the image.\"}",
+  "runtime_ms": 820.0722485999904
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-561846::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the person is sitting on the bench with a tennis racket next to him",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the person is sitting on the bench with a tennis racket next to him\"}",
+  "runtime_ms": 648.3929867999905
+}

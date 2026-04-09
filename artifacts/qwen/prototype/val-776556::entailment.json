@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-776556::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the girl is standing in front of the sofa and holding a remote",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the girl is standing in front of the sofa and holding a remote\"}",
+  "runtime_ms": 631.5604861500105
+}

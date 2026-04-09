@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-128837::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption says 'a close up of people running on a public transit train' but the image shows people sitting down on a subway train",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption says 'a close up of people running on a public transit train' but the image shows people sitting down on a subway train\"}",
+  "runtime_ms": 570.6522192500415
+}

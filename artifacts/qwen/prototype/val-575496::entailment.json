@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-575496::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows people standing near a horse, which is consistent with the statement that there are individuals standing next to a horse.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows people standing near a horse, which is consistent with the statement that there are individuals standing next to a horse.\"}",
+  "runtime_ms": 651.0731214500083
+}
