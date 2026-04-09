@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-213315::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a cat sitting on a couch and a dog lying on the floor, which is consistent with the image where a cat is sitting on a plaid couch and a black dog is lying on the floor next to it.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a cat sitting on a couch and a dog lying on the floor, which is consistent with the image where a cat is sitting on a plaid couch and a black dog is lying on the floor next to it.\"}",
+  "runtime_ms": 800.2579649166724
+}

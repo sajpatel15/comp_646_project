@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-526514::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption accurately describes the scene where a large motorcycle is parked outside a garage.",
+  "raw_output": "{\n    \"label\": \"entailment\",\n    \"rationale\": \"The caption accurately describes the scene where a large motorcycle is parked outside a garage.\"\n}",
+  "runtime_ms": 822.5971583749943
+}

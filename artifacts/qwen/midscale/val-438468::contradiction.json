@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-438468::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that people are running under umbrellas, but the image shows people sitting on bleachers with umbrellas over their heads.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that people are running under umbrellas, but the image shows people sitting on bleachers with umbrellas over their heads.\"}",
+  "runtime_ms": 569.658100458336
+}

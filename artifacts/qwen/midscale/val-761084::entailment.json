@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-761084::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a living room with a large black sofa in the center, which is consistent with the image description of a living room with a black sectional couch in the middle.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a living room with a large black sofa in the center, which is consistent with the image description of a living room with a black sectional couch in the middle.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
+  "runtime_ms": 711.0332358333267
+}

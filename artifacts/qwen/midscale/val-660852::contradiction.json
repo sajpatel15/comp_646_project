@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-660852::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes two people feeding a little boy a hot dog while he sits at an iron table, which is consistent with the image where a child is being fed by an adult at a red table.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes two people feeding a little boy a hot dog while he sits at an iron table, which is consistent with the image where a child is being fed by an adult at a red table.\"}",
+  "runtime_ms": 607.6329850833417
+}

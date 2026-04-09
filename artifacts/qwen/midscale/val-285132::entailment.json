@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-285132::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the people in the image are standing on a dock with their luggage, which is consistent with the caption's description of individuals standing on a dock with their baggage.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people in the image are standing on a dock with their luggage, which is consistent with the caption's description of individuals standing on a dock with their baggage.\"}",
+  "runtime_ms": 632.739540250005
+}

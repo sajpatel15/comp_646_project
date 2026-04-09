@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-118896::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that the food truck is blue, but the image shows a red food truck.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that the food truck is blue, but the image shows a red food truck.\"}",
+  "runtime_ms": 794.9515945416673
+}

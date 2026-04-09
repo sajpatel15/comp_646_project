@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-745291::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a cat sitting on a bed near someone using a laptop, which is consistent with the image where a cat is indeed sitting on a bed next to a person using a laptop.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a cat sitting on a bed near someone using a laptop, which is consistent with the image where a cat is indeed sitting on a bed next to a person using a laptop.\"}",
+  "runtime_ms": 711.0332358333267
+}

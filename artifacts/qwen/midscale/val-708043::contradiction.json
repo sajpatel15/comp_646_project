@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-708043::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a group of people standing together in a field, which is consistent with the image where multiple individuals are gathered outdoors on grassy terrain.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a group of people standing together in a field, which is consistent with the image where multiple individuals are gathered outdoors on grassy terrain.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
+  "runtime_ms": 865.4094801666664
+}

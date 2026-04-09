@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-783437::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the person is surfing in the ocean",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the person is surfing in the ocean\"}",
+  "runtime_ms": 611.3889890833283
+}

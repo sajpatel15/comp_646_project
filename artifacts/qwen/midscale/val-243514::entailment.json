@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-243514::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes giraffes in a zoo, standing with their heads peeking over the fence, looking at individuals, which is consistent with the image where giraffes are indeed in a zoo enclosure and interacting with people.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes giraffes in a zoo, standing with their heads peeking over the fence, looking at individuals, which is consistent with the image where giraffes are indeed in a zoo enclosure and interacting with people.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
+  "runtime_ms": 674.1371126250044
+}

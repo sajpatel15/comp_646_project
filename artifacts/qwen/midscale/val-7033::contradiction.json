@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-7033::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption mentions a waiting room while the image shows a red carpet event",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption mentions a waiting room while the image shows a red carpet event\"}",
+  "runtime_ms": 865.4094801666664
+}

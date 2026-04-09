@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-287594::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows a woman holding a baseball bat in front of a group of people who are watching her. This aligns with the caption's description of a woman holding a bat while being stared at by others.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows a woman holding a baseball bat in front of a group of people who are watching her. This aligns with the caption's description of a woman holding a bat while being stared at by others.\"}",
+  "runtime_ms": 632.739540250005
+}

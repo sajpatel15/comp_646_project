@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-828868::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that four people are trying to get a black horse into the back of a red and white truck, but the image shows two people helping a brown horse into a white trailer.",
+  "raw_output": "{\n    \"label\": \"contradiction\",\n    \"rationale\": \"The caption states that four people are trying to get a black horse into the back of a red and white truck, but the image shows two people helping a brown horse into a white trailer.\"\n}",
+  "runtime_ms": 673.3037584583409
+}

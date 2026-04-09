@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-163952::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows a person flying a kite on a sandy beach near a body of water, which is consistent with the caption's description of people flying two kites on a sandy beach near a body of water.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows a person flying a kite on a sandy beach near a body of water, which is consistent with the caption's description of people flying two kites on a sandy beach near a body of water.\"}",
+  "runtime_ms": 665.3400951666603
+}

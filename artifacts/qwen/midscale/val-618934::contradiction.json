@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-618934::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the tv is small not large",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the tv is small not large\"}",
+  "runtime_ms": 562.4779267916816
+}

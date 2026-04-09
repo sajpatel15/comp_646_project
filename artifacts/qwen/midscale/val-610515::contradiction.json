@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-610515::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows a person making a kite using sticks, which is consistent with the caption's description of crafting a kite around one stick.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows a person making a kite using sticks, which is consistent with the caption's description of crafting a kite around one stick.\"}",
+  "runtime_ms": 562.4779267916816
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-658424::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows two people standing together, each holding an umbrella hat, which is consistent with the caption's description of 'one person with umbrella hats near one another.'",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people standing together, each holding an umbrella hat, which is consistent with the caption's description of 'one person with umbrella hats near one another.'\"}",
+  "runtime_ms": 636.7252236666635
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-195412::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the people riding the elephant are in front of trees",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people riding the elephant are in front of trees\"}",
+  "runtime_ms": 800.2579649166724
+}

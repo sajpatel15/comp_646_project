@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-406990::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes people skiing on a snowy slope which is consistent with the image where multiple people are seen skiing down a snowy hill.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes people skiing on a snowy slope which is consistent with the image where multiple people are seen skiing down a snowy hill.\"}",
+  "runtime_ms": 657.03945279166
+}

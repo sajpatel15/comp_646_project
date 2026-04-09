@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-427275::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the person is on a board and the caption describes the same action",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the person is on a board and the caption describes the same action\"}",
+  "runtime_ms": 569.658100458336
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-672802::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows a dining table with various cakes, which is consistent with the caption mentioning a dining table and cakes. The presence of a laptop monitor in the background is also implied by the context of the image being a display or presentation setting.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows a dining table with various cakes, which is consistent with the caption mentioning a dining table and cakes. The presence of a laptop monitor in the background is also implied by the context of the image being a display or presentation setting.\"}",
+  "runtime_ms": 607.6329850833417
+}

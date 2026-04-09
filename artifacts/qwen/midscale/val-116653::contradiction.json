@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-116653::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that there is only one person playing the video game, but the image shows two people playing together.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that there is only one person playing the video game, but the image shows two people playing together.\"}",
+  "runtime_ms": 794.9515945416673
+}

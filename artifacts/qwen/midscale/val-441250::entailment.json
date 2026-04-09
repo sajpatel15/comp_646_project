@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-441250::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the bus is green and the people on the motorcycle are wearing black clothing",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the bus is green and the people on the motorcycle are wearing black clothing\"}",
+  "runtime_ms": 785.9574092083411
+}

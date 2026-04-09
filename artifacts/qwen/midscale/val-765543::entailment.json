@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-765543::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows two people standing in a room, which aligns with the statement that 'some individuals are standing around in a room.'",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people standing in a room, which aligns with the statement that 'some individuals are standing around in a room.'\"}",
+  "runtime_ms": 611.3889890833283
+}

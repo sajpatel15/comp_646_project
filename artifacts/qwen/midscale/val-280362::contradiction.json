@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-280362::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption says people sitting but the image shows people standing",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption says people sitting but the image shows people standing\"}",
+  "runtime_ms": 618.7864701250021
+}

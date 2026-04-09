@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-223894::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption mentions two people while the image shows only one person playing tennis",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption mentions two people while the image shows only one person playing tennis\"}",
+  "runtime_ms": 674.1371126250044
+}

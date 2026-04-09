@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-637038::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption mentions 'old people', but the image shows young people playing tennis. This is a contradiction.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption mentions 'old people', but the image shows young people playing tennis. This is a contradiction.\"}",
+  "runtime_ms": 636.7252236666635
+}

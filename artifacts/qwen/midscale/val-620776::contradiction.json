@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-620776::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that the person is dropping a vegetable, but the image shows a carrot being held by the person's hand.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that the person is dropping a vegetable, but the image shows a carrot being held by the person's hand.\"}",
+  "runtime_ms": 562.4779267916816
+}

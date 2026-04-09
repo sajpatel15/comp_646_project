@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-287594::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that the woman is dropping the bat, but in the image, she is holding the bat up to her head. This is a contradiction.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that the woman is dropping the bat, but in the image, she is holding the bat up to her head. This is a contradiction.\"}",
+  "runtime_ms": 632.739540250005
+}

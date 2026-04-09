@@ -1,0 +1,34 @@
+{
+  "accuracy": 0.945906432748538,
+  "macro_f1": 0.9458868858873563,
+  "precision_contradiction": 0.9635258358662614,
+  "precision_entailment": 0.9295774647887324,
+  "recall_contradiction": 0.9269005847953217,
+  "recall_entailment": 0.9649122807017544,
+  "confusion_matrix": [
+    [
+      317,
+      25
+    ],
+    [
+      12,
+      330
+    ]
+  ],
+  "temperature": 1.1070265769958496,
+  "ece": 0.015429574930877004,
+  "best_trial": {
+    "trial_name": "ca_m1",
+    "epochs": 10,
+    "batch_size": 8,
+    "learning_rate": 0.0005,
+    "weight_decay": 0.01,
+    "val_accuracy": 0.9633431085043989,
+    "test_macro_f1": 0.9458868858873563,
+    "test_accuracy": 0.945906432748538,
+    "checkpoint_path": "/content/project/artifacts/checkpoints/midscale/cross_attention__ca_m1.pt",
+    "log_dir": "/content/project/artifacts/logs/midscale/cross_attention__ca_m1"
+  },
+  "selection_metric": "accuracy",
+  "best_checkpoint": "/content/project/artifacts/checkpoints/midscale/cross_attention_midscale.pt"
+}

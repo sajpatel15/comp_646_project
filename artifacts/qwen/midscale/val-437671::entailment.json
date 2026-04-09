@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-437671::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a cat sitting in front of a television, which is consistent with the image where a cat is indeed sitting in front of a television displaying a black and white scene.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a cat sitting in front of a television, which is consistent with the image where a cat is indeed sitting in front of a television displaying a black and white scene.\"}",
+  "runtime_ms": 569.658100458336
+}

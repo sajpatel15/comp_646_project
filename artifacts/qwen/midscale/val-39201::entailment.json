@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-39201::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the man is wearing a shirt and tie, which can be considered as part of a suit",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the man is wearing a shirt and tie, which can be considered as part of a suit\"}",
+  "runtime_ms": 657.03945279166
+}

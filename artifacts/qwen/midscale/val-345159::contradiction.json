@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-345159::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The image shows only one snowboarder, not two.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The image shows only one snowboarder, not two.\"}",
+  "runtime_ms": 694.2744383750038
+}

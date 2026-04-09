@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-253070::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption mentions people in cars, but the image does not show any cars",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption mentions people in cars, but the image does not show any cars\"}",
+  "runtime_ms": 618.7864701250021
+}

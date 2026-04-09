@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-156046::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes the scene accurately, mentioning the person sleeping on the bench with an orange blanket and no contradictions are present.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the scene accurately, mentioning the person sleeping on the bench with an orange blanket and no contradictions are present.\"}",
+  "runtime_ms": 665.3400951666603
+}

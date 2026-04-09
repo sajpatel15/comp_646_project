@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-254727::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the image shows a hand holding a doughnut that has been bitten into, which is consistent with the caption describing it as 'AN individual's hand holding a bitten into doughnut'.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the image shows a hand holding a doughnut that has been bitten into, which is consistent with the caption describing it as 'AN individual's hand holding a bitten into doughnut'.\"}",
+  "runtime_ms": 618.7864701250021
+}

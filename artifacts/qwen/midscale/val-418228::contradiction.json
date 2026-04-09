@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-418228::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a scene where two people are standing at an intersection, which is consistent with the image content.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a scene where two people are standing at an intersection, which is consistent with the image content.\"}",
+  "runtime_ms": 569.658100458336
+}

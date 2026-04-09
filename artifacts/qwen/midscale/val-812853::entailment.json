@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-812853::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the three images show the same man in different positions while playing tennis",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the three images show the same man in different positions while playing tennis\"}",
+  "runtime_ms": 673.3037584583409
+}

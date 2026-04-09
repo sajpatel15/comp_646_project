@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-274916::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a large aircraft sitting on the runway which is consistent with the image where there is a large airplane on the runway.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a large aircraft sitting on the runway which is consistent with the image where there is a large airplane on the runway.\"}",
+  "runtime_ms": 618.7864701250021
+}

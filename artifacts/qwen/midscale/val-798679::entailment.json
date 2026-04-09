@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-798679::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the person is holding a remote control",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the person is holding a remote control\"}",
+  "runtime_ms": 611.3889890833283
+}

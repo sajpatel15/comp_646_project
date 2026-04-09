@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-703292::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes the room as having a chair, sofa, and television, which is consistent with the image description of a living area with these items.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the room as having a chair, sofa, and television, which is consistent with the image description of a living area with these items.\"}",
+  "runtime_ms": 607.6329850833417
+}

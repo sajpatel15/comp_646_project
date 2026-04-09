@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-156046::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes the same scene as the image, including the person sleeping on the bench covered by an orange blanket, which is consistent with the image content.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the same scene as the image, including the person sleeping on the bench covered by an orange blanket, which is consistent with the image content.\"}",
+  "runtime_ms": 665.3400951666603
+}

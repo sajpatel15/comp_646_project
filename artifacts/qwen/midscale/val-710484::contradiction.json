@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-710484::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the image shows a person flying a kite, not sleeping",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the image shows a person flying a kite, not sleeping\"}",
+  "runtime_ms": 865.4094801666664
+}

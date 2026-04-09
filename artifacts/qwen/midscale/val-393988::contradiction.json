@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-393988::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "A surfer is riding a wave, which implies they are pushing the surf of the wave.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"A surfer is riding a wave, which implies they are pushing the surf of the wave.\"}",
+  "runtime_ms": 657.03945279166
+}

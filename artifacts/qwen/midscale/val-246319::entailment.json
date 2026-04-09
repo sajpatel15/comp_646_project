@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-246319::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption accurately describes the scene depicted in the image, mentioning individuals in red uniforms and black horses.",
+  "raw_output": "{\n  \"label\": \"entailment\",\n  \"rationale\": \"The caption accurately describes the scene depicted in the image, mentioning individuals in red uniforms and black horses.\"\n}",
+  "runtime_ms": 674.1371126250044
+}

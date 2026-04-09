@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-744987::entailment",
+  "label": "entailment",
+  "pred_label": "contradiction",
+  "rationale": "The caption mentions two young males playing a video game together in front of a television, while the image shows two men playing a video game on a table, not in front of a television.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption mentions two young males playing a video game together in front of a television, while the image shows two men playing a video game on a table, not in front of a television.\"}",
+  "runtime_ms": 711.0332358333267
+}

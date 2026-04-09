@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-242677::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The individuals in the image are indeed lined up at a train station, waiting for a train to arrive. The caption accurately describes this scenario without any contradictions or additional information not present in the image.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The individuals in the image are indeed lined up at a train station, waiting for a train to arrive. The caption accurately describes this scenario without any contradictions or additional information not present in the image.\"}",
+  "runtime_ms": 674.1371126250044
+}

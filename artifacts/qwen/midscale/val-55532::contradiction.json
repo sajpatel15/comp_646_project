@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-55532::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a scene where one person is riding a horse on the beach with waves coming in, which is consistent with the image provided.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a scene where one person is riding a horse on the beach with waves coming in, which is consistent with the image provided.\"}",
+  "runtime_ms": 648.7179205833323
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-187304::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes small sailboats floating past a beach, which is consistent with the image where sailboats are seen in the water and people are on the beach.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes small sailboats floating past a beach, which is consistent with the image where sailboats are seen in the water and people are on the beach.\"}",
+  "runtime_ms": 800.2579649166724
+}

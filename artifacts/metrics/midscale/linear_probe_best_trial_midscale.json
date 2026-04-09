@@ -1,0 +1,12 @@
+{
+  "trial_name": "lp_m1",
+  "epochs": 10,
+  "batch_size": 16,
+  "learning_rate": 0.0005,
+  "weight_decay": 0.01,
+  "val_accuracy": 0.844574780058651,
+  "test_macro_f1": 0.8566650985758885,
+  "test_accuracy": 0.8567251461988304,
+  "checkpoint_path": "/content/project/artifacts/checkpoints/midscale/linear_probe__lp_m1.pt",
+  "log_dir": "/content/project/artifacts/logs/midscale/linear_probe__lp_m1"
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-249936::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the people are riding on the elephant",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people are riding on the elephant\"}",
+  "runtime_ms": 618.7864701250021
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-391491::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows two people standing next to a large suitcase that appears to be a statue or sculpture, which is consistent with the caption's description.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people standing next to a large suitcase that appears to be a statue or sculpture, which is consistent with the caption's description.\"}",
+  "runtime_ms": 657.03945279166
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-791972::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes the same scene as the image, which shows a person riding a horse jumping over an obstacle in a competition setting.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the same scene as the image, which shows a person riding a horse jumping over an obstacle in a competition setting.\"}",
+  "runtime_ms": 611.3889890833283
+}

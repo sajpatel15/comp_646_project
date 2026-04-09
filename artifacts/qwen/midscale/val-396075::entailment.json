@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-396075::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a cow walking on a city street near individuals, which is consistent with the image where a white cow is walking in the middle of a street surrounded by people.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a cow walking on a city street near individuals, which is consistent with the image where a white cow is walking in the middle of a street surrounded by people.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
+  "runtime_ms": 657.03945279166
+}

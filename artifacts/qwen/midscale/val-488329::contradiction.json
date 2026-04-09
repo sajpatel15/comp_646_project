@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-488329::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the two men on bicycles are riding next to the cars",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the two men on bicycles are riding next to the cars\"}",
+  "runtime_ms": 614.01486545833
+}

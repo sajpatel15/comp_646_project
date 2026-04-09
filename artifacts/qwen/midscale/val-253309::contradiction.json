@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-253309::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that a person is running on the floor, but in the image, there is no indication of any movement or running. The person appears to be standing still, with their feet visible in the background.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that a person is running on the floor, but in the image, there is no indication of any movement or running. The person appears to be standing still, with their feet visible in the background.\"}",
+  "runtime_ms": 618.7864701250021
+}

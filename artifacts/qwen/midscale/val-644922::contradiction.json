@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-644922::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "There are four people in the banana warehouse",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"There are four people in the banana warehouse\"}",
+  "runtime_ms": 636.7252236666635
+}

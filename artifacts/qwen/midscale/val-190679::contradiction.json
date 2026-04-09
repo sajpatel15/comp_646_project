@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-190679::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the image shows a group of people standing on a sidewalk with a bus going by",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the image shows a group of people standing on a sidewalk with a bus going by\"}",
+  "runtime_ms": 800.2579649166724
+}

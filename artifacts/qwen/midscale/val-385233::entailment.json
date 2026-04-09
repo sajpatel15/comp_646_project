@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-385233::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a person performing a skateboard trick near a beach, which is consistent with the image content showing a person skateboarding at the beach during sunset.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a person performing a skateboard trick near a beach, which is consistent with the image content showing a person skateboarding at the beach during sunset.\"}",
+  "runtime_ms": 657.03945279166
+}

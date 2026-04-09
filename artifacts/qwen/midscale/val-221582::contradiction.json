@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-221582::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "A person is standing on a snowboard in the snow.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"A person is standing on a snowboard in the snow.\"}",
+  "runtime_ms": 674.1371126250044
+}

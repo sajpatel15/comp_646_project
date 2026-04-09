@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-805855::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "A television is present in the image, and there is a statue on the ground near a window. The statue is not lying on the ground but rather standing upright on a wooden platform. However, the presence of both the television and the statue near the window does support the idea that they could be seen together in this setting.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"A television is present in the image, and there is a statue on the ground near a window. The statue is not lying on the ground but rather standing upright on a wooden platform. However, the presence of both the television and the statue near the window does support the idea that they could be seen together in this setting.\"}",
+  "runtime_ms": 673.3037584583409
+}

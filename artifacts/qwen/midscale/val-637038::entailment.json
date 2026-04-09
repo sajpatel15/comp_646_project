@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-637038::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows a group of young individuals standing together, which is consistent with the caption 'A group of young individuals standing next to each other.'",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows a group of young individuals standing together, which is consistent with the caption 'A group of young individuals standing next to each other.'\"}",
+  "runtime_ms": 636.7252236666635
+}

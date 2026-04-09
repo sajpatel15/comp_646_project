@@ -1,0 +1,17 @@
+sample_id,error_count,correct_votes,total_models,pool
+val-309308::contradiction,0,4,4,correct
+val-795687::entailment,0,4,4,correct
+val-59317::entailment,0,4,4,correct
+val-403659::entailment,0,4,4,correct
+val-556756::contradiction,0,4,4,correct
+val-362136::contradiction,0,4,4,correct
+val-637038::contradiction,0,4,4,correct
+val-533336::contradiction,0,4,4,correct
+val-101382::contradiction,4,0,4,failure
+val-676170::contradiction,4,0,4,failure
+val-499985::contradiction,4,0,4,failure
+val-487564::contradiction,4,0,4,failure
+val-444966::contradiction,3,1,4,failure
+val-467630::contradiction,3,1,4,failure
+val-798679::contradiction,3,1,4,failure
+val-821562::contradiction,3,1,4,failure

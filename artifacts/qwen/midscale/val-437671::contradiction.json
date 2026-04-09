@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-437671::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the animal is a cat not a dog",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the animal is a cat not a dog\"}",
+  "runtime_ms": 569.658100458336
+}

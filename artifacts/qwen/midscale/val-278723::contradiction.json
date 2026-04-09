@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-278723::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "contradiction\nThe given caption states that the horses are sleeping, which is not consistent with the image where the horses appear to be standing still and alert.",
+  "raw_output": "contradiction\nThe given caption states that the horses are sleeping, which is not consistent with the image where the horses appear to be standing still and alert.",
+  "runtime_ms": 618.7864701250021
+}

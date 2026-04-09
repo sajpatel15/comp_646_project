@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-514739::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The horse in the image is brown and white, not black and white as mentioned in the caption. The horse is also not being fed a popsicle, but rather a frozen treat. Additionally, there is no fence present in the image.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The horse in the image is brown and white, not black and white as mentioned in the caption. The horse is also not being fed a popsicle, but rather a frozen treat. Additionally, there is no fence present in the image.\"}",
+  "runtime_ms": 822.5971583749943
+}

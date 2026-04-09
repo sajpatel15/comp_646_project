@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-285132::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the people in the image are standing on the beach, not sleeping on a dock.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the people in the image are standing on the beach, not sleeping on a dock.\"}",
+  "runtime_ms": 632.739540250005
+}

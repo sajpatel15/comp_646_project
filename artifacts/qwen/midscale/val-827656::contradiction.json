@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-827656::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption accurately describes the scene where a bicycle is parked next to two parking meters, which is consistent with the image provided.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption accurately describes the scene where a bicycle is parked next to two parking meters, which is consistent with the image provided.\"}",
+  "runtime_ms": 673.3037584583409
+}

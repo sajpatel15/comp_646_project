@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-157107::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a cat and dog napping together, which is consistent with the image where both animals are resting on the couch.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a cat and dog napping together, which is consistent with the image where both animals are resting on the couch.\"}",
+  "runtime_ms": 665.3400951666603
+}

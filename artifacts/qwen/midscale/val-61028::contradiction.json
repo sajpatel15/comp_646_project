@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-61028::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that two people are riding a bicycle on the beach, but the image shows two people riding a motorcycle on the street near the beach.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that two people are riding a bicycle on the beach, but the image shows two people riding a motorcycle on the street near the beach.\"}",
+  "runtime_ms": 562.4779267916816
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-94317::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the people are in a parking lot and there is a train in the background",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people are in a parking lot and there is a train in the background\"}",
+  "runtime_ms": 601.3073884285924
+}

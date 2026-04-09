@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-560251::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a group of people in a room, which is consistent with the image where multiple people are gathered together. The mention of two people playing Nintendo Wii aligns with the presence of individuals holding game controllers in the image.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a group of people in a room, which is consistent with the image where multiple people are gathered together. The mention of two people playing Nintendo Wii aligns with the presence of individuals holding game controllers in the image.\"}",
+  "runtime_ms": 648.7179205833323
+}

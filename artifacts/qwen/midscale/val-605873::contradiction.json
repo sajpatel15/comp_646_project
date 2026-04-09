@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-605873::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption says a person is dropping the laptop but there is no person in the image",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption says a person is dropping the laptop but there is no person in the image\"}",
+  "runtime_ms": 562.4779267916816
+}

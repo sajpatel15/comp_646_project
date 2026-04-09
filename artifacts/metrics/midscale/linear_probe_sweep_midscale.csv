@@ -1,0 +1,6 @@
+trial_name,epochs,batch_size,learning_rate,weight_decay,val_accuracy,test_macro_f1,test_accuracy,checkpoint_path,log_dir
+lp_m1,10,16,0.0005,0.01,0.844574780058651,0.8566650985758885,0.8567251461988304,/content/project/artifacts/checkpoints/midscale/linear_probe__lp_m1.pt,/content/project/artifacts/logs/midscale/linear_probe__lp_m1
+lp_m2,15,16,0.0003,0.01,0.8401759530791789,0.8493762493719734,0.8494152046783626,/content/project/artifacts/checkpoints/midscale/linear_probe__lp_m2.pt,/content/project/artifacts/logs/midscale/linear_probe__lp_m2
+lp_m3,20,32,0.0003,0.005,0.8343108504398827,0.8420390882264893,0.8421052631578947,/content/project/artifacts/checkpoints/midscale/linear_probe__lp_m3.pt,/content/project/artifacts/logs/midscale/linear_probe__lp_m3
+lp_m5,30,16,0.0001,0.005,0.8093841642228738,0.8082233413450735,0.8084795321637427,/content/project/artifacts/checkpoints/midscale/linear_probe__lp_m5.pt,/content/project/artifacts/logs/midscale/linear_probe__lp_m5
+lp_m4,25,32,0.0001,0.01,0.8005865102639296,0.7800925925925926,0.7807017543859649,/content/project/artifacts/checkpoints/midscale/linear_probe__lp_m4.pt,/content/project/artifacts/logs/midscale/linear_probe__lp_m4

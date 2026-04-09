@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-641565::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a school girl checking her phone while pushing a bike, which is consistent with the image where a young woman is sitting on a bicycle holding a cell phone.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a school girl checking her phone while pushing a bike, which is consistent with the image where a young woman is sitting on a bicycle holding a cell phone.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
+  "runtime_ms": 636.7252236666635
+}

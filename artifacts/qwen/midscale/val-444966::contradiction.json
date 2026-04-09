@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-444966::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the images show several asian dishes and two people eating",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the images show several asian dishes and two people eating\"}",
+  "runtime_ms": 785.9574092083411
+}

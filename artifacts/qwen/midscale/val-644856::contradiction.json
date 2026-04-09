@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-644856::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption mentions two people jumping in the air, but the image shows only one person jumping. The caption also mentions a tennis racket, while the image does not show any rackets or players holding them.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption mentions two people jumping in the air, but the image shows only one person jumping. The caption also mentions a tennis racket, while the image does not show any rackets or players holding them.\"}",
+  "runtime_ms": 636.7252236666635
+}

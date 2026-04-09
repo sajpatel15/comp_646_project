@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-729654::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the man in the top right picture is putting fire on a cake",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the man in the top right picture is putting fire on a cake\"}",
+  "runtime_ms": 865.4094801666664
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-798679::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the person is holding two remotes",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the person is holding two remotes\"}",
+  "runtime_ms": 611.3889890833283
+}

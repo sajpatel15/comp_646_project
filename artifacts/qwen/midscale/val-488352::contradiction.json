@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-488352::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the two people in the image are sitting on a train with trays of food in front of them.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the two people in the image are sitting on a train with trays of food in front of them.\"}",
+  "runtime_ms": 614.01486545833
+}

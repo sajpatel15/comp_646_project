@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-39201::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the person is sitting in the chair, not running, and they are wearing a shirt and tie, not a suit",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the person is sitting in the chair, not running, and they are wearing a shirt and tie, not a suit\"}",
+  "runtime_ms": 657.03945279166
+}

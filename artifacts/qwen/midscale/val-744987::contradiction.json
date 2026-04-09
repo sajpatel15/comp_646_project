@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-744987::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that the two men are old, but the image shows young men playing a video game.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that the two men are old, but the image shows young men playing a video game.\"}",
+  "runtime_ms": 711.0332358333267
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-439076::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes the scene as having many people on ski slopes, which is consistent with the image showing a crowded area with people skiing and snowboarding.\"",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the scene as having many people on ski slopes, which is consistent with the image showing a crowded area with people skiing and snowboarding.\\\"\"}",
+  "runtime_ms": 569.658100458336
+}

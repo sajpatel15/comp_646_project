@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-270696::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "A woman is petting the elephant while two men stand nearby observing her actions.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"A woman is petting the elephant while two men stand nearby observing her actions.\"}",
+  "runtime_ms": 618.7864701250021
+}

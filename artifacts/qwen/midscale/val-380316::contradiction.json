@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-380316::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The image shows only one person performing a skateboard trick, not two people.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The image shows only one person performing a skateboard trick, not two people.\"}",
+  "runtime_ms": 576.6138363750031
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-253637::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows several people holding umbrellas while riding in a boat, which directly matches the description in the caption.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows several people holding umbrellas while riding in a boat, which directly matches the description in the caption.\"}",
+  "runtime_ms": 618.7864701250021
+}

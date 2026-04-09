@@ -1,0 +1,6 @@
+label,edit_family,candidate_count,selected_count,target_count,meets_target
+contradiction,contradiction_action,1282,683,1000,False
+contradiction,contradiction_attribute,386,384,1000,False
+contradiction,contradiction_count,873,642,1000,False
+contradiction,contradiction_object,678,567,1000,False
+entailment,entailment_synonym,2276,2276,4000,False

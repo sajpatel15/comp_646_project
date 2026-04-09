@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-221176::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes two people riding horses in front of a tall building, which is consistent with the image where two people are riding horses in front of a tall building.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes two people riding horses in front of a tall building, which is consistent with the image where two people are riding horses in front of a tall building.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
+  "runtime_ms": 674.1371126250044
+}

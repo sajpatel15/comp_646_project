@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-323550::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows a laptop placed on plastic blocks, which is consistent with the caption mentioning 'plastic blocks' and 'toy individuals' as well.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows a laptop placed on plastic blocks, which is consistent with the caption mentioning 'plastic blocks' and 'toy individuals' as well.\"}",
+  "runtime_ms": 694.2744383750038
+}

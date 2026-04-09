@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-450300::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows people walking in a park and flying a kite, which is consistent with the caption's description of individuals walking around a park and flying kites.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows people walking in a park and flying a kite, which is consistent with the caption's description of individuals walking around a park and flying kites.\"}",
+  "runtime_ms": 785.9574092083411
+}

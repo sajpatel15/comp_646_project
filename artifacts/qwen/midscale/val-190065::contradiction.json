@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-190065::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows two people standing on the beach, each holding a surfboard under their arms. This directly matches the description in the caption.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people standing on the beach, each holding a surfboard under their arms. This directly matches the description in the caption.\"}",
+  "runtime_ms": 800.2579649166724
+}

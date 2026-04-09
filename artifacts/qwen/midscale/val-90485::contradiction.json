@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-90485::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a scene where one person is sitting on chairs in the desert with airplanes in the background, which is consistent with the image provided.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a scene where one person is sitting on chairs in the desert with airplanes in the background, which is consistent with the image provided.\"}",
+  "runtime_ms": 601.3073884285924
+}

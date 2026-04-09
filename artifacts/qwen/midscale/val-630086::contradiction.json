@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-630086::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the person in the outfit is actually a statue, not a real person",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the person in the outfit is actually a statue, not a real person\"}",
+  "runtime_ms": 562.4779267916816
+}

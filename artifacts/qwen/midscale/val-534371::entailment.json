@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-534371::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a bowl of stew in a white bowl being held by an individual, which is consistent with the image where a person is holding a bowl of stew.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a bowl of stew in a white bowl being held by an individual, which is consistent with the image where a person is holding a bowl of stew.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
+  "runtime_ms": 822.5971583749943
+}

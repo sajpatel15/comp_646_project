@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-562837::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the room is small and has a wooden table with chairs and a couch",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the room is small and has a wooden table with chairs and a couch\"}",
+  "runtime_ms": 648.7179205833323
+}

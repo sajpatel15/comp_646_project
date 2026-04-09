@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-57853::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes two people flying a kite on a beach, which is consistent with the image where two people are standing on the beach and flying a kite in the sky.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes two people flying a kite on a beach, which is consistent with the image where two people are standing on the beach and flying a kite in the sky.\"}",
+  "runtime_ms": 670.2207414583276
+}

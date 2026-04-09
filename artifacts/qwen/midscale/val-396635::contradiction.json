@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-396635::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption says the person is pushing the surfboard but in the image the person is riding the surfboard",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption says the person is pushing the surfboard but in the image the person is riding the surfboard\"}",
+  "runtime_ms": 657.03945279166
+}

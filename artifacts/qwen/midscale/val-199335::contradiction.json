@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-199335::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The image shows a couch, not a bench.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The image shows a couch, not a bench.\"}",
+  "runtime_ms": 800.2579649166724
+}

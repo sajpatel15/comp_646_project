@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-176413::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the sky is blue not red",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the sky is blue not red\"}",
+  "runtime_ms": 800.2579649166724
+}

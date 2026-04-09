@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-560251::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a group of people in a room, some of which are playing Nintendo Wii, which is consistent with the image where multiple people are holding Wii remotes.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a group of people in a room, some of which are playing Nintendo Wii, which is consistent with the image where multiple people are holding Wii remotes.\"}",
+  "runtime_ms": 648.7179205833323
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-130474::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a black dog standing between individuals in line, which is consistent with the image where a black dog is indeed standing between people's legs on a sidewalk.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a black dog standing between individuals in line, which is consistent with the image where a black dog is indeed standing between people's legs on a sidewalk.\"}",
+  "runtime_ms": 794.9515945416673
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-118896::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes individuals lined up by a red food truck, which is consistent with the image where people are standing in line near a red food truck. The presence of multiple people and the red color of the truck match the description in the caption.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes individuals lined up by a red food truck, which is consistent with the image where people are standing in line near a red food truck. The presence of multiple people and the red color of the truck match the description in the caption.\"}",
+  "runtime_ms": 794.9515945416673
+}

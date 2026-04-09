@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-395542::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "",
+  "raw_output": "{\n    \"label\": \"contradiction\"\n}",
+  "runtime_ms": 657.03945279166
+}

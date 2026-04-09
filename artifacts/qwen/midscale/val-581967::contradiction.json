@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-581967::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "contradiction\n\nThe caption suggests that the group of people is sleeping, which contradicts the image where they appear to be standing and interacting in a social setting.",
+  "raw_output": "contradiction\n\nThe caption suggests that the group of people is sleeping, which contradicts the image where they appear to be standing and interacting in a social setting.",
+  "runtime_ms": 670.2207414583276
+}

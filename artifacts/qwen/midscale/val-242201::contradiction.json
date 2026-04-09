@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-242201::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a beach scene with many people and umbrellas, which is consistent with the image content.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a beach scene with many people and umbrellas, which is consistent with the image content.\"}",
+  "runtime_ms": 674.1371126250044
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-282748::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes two people using a computer, which is consistent with the image showing hands on a laptop and a mouse.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes two people using a computer, which is consistent with the image showing hands on a laptop and a mouse.\"}",
+  "runtime_ms": 632.739540250005
+}
