@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-783437::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the person is standing on the surfboard in the water",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the person is standing on the surfboard in the water\"}",
+  "runtime_ms": 597.7762604642943
+}

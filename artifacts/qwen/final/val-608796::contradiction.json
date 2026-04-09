@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-608796::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption says the man is dropping a tv remote and wii controller but in the image he is holding them",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption says the man is dropping a tv remote and wii controller but in the image he is holding them\"}",
+  "runtime_ms": 663.6336021785739
+}

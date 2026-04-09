@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-644856::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes an individual jumping in the air with a tennis racket in their hand, which is consistent with the image where a woman is jumping to hit a tennis ball with her racket.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes an individual jumping in the air with a tennis racket in their hand, which is consistent with the image where a woman is jumping to hit a tennis ball with her racket.\"}",
+  "runtime_ms": 606.0224891428528
+}

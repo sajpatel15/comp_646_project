@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-519947::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows a skier on the bottom of a slope, not climbing up a mountain. The caption describes someone climbing up a mountain, which is not accurate based on the visual content.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows a skier on the bottom of a slope, not climbing up a mountain. The caption describes someone climbing up a mountain, which is not accurate based on the visual content.\"}",
+  "runtime_ms": 807.8122216428645
+}

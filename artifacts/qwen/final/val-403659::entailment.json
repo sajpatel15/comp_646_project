@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-403659::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows a person performing a skateboarding trick, which aligns with the statement that a young individual is doing a trick on their skateboard.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows a person performing a skateboarding trick, which aligns with the statement that a young individual is doing a trick on their skateboard.\"}",
+  "runtime_ms": 624.2333990357208
+}

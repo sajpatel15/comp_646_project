@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-243514::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the giraffes are standing up, not sleeping, and they are not looking at people",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the giraffes are standing up, not sleeping, and they are not looking at people\"}",
+  "runtime_ms": 671.1753049642733
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-415974::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the person is wearing a wetsuit and is surfing on a board",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the person is wearing a wetsuit and is surfing on a board\"}",
+  "runtime_ms": 624.2333990357208
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-620776::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows a person holding a small carrot, which is a type of vegetable, in their left hand. The caption accurately describes the action and object present in the image.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows a person holding a small carrot, which is a type of vegetable, in their left hand. The caption accurately describes the action and object present in the image.\"}",
+  "runtime_ms": 621.2562165714287
+}

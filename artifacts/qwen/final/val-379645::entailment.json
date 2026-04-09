@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-379645::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows multiple elephants with people riding them, all dressed in blue clothing. This directly supports the statement that a group of elephants is being ridden by individuals wearing blue.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows multiple elephants with people riding them, all dressed in blue clothing. This directly supports the statement that a group of elephants is being ridden by individuals wearing blue.\"}",
+  "runtime_ms": 621.6832053214277
+}

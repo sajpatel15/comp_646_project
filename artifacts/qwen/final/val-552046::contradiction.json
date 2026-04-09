@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-552046::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that people are sitting and loitering, but the image shows people walking and standing in a train station. There is no mention of any seating or people sitting in the image.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that people are sitting and loitering, but the image shows people walking and standing in a train station. There is no mention of any seating or people sitting in the image.\"}",
+  "runtime_ms": 645.2441656428585
+}

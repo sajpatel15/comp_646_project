@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-438435::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the two people on the motorbike are indeed on a street",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the two people on the motorbike are indeed on a street\"}",
+  "runtime_ms": 683.947864392865
+}

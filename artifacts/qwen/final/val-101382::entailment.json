@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-101382::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows two motorcyclists racing on a dirt track, which aligns with the description of them skidding during a dirt bicycle competition.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two motorcyclists racing on a dirt track, which aligns with the description of them skidding during a dirt bicycle competition.\"}",
+  "runtime_ms": 797.2685564642786
+}

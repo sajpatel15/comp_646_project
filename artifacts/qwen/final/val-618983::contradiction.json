@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-618983::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows two people waiting for their luggage at an airport, which is consistent with the caption's description.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people waiting for their luggage at an airport, which is consistent with the caption's description.\"}",
+  "runtime_ms": 621.2562165714287
+}

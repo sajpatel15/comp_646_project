@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-597757::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows people sitting on the sand near a mountainous area, which is consistent with the caption's description.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows people sitting on the sand near a mountainous area, which is consistent with the caption's description.\"}",
+  "runtime_ms": 663.6336021785739
+}

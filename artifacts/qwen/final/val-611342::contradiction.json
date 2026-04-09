@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-611342::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows two elderly people playing an interactive video game, as indicated by the presence of a Wii remote in their hands.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two elderly people playing an interactive video game, as indicated by the presence of a Wii remote in their hands.\"}",
+  "runtime_ms": 621.2562165714287
+}

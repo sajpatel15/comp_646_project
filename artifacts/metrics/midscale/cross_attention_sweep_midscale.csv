@@ -1,6 +1,0 @@
-trial_name,epochs,batch_size,learning_rate,weight_decay,val_accuracy,test_macro_f1,test_accuracy,checkpoint_path,log_dir
-ca_m1,10,8,0.0005,0.01,0.9633431085043989,0.9458868858873563,0.945906432748538,/content/project/artifacts/checkpoints/midscale/cross_attention__ca_m1.pt,/content/project/artifacts/logs/midscale/cross_attention__ca_m1
-ca_m2,15,8,0.0003,0.01,0.9604105571847508,0.9502651839178785,0.9502923976608187,/content/project/artifacts/checkpoints/midscale/cross_attention__ca_m2.pt,/content/project/artifacts/logs/midscale/cross_attention__ca_m2
-ca_m3,20,4,0.0001,0.01,0.9574780058651027,0.9517245656772184,0.9517543859649122,/content/project/artifacts/checkpoints/midscale/cross_attention__ca_m3.pt,/content/project/artifacts/logs/midscale/cross_attention__ca_m3
-ca_m4,25,8,0.0001,0.005,0.9516129032258065,0.9488057891799304,0.9488304093567251,/content/project/artifacts/checkpoints/midscale/cross_attention__ca_m4.pt,/content/project/artifacts/logs/midscale/cross_attention__ca_m4
-ca_m5,30,4,0.0003,0.001,0.9457478005865103,0.9415124670793857,0.9415204678362573,/content/project/artifacts/checkpoints/midscale/cross_attention__ca_m5.pt,/content/project/artifacts/logs/midscale/cross_attention__ca_m5

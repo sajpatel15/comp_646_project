@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-433976::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the people in the image are indeed hanging around in a living room with a couch",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people in the image are indeed hanging around in a living room with a couch\"}",
+  "runtime_ms": 683.947864392865
+}

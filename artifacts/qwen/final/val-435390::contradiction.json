@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-435390::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows two people riding elephants in a wooded area, which aligns with the caption's description of one person riding elephants beside some trees.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people riding elephants in a wooded area, which aligns with the caption's description of one person riding elephants beside some trees.\"}",
+  "runtime_ms": 683.947864392865
+}

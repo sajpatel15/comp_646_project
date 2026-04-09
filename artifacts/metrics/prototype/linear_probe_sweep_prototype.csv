@@ -1,4 +1,0 @@
-trial_name,epochs,batch_size,learning_rate,weight_decay,val_accuracy,test_macro_f1,test_accuracy,checkpoint_path,log_dir
-lp_p2,8,16,0.0003,0.01,0.7916666666666666,0.7662048490846116,0.7666666666666667,/content/project/artifacts/checkpoints/prototype/linear_probe__lp_p2.pt,/content/project/artifacts/logs/prototype/linear_probe__lp_p2
-lp_p1,5,16,0.0005,0.01,0.7888888888888889,0.7637412271558612,0.7638888888888888,/content/project/artifacts/checkpoints/prototype/linear_probe__lp_p1.pt,/content/project/artifacts/logs/prototype/linear_probe__lp_p1
-lp_p3,10,32,0.0003,0.005,0.7805555555555556,0.7328055418109847,0.7333333333333333,/content/project/artifacts/checkpoints/prototype/linear_probe__lp_p3.pt,/content/project/artifacts/logs/prototype/linear_probe__lp_p3

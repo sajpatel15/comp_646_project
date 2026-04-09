@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-456526::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption 'A group of people sleeping in a room' is incorrect because the image shows a wedding reception with people standing and smiling, not sleeping. The presence of a chandelier, formal attire, and a man holding a garter suggests a celebratory event rather than a sleep scene.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption 'A group of people sleeping in a room' is incorrect because the image shows a wedding reception with people standing and smiling, not sleeping. The presence of a chandelier, formal attire, and a man holding a garter suggests a celebratory event rather than a sleep scene.\"}",
+  "runtime_ms": 683.947864392865
+}

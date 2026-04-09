@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-644922::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "There are five people in the image",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"There are five people in the image\"}",
+  "runtime_ms": 606.0224891428528
+}

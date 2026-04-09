@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-737197::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the skier is pushing on the snow to move forward",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the skier is pushing on the snow to move forward\"}",
+  "runtime_ms": 714.7083649642809
+}

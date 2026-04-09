@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-226511::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption mentions a man sleeping, but the image shows a person standing next to a bike and a motorcycle, not sleeping.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption mentions a man sleeping, but the image shows a person standing next to a bike and a motorcycle, not sleeping.\"}",
+  "runtime_ms": 716.1018494285664
+}

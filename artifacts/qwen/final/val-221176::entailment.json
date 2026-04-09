@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-221176::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes two people riding horses near a tall building, which is consistent with the image showing two individuals on horseback in front of a large building. The presence of the tall flagpole and the architectural style of the building further support this interpretation.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes two people riding horses near a tall building, which is consistent with the image showing two individuals on horseback in front of a large building. The presence of the tall flagpole and the architectural style of the building further support this interpretation.\"}",
+  "runtime_ms": 716.1018494285664
+}

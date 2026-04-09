@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-59734::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a remote control on a table with a television in the background, which is consistent with the image provided.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a remote control on a table with a television in the background, which is consistent with the image provided.\"}",
+  "runtime_ms": 663.6336021785739
+}

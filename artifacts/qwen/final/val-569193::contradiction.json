@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-569193::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption mentions 'old people', but the image shows a diverse group of people including children and adults of various ages. The caption also incorrectly states that they are gathered with surfboards, while in the image, some people are sitting on the sand without surfboards.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption mentions 'old people', but the image shows a diverse group of people including children and adults of various ages. The caption also incorrectly states that they are gathered with surfboards, while in the image, some people are sitting on the sand without surfboards.\"}",
+  "runtime_ms": 645.2441656428585
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-164776::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a snowboarding event with two people racing down a snowy slope, which aligns with the image showing a snowboarder descending a snowy course while spectators watch from the side.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a snowboarding event with two people racing down a snowy slope, which aligns with the image showing a snowboarder descending a snowy course while spectators watch from the side.\"}",
+  "runtime_ms": 683.6538839285628
+}

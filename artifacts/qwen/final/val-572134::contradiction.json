@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-572134::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "contradiction\nThe given caption states that \"a number of people sitting on a side walk near a building,\" but the image shows people walking on the sidewalk in front of a brick building. There is no indication of anyone sitting in the image. Therefore, the caption contradicts the visual content of the image.",
+  "raw_output": "contradiction\nThe given caption states that \"a number of people sitting on a side walk near a building,\" but the image shows people walking on the sidewalk in front of a brick building. There is no indication of anyone sitting in the image. Therefore, the caption contradicts the visual content of the image.",
+  "runtime_ms": 663.6336021785739
+}

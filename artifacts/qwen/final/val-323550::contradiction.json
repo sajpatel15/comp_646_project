@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-323550::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows a keyboard placed on top of plastic blocks, which is consistent with the description of a TV sitting on plastic blocks. The presence of toy people in both images supports this entailment.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows a keyboard placed on top of plastic blocks, which is consistent with the description of a TV sitting on plastic blocks. The presence of toy people in both images supports this entailment.\"}",
+  "runtime_ms": 680.7438916428542
+}

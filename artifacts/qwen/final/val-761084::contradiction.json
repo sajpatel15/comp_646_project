@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-761084::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption describes a living room with a big white couch in the middle of it, but the image shows a black sectional couch. These are contradictory descriptions.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption describes a living room with a big white couch in the middle of it, but the image shows a black sectional couch. These are contradictory descriptions.\"}",
+  "runtime_ms": 714.7083649642809
+}

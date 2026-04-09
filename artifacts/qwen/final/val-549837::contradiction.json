@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-549837::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption mentions cups on the bench while the image does not have any cups visible",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption mentions cups on the bench while the image does not have any cups visible\"}",
+  "runtime_ms": 645.2441656428585
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-375891::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a kitchen scene with two people making pies and pots and pans hanging on the wall, which is consistent with the image content.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a kitchen scene with two people making pies and pots and pans hanging on the wall, which is consistent with the image content.\"}",
+  "runtime_ms": 621.6832053214277
+}

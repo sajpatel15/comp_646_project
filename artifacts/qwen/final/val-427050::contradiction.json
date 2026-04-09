@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-427050::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption mentions people sitting on the street, but the image shows people walking on the sidewalk",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption mentions people sitting on the street, but the image shows people walking on the sidewalk\"}",
+  "runtime_ms": 624.2333990357208
+}

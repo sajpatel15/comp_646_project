@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-293778::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the people on the beach are flying kites",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people on the beach are flying kites\"}",
+  "runtime_ms": 644.925874749999
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-49404::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a group of people sitting around a table with laptops, which is consistent with the image where multiple individuals are seated at a table using laptops. The presence of laptops and the setting suggest that this is a common scenario for working or studying together.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a group of people sitting around a table with laptops, which is consistent with the image where multiple individuals are seated at a table using laptops. The presence of laptops and the setting suggest that this is a common scenario for working or studying together.\"}",
+  "runtime_ms": 781.4557178571379
+}

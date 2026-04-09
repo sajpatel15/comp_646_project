@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-57853::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows two people standing on a beach, one of whom is flying a kite in the air. This directly entails the statement that one person on a beach is flying a kite in the air.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people standing on a beach, one of whom is flying a kite in the air. This directly entails the statement that one person on a beach is flying a kite in the air.\"}",
+  "runtime_ms": 663.6336021785739
+}

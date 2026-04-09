@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-724110::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption mentions one person taking a picture, but the image shows four people standing together",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption mentions one person taking a picture, but the image shows four people standing together\"}",
+  "runtime_ms": 714.7083649642809
+}

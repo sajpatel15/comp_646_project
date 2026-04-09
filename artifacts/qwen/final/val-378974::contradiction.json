@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-378974::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the objects in the image do not match the description. there is no couch in the image, only benches",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the objects in the image do not match the description. there is no couch in the image, only benches\"}",
+  "runtime_ms": 621.6832053214277
+}

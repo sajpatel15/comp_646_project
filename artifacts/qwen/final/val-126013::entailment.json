@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-126013::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a group of people standing in a kitchen, which is consistent with the image where multiple people are indeed present in a kitchen setting.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a group of people standing in a kitchen, which is consistent with the image where multiple people are indeed present in a kitchen setting.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
+  "runtime_ms": 797.2685564642786
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-138663::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes the scene accurately, mentioning a train approaching a station and a man with a bicycle present in the image.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the scene accurately, mentioning a train approaching a station and a man with a bicycle present in the image.\"}",
+  "runtime_ms": 797.2685564642786
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-642054::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that the woman is running on a bike, but the image shows her sitting on the bike. This is a contradiction.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that the woman is running on a bike, but the image shows her sitting on the bike. This is a contradiction.\"}",
+  "runtime_ms": 621.2562165714287
+}

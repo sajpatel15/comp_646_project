@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-88967::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes people pushing tricycle carriages, which is consistent with the image where multiple individuals are seen pushing or riding tricycles down a street.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes people pushing tricycle carriages, which is consistent with the image where multiple individuals are seen pushing or riding tricycles down a street.\"}",
+  "runtime_ms": 668.4725540357184
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-618261::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a puppy cuddling with a shoe on a bench, which is consistent with the image where a dog is lying on a couch with a shoe beside it.",
+  "raw_output": "{\n    \"label\": \"entailment\",\n    \"rationale\": \"The caption describes a puppy cuddling with a shoe on a bench, which is consistent with the image where a dog is lying on a couch with a shoe beside it.\"\n}",
+  "runtime_ms": 621.2562165714287
+}

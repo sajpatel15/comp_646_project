@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-380715::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a living room with a television on and a wheel on the wall, which is consistent with the image provided.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a living room with a television on and a wheel on the wall, which is consistent with the image provided.\"}",
+  "runtime_ms": 621.6832053214277
+}

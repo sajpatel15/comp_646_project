@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-315880::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the object is a television not a laptop",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the object is a television not a laptop\"}",
+  "runtime_ms": 680.7438916428542
+}

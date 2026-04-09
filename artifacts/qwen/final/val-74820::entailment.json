@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-74820::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a motorcycle parked in front of a crowd of individuals, which is consistent with the image where a motorcycle is parked on the ground and people are standing around it.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a motorcycle parked in front of a crowd of individuals, which is consistent with the image where a motorcycle is parked on the ground and people are standing around it.\"}",
+  "runtime_ms": 714.7083649642809
+}

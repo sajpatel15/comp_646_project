@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-745202::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption says a large boat but the image shows a small boat",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption says a large boat but the image shows a small boat\"}",
+  "runtime_ms": 714.7083649642809
+}

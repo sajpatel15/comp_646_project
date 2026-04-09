@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-498470::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows two people sitting at a table and eating food, which is consistent with the caption 'Two individuals sitting at a table eating'.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people sitting at a table and eating food, which is consistent with the caption 'Two individuals sitting at a table eating'.\"}",
+  "runtime_ms": 781.4557178571379
+}

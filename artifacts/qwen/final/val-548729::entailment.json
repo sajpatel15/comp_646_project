@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-548729::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the person is reaching for the container on the counter",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the person is reaching for the container on the counter\"}",
+  "runtime_ms": 645.2441656428585
+}

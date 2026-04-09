@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-627284::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption mentions a cat on a boat but there is no mention of a person in the water.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption mentions a cat on a boat but there is no mention of a person in the water.\"}",
+  "runtime_ms": 621.2562165714287
+}

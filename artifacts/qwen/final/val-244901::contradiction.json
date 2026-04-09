@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-244901::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a scene where there is a parked bicycle on a sidewalk and a person riding a motorcycle. This is consistent with the image provided, which shows a parked bicycle and a person riding a motorcycle. The only difference is that the person in the image is not wearing a helmet, but this does not contradict the description of the scene.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a scene where there is a parked bicycle on a sidewalk and a person riding a motorcycle. This is consistent with the image provided, which shows a parked bicycle and a person riding a motorcycle. The only difference is that the person in the image is not wearing a helmet, but this does not contradict the description of the scene.\"}",
+  "runtime_ms": 671.1753049642733
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-405764::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the image shows two people holding a bat in the dark",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the image shows two people holding a bat in the dark\"}",
+  "runtime_ms": 624.2333990357208
+}

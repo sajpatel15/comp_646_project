@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-242192::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the people in the picture are laying in chairs, walking, and playing in the water on the beach",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people in the picture are laying in chairs, walking, and playing in the water on the beach\"}",
+  "runtime_ms": 671.1753049642733
+}

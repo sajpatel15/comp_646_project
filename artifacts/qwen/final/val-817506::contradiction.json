@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-817506::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes the presence of a lounge chair and a white couch, which are both visible in the image. The description accurately reflects the objects present in the room.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes the presence of a lounge chair and a white couch, which are both visible in the image. The description accurately reflects the objects present in the room.\"}",
+  "runtime_ms": 668.4725540357184
+}

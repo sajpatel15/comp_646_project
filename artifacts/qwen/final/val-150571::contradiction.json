@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-150571::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the two people standing at the base are waiting for the pitch to be thrown by the pitcher",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the two people standing at the base are waiting for the pitch to be thrown by the pitcher\"}",
+  "runtime_ms": 683.6538839285628
+}

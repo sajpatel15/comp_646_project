@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-683936::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption says that the man is sleeping but the image shows two men playing baseball",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption says that the man is sleeping but the image shows two men playing baseball\"}",
+  "runtime_ms": 831.7803645357052
+}

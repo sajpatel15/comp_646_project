@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-441250::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption states that the bus is small, but the image shows a large green bus. Additionally, there are no people on motorcycles in the image, only a person riding a motorcycle behind the bus.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that the bus is small, but the image shows a large green bus. Additionally, there are no people on motorcycles in the image, only a person riding a motorcycle behind the bus.\"}",
+  "runtime_ms": 683.947864392865
+}

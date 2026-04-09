@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-675587::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows people riding motorcycles on a city street, which is consistent with the caption's statement that people are sitting and riding motorcycles on the street.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows people riding motorcycles on a city street, which is consistent with the caption's statement that people are sitting and riding motorcycles on the street.\"}",
+  "runtime_ms": 831.7803645357052
+}

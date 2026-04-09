@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-816797::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes two people holding a child while the child is looking at a cake, which is consistent with the image where a man is holding a baby and a woman is holding a cake.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes two people holding a child while the child is looking at a cake, which is consistent with the image where a man is holding a baby and a woman is holding a cake.\"}",
+  "runtime_ms": 668.4725540357184
+}

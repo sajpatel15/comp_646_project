@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-623693::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption says that the people are running around a long table while eating from plates of food but in the image there is no one running around a long table",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption says that the people are running around a long table while eating from plates of food but in the image there is no one running around a long table\"}",
+  "runtime_ms": 621.2562165714287
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-171992::entailment",
+  "label": "entailment",
+  "pred_label": "contradiction",
+  "rationale": "the statue is of a girl not a child",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the statue is of a girl not a child\"}",
+  "runtime_ms": 683.6538839285628
+}

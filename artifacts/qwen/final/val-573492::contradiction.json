@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-573492::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The image shows multiple people riding motorcycles on a road, which aligns with the idea of people pushing motorcycles. The caption is a reasonable interpretation of the scene.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows multiple people riding motorcycles on a road, which aligns with the idea of people pushing motorcycles. The caption is a reasonable interpretation of the scene.\"}",
+  "runtime_ms": 663.6336021785739
+}

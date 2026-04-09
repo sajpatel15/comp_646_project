@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-499985::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes three people wearing work uniforms and visors, standing in front of donuts, which is consistent with the image content.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes three people wearing work uniforms and visors, standing in front of donuts, which is consistent with the image content.\"}",
+  "runtime_ms": 807.8122216428645
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-48448::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes the person wearing a heavy coat and holding a cell phone, which is consistent with the image where a person in a dark jacket is holding a cell phone.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes the person wearing a heavy coat and holding a cell phone, which is consistent with the image where a person in a dark jacket is holding a cell phone.\"}",
+  "runtime_ms": 781.4557178571379
+}

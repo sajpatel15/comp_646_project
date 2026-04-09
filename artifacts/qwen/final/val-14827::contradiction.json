@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-14827::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the umbrella is red not black",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the umbrella is red not black\"}",
+  "runtime_ms": 683.6538839285628
+}

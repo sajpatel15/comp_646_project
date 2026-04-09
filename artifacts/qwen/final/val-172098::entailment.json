@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-172098::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a man walking towards the lighthouse, which is consistent with the image where a person is seen walking on a path towards a lighthouse. The caption does not contradict any information present in the image.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a man walking towards the lighthouse, which is consistent with the image where a person is seen walking on a path towards a lighthouse. The caption does not contradict any information present in the image.\"}",
+  "runtime_ms": 683.6538839285628
+}

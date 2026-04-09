@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-556756::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption mentions 'old and older people', but the image shows mostly young adults and teenagers, not elderly individuals.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption mentions 'old and older people', but the image shows mostly young adults and teenagers, not elderly individuals.\"}",
+  "runtime_ms": 645.2441656428585
+}

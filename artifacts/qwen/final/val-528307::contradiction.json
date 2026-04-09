@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-528307::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a small stack of trunks and luggage on a sidewalk with people behind it, which is consistent with the image where there is a pile of suitcases on a sidewalk with people in the background.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a small stack of trunks and luggage on a sidewalk with people behind it, which is consistent with the image where there is a pile of suitcases on a sidewalk with people in the background.\"}",
+  "runtime_ms": 807.8122216428645
+}

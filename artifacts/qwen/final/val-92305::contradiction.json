@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-92305::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the two men in the picture are holding a slice of pizza and smiling at the camera",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the two men in the picture are holding a slice of pizza and smiling at the camera\"}",
+  "runtime_ms": 664.974455599986
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-581967::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the people in the image are standing around a counter that has bottles on it which implies they are at a wine bar",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people in the image are standing around a counter that has bottles on it which implies they are at a wine bar\"}",
+  "runtime_ms": 663.6336021785739
+}

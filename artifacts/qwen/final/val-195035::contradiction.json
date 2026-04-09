@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-195035::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes people wearing jackets riding horses on the beach, which is consistent with the image where four people are riding horses on the beach. The action of 'pushing' horses is not explicitly mentioned in the caption but can be inferred from the context of riding horses on the beach.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes people wearing jackets riding horses on the beach, which is consistent with the image where four people are riding horses on the beach. The action of 'pushing' horses is not explicitly mentioned in the caption but can be inferred from the context of riding horses on the beach.\"}",
+  "runtime_ms": 716.1018494285664
+}

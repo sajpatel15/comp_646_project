@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-204437::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the two people are sitting at a table with drinks and the woman is holding a phone",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the two people are sitting at a table with drinks and the woman is holding a phone\"}",
+  "runtime_ms": 716.1018494285664
+}

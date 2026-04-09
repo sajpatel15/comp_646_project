@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-441816::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows people at a bus stop, some boarding the bus while others wait, which aligns with the caption's description of individuals milling about a bus terminal getting ready to board.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows people at a bus stop, some boarding the bus while others wait, which aligns with the caption's description of individuals milling about a bus terminal getting ready to board.\"}",
+  "runtime_ms": 683.947864392865
+}

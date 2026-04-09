@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-196727::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "A hand is holding a toy hot dog on a plate. There is another person sitting in the background. The hot dog is in a bun.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"A hand is holding a toy hot dog on a plate. There is another person sitting in the background. The hot dog is in a bun.\"}",
+  "runtime_ms": 716.1018494285664
+}

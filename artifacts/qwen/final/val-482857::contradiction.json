@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-482857::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a person sitting on a bench in the woods, which is consistent with the image where three people are sitting on a log in a wooded area.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a person sitting on a bench in the woods, which is consistent with the image where three people are sitting on a log in a wooded area.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
+  "runtime_ms": 781.4557178571379
+}

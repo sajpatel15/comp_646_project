@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-648256::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows multiple umbrellas being held by people, indicating that they are protecting themselves from the rain.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows multiple umbrellas being held by people, indicating that they are protecting themselves from the rain.\"}",
+  "runtime_ms": 606.0224891428528
+}

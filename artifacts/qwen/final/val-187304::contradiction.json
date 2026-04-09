@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-187304::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes a scene where sailboats are floating near a beach, with people and a dog present on the shore. this is consistent with the image provided, which shows sailboats in the water and people on the beach.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a scene where sailboats are floating near a beach, with people and a dog present on the shore. this is consistent with the image provided, which shows sailboats in the water and people on the beach.\"}",
+  "runtime_ms": 683.6538839285628
+}

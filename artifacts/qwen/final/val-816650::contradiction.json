@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-816650::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "The caption describes people riding horses on a beach, which is consistent with the image where three people are riding horses on a sandy beach.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes people riding horses on a beach, which is consistent with the image where three people are riding horses on a sandy beach.\"}",
+  "runtime_ms": 668.4725540357184
+}

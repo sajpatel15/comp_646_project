@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-817019::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the person is riding the horse drawn carriage",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the person is riding the horse drawn carriage\"}",
+  "runtime_ms": 668.4725540357184
+}

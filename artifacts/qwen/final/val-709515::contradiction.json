@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-709515::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the caption says that the person is looking inside the toilet but the image shows the person is touching the toilet seat",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption says that the person is looking inside the toilet but the image shows the person is touching the toilet seat\"}",
+  "runtime_ms": 831.7803645357052
+}

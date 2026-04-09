@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-712840::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The caption describes a scene where people are holding kites in a grassy field, which aligns with the image showing people flying kites in a field. The presence of multiple kites and people suggests that the wind is blowing them, which is consistent with the image's description of kites being blown by the wind.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a scene where people are holding kites in a grassy field, which aligns with the image showing people flying kites in a field. The presence of multiple kites and people suggests that the wind is blowing them, which is consistent with the image's description of kites being blown by the wind.\"}",
+  "runtime_ms": 831.7803645357052
+}

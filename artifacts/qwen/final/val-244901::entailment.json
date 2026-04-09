@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-244901::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "the caption describes two parked bikes and a person on a motorcycle, which is consistent with the image content.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes two parked bikes and a person on a motorcycle, which is consistent with the image content.\"}",
+  "runtime_ms": 671.1753049642733
+}

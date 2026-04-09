@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-242677::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "the people are not lined up at a bus station but at a train station",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the people are not lined up at a bus station but at a train station\"}",
+  "runtime_ms": 671.1753049642733
+}

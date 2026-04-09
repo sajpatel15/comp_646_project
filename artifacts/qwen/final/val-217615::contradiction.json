@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-217615::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the people are standing on the grass near the water and there is a bench in the grass as well as kites flying in the sky",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people are standing on the grass near the water and there is a bench in the grass as well as kites flying in the sky\"}",
+  "runtime_ms": 716.1018494285664
+}

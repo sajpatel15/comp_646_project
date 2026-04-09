@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-630672::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows two people playing a video game on the Wii console, which is consistent with the caption's description of them playing a Wii game.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people playing a video game on the Wii console, which is consistent with the caption's description of them playing a Wii game.\"}",
+  "runtime_ms": 621.2562165714287
+}

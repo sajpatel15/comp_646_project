@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-569054::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the bride is wearing a white dress and the groom is wearing a black suit with a red tie",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the bride is wearing a white dress and the groom is wearing a black suit with a red tie\"}",
+  "runtime_ms": 645.2441656428585
+}

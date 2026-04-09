@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-345438::contradiction",
+  "label": "contradiction",
+  "pred_label": "entailment",
+  "rationale": "the caption describes the same scene as the image, including the person holding the scissors and their small size",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the same scene as the image, including the person holding the scissors and their small size\"}",
+  "runtime_ms": 680.7438916428542
+}

@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-236724::entailment",
+  "label": "entailment",
+  "pred_label": "entailment",
+  "rationale": "The image shows people sitting on benches in a park-like setting, which aligns with the statement that some individuals are sitting on benches and relaxing.",
+  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows people sitting on benches in a park-like setting, which aligns with the statement that some individuals are sitting on benches and relaxing.\"}",
+  "runtime_ms": 716.1018494285664
+}

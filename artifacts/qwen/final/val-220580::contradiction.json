@@ -1,0 +1,8 @@
+{
+  "sample_id": "val-220580::contradiction",
+  "label": "contradiction",
+  "pred_label": "contradiction",
+  "rationale": "The caption mentions 'people sitting' which is not present in the image. The image shows only a sign with teddy bears and no people sitting.",
+  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption mentions 'people sitting' which is not present in the image. The image shows only a sign with teddy bears and no people sitting.\"}",
+  "runtime_ms": 716.1018494285664
+}
