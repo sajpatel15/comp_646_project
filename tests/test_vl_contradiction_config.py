@@ -27,9 +27,12 @@ class ConfigLoadingTests(unittest.TestCase):
         self.assertFalse(config.audit.require_all_rows_reviewed)
         self.assertEqual("auto", config.performance.active_profile)
         self.assertFalse(config.performance.compatibility_mode)
+        self.assertEqual("artifacts/.scratch", config.performance.colab_scratch_root)
         self.assertEqual("fp16", config.performance.gpu_profiles["t4"].qwen_precision)
+        self.assertEqual("direct", config.performance.gpu_profiles["t4"].qwen_cache_mode)
         self.assertEqual("fp16", config.performance.gpu_profiles["t4"].training_amp_precision)
         self.assertEqual("bf16", config.performance.gpu_profiles["h100"].clip_precision)
+        self.assertFalse(config.evaluation.save_figures_as_pdf)
 
 
 if __name__ == "__main__":

@@ -16,7 +16,7 @@ except ModuleNotFoundError:  # pragma: no cover - exercised in dependency-light 
 DEFAULT_PERFORMANCE_PAYLOAD: dict[str, Any] = {
     "active_profile": "auto",
     "compatibility_mode": False,
-    "colab_scratch_root": "/content/comp646_scratch",
+    "colab_scratch_root": "artifacts/.scratch",
     "gpu_profiles": {
         "default": {
             "clip_precision": "auto",
@@ -43,7 +43,7 @@ DEFAULT_PERFORMANCE_PAYLOAD: dict[str, Any] = {
             "amp_training": True,
             "early_stopping_patience": 2,
             "early_stopping_min_delta": 0.001,
-            "qwen_cache_mode": "scratch_then_sync",
+            "qwen_cache_mode": "direct",
             "qwen_cache_flush_every": 8,
         },
         "h100": {
@@ -57,7 +57,7 @@ DEFAULT_PERFORMANCE_PAYLOAD: dict[str, Any] = {
             "amp_training": True,
             "early_stopping_patience": 3,
             "early_stopping_min_delta": 0.0005,
-            "qwen_cache_mode": "scratch_then_sync",
+            "qwen_cache_mode": "direct",
             "qwen_cache_flush_every": 16,
         },
     },

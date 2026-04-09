@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import math
 from pathlib import Path
 import textwrap
+from typing import Callable
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -29,6 +31,14 @@ def _prepare_output(path: str | Path) -> Path:
     output = Path(path)
     output.parent.mkdir(parents=True, exist_ok=True)
     return output
+
+
+def resolve_figure_output(figure_root: str | Path, *parts: str) -> Path:
+    """Build a figure output path under a categorized figure root."""
+
+    if not parts:
+        raise ValueError("At least one path component is required for a figure output.")
+    return _prepare_output(Path(figure_root).joinpath(*parts))
 
 
 def _add_footer_legend(legend_ax: plt.Axes, handles: list[object], labels: list[str]) -> None:
@@ -106,7 +116,7 @@ def save_score_histogram(score_frame: pd.DataFrame, output_path: str | Path, tit
     ax.set_title(title)
     if ax.legend_ is not None:
         sns.move_legend(ax, "upper left", bbox_to_anchor=(1.02, 1.0), title="Label", frameon=True)
-    fig.tight_layout(rect=(0, 0, 0.82, 1))
+    fig.subplots_adjust(left=0.10, right=0.79, bottom=0.14, top=0.90)
     fig.savefig(output, bbox_inches="tight")
     plt.close(fig)
 
@@ -388,11 +398,31 @@ def _load_thumbnail(image_path: str | Path, thumbnail_size: tuple[int, int]) -> 
     return canvas
 
 
+def _format_decimal(value: object, *, digits: int = 4, round_down: bool = False) -> str:
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        return str(value).strip()
+    if not math.isfinite(numeric):
+        return str(value).strip()
+    if round_down:
+        scale = 10**digits
+        numeric = math.trunc(numeric * scale) / scale
+    return f"{numeric:.{digits}f}"
+
+
 def _format_panel_lines(row: pd.Series, *, text_width: int) -> list[str]:
-    def add_line(lines: list[str], label: str, value: object, *, wrap: bool = False) -> None:
+    def add_line(
+        lines: list[str],
+        label: str,
+        value: object,
+        *,
+        wrap: bool = False,
+        formatter: Callable[[object], str] | None = None,
+    ) -> None:
         if pd.isna(value):
             return
-        text = str(value).strip()
+        text = formatter(value) if formatter is not None else str(value).strip()
         if not text:
             return
         if wrap:
@@ -400,10 +430,6 @@ def _format_panel_lines(row: pd.Series, *, text_width: int) -> list[str]:
         lines.append(f"{label}: {text}")
 
     lines: list[str] = []
-    add_line(lines, "Sample", row.get("sample_id"))
-    add_line(lines, "Model", row.get("model"))
-    add_line(lines, "Stage", row.get("stage"))
-    add_line(lines, "Scope", row.get("eval_scope"))
     add_line(lines, "True", row.get("label"))
     add_line(lines, "Pred", row.get("pred_label"))
     if "correct" in row.index and not pd.isna(row.get("correct")):
@@ -411,13 +437,65 @@ def _format_panel_lines(row: pd.Series, *, text_width: int) -> list[str]:
         if isinstance(correct_value, str):
             correct_value = correct_value.strip().lower() in {"1", "true", "yes", "y"}
         add_line(lines, "Correct", "yes" if bool(correct_value) else "no")
-    add_line(lines, "Family", row.get("edit_family"))
-    add_line(lines, "Confidence", row.get("confidence"))
-    add_line(lines, "Raw score", row.get("raw_score"))
-    add_line(lines, "Rationale", row.get("rationale"), wrap=True)
+    add_line(lines, "Scope", row.get("eval_scope"))
+    add_line(lines, "Confidence", row.get("confidence"), formatter=lambda value: _format_decimal(value, round_down=True))
+    add_line(lines, "Raw score", row.get("raw_score"), formatter=_format_decimal)
     add_line(lines, "Source", row.get("source_caption"), wrap=True)
     add_line(lines, "Edited", row.get("edited_caption"), wrap=True)
     return lines
+
+
+def build_qualitative_panel_figure(
+    frame: pd.DataFrame,
+    title: str,
+    max_rows: int = 4,
+    *,
+    thumbnail_size: tuple[int, int] = (320, 320),
+    text_width: int = 32,
+    ncols: int = 4,
+) -> plt.Figure:
+    if frame.empty:
+        raise ValueError("frame must contain at least one qualitative example.")
+
+    subset = frame.head(max_rows).reset_index(drop=True)
+    if subset.empty:
+        raise ValueError("frame must contain at least one row to render.")
+
+    ncols = max(1, min(ncols, len(subset)))
+    nrows = int(math.ceil(len(subset) / ncols))
+    height_ratios: list[float] = []
+    for _ in range(nrows):
+        height_ratios.extend([1.0, 0.60])
+    fig = plt.figure(figsize=(2.85 * ncols, 3.55 * nrows + 0.25))
+    grid = fig.add_gridspec(
+        nrows * 2,
+        ncols,
+        height_ratios=height_ratios,
+    )
+    for index, (_, row) in enumerate(subset.iterrows()):
+        row_index = index // ncols
+        col_index = index % ncols
+        image_ax = fig.add_subplot(grid[row_index * 2, col_index])
+        text_ax = fig.add_subplot(grid[row_index * 2 + 1, col_index])
+        thumbnail = _load_thumbnail(row["file_path"], thumbnail_size=thumbnail_size)
+        image_ax.imshow(thumbnail)
+        image_ax.set_aspect("equal")
+        image_ax.axis("off")
+
+        text_ax.axis("off")
+        text_ax.text(
+            0.0,
+            1.0,
+            "\n".join(_format_panel_lines(row, text_width=text_width)),
+            va="top",
+            ha="left",
+            fontsize=8.5,
+            transform=text_ax.transAxes,
+        )
+
+    fig.suptitle(title, y=0.965)
+    fig.subplots_adjust(left=0.03, right=0.99, bottom=0.04, top=0.86, wspace=0.04, hspace=0.02)
+    return fig
 
 
 def save_qualitative_panel(
@@ -427,43 +505,17 @@ def save_qualitative_panel(
     max_rows: int = 4,
     *,
     thumbnail_size: tuple[int, int] = (320, 320),
-    text_width: int = 58,
+    text_width: int = 32,
+    ncols: int = 4,
 ) -> None:
-    if frame.empty:
-        raise ValueError("frame must contain at least one qualitative example.")
-
     output = _prepare_output(output_path)
-    subset = frame.head(max_rows).reset_index(drop=True)
-    if subset.empty:
-        raise ValueError("frame must contain at least one row to render.")
-
-    fig_height = max(4.0, 3.8 * len(subset))
-    fig, axes = plt.subplots(
-        len(subset),
-        2,
-        figsize=(12.4, fig_height),
-        gridspec_kw={"width_ratios": [1.05, 1.55], "wspace": 0.08, "hspace": 0.38},
+    fig = build_qualitative_panel_figure(
+        frame,
+        title,
+        max_rows=max_rows,
+        thumbnail_size=thumbnail_size,
+        text_width=text_width,
+        ncols=ncols,
     )
-    axes = np.atleast_2d(axes)
-    for axis_row, (_, row) in zip(axes, subset.iterrows(), strict=True):
-        thumbnail = _load_thumbnail(row["file_path"], thumbnail_size=thumbnail_size)
-        axis_row[0].imshow(thumbnail)
-        axis_row[0].set_aspect("equal")
-        axis_row[0].axis("off")
-
-        axis_row[1].axis("off")
-        axis_row[1].set_xlim(0.0, 1.0)
-        axis_row[1].set_ylim(0.0, 1.0)
-        axis_row[1].text(
-            0.0,
-            1.0,
-            "\n".join(_format_panel_lines(row, text_width=text_width)),
-            va="top",
-            ha="left",
-            fontsize=10,
-        )
-
-    fig.suptitle(title, y=0.995)
-    fig.tight_layout(rect=(0.0, 0.0, 1.0, 0.985))
     fig.savefig(output, bbox_inches="tight")
     plt.close(fig)

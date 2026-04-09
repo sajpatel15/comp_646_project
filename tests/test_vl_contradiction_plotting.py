@@ -20,6 +20,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from vl_contradiction.plotting import (  # noqa: E402
+    build_qualitative_panel_figure,
+    resolve_figure_output,
     save_grouped_comparison_chart,
     save_qualitative_panel,
     save_per_family_accuracy_heatmap,
@@ -196,6 +198,12 @@ class PlottingTests(unittest.TestCase):
             self.assertTrue(output_path.exists())
             self.assertGreater(output_path.stat().st_size, 0)
 
+    def test_resolve_figure_output_builds_nested_paths(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output_path = resolve_figure_output(tmpdir, "comparison", "overall.png")
+            self.assertEqual(Path(tmpdir) / "comparison" / "overall.png", output_path)
+            self.assertTrue(output_path.parent.exists())
+
     def test_save_qualitative_panel_pads_thumbnails_and_renders_metadata(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             tmpdir_path = Path(tmpdir)
@@ -215,7 +223,7 @@ class PlottingTests(unittest.TestCase):
                         "pred_label": "contradiction",
                         "correct": True,
                         "edit_family": "family-a",
-                        "confidence": 0.91,
+                        "confidence": 0.91999,
                         "raw_score": 1.22,
                         "rationale": "The model matched the contradiction target.",
                         "source_caption": "Source caption 0 with enough detail to wrap cleanly.",
@@ -270,8 +278,77 @@ class PlottingTests(unittest.TestCase):
             self.assertIn("True:", text_content)
             self.assertIn("Pred:", text_content)
             self.assertIn("Correct:", text_content)
+            self.assertIn("Confidence: 0.9199", text_content)
+            self.assertIn("Raw score: 1.2200", text_content)
             self.assertIn("Source:", text_content)
             self.assertIn("Edited:", text_content)
+            self.assertNotIn("Rationale:", text_content)
+            self.assertNotIn("Sample:", text_content)
+            self.assertNotIn("Model:", text_content)
+            self.assertNotIn("Stage:", text_content)
+            self.assertNotIn("Family:", text_content)
+
+    def test_build_qualitative_panel_figure_uses_four_across_layout(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmpdir_path = Path(tmpdir)
+            image_path = tmpdir_path / "a.png"
+            self._write_image(image_path, 180, 260, (255, 0, 0))
+
+            frame = pd.DataFrame(
+                [
+                    {
+                        "sample_id": f"sample-{index}",
+                        "label": "contradiction" if index % 2 == 0 else "entailment",
+                        "pred_label": "contradiction",
+                        "correct": index % 2 == 0,
+                        "confidence": 0.91999,
+                        "raw_score": 1.22,
+                        "rationale": "This text should not appear.",
+                        "source_caption": f"Source caption {index}",
+                        "edited_caption": f"Edited caption {index}",
+                        "file_path": str(image_path),
+                    }
+                    for index in range(4)
+                ]
+            )
+
+            fig = build_qualitative_panel_figure(frame, "Synthetic Panel", max_rows=4)
+            try:
+                image_axes = [axis for axis in fig.axes if axis.images]
+                self.assertEqual(4, len(image_axes))
+                x_positions = sorted(round(axis.get_position().x0, 3) for axis in image_axes)
+                self.assertEqual(4, len(set(x_positions)))
+                y_positions = {round(axis.get_position().y0, 3) for axis in image_axes}
+                self.assertEqual(1, len(y_positions))
+            finally:
+                plt.close(fig)
+
+    def test_save_qualitative_panel_does_not_call_tight_layout(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmpdir_path = Path(tmpdir)
+            image_path = tmpdir_path / "a.png"
+            self._write_image(image_path, 180, 260, (255, 0, 0))
+            frame = pd.DataFrame(
+                [
+                    {
+                        "sample_id": "sample-0",
+                        "label": "contradiction",
+                        "pred_label": "contradiction",
+                        "correct": True,
+                        "confidence": 0.91999,
+                        "raw_score": 1.22,
+                        "source_caption": "Source caption 0",
+                        "edited_caption": "Edited caption 0",
+                        "file_path": str(image_path),
+                    }
+                ]
+            )
+
+            with mock.patch("matplotlib.figure.Figure.tight_layout") as tight_layout:
+                output_path = tmpdir_path / "panel.png"
+                save_qualitative_panel(frame, output_path, "Synthetic Panel", max_rows=1)
+                self.assertTrue(output_path.exists())
+                tight_layout.assert_not_called()
 
     def test_save_grouped_comparison_chart_writes_nonempty_image(self) -> None:
         frame = pd.DataFrame(

@@ -34,15 +34,15 @@ class PerformanceResolutionTests(unittest.TestCase):
                 config.performance,
                 device=torch.device("cuda"),
                 is_colab=True,
-                cache_root=PROJECT_ROOT / "artifacts",
+                cache_root=PROJECT_ROOT,
             )
 
         self.assertEqual("t4", profile.name)
         self.assertEqual("fp16", profile.qwen_precision)
         self.assertEqual("fp16", profile.training_amp_precision)
         self.assertEqual(4, profile.qwen_batch_size)
-        self.assertEqual("scratch_then_sync", profile.qwen_cache_mode)
-        self.assertEqual(Path("/content/comp646_scratch"), profile.scratch_root)
+        self.assertEqual("direct", profile.qwen_cache_mode)
+        self.assertEqual(PROJECT_ROOT / "artifacts" / ".scratch", profile.scratch_root)
 
     def test_t4_training_amp_precision_does_not_drift_to_bf16_when_probe_is_true(self) -> None:
         config = load_config(PROJECT_ROOT / "configs" / "default.yaml")
@@ -60,7 +60,7 @@ class PerformanceResolutionTests(unittest.TestCase):
                 config.performance,
                 device=torch.device("cuda"),
                 is_colab=True,
-                cache_root=PROJECT_ROOT / "artifacts",
+                cache_root=PROJECT_ROOT,
             )
 
         self.assertTrue(profile.amp_training)
@@ -83,7 +83,7 @@ class PerformanceResolutionTests(unittest.TestCase):
                 config.performance,
                 device=torch.device("cuda"),
                 is_colab=True,
-                cache_root=PROJECT_ROOT / "artifacts",
+                cache_root=PROJECT_ROOT,
             )
 
         self.assertEqual("h100", profile.name)
@@ -106,7 +106,7 @@ class PerformanceResolutionTests(unittest.TestCase):
                 config.performance,
                 device=torch.device("cuda"),
                 is_colab=True,
-                cache_root=PROJECT_ROOT / "artifacts",
+                cache_root=PROJECT_ROOT,
             )
 
         self.assertEqual("4bit", profile.qwen_precision)
@@ -136,7 +136,7 @@ class PerformanceResolutionTests(unittest.TestCase):
         self.assertEqual(PROJECT_ROOT / "artifacts" / "datasets" / "coco2017", runtime.dataset_root)
         self.assertEqual(PROJECT_ROOT / "artifacts" / "benchmark", runtime.benchmark_root)
         self.assertEqual(PROJECT_ROOT / "artifacts" / "metrics", runtime.metrics_root)
-        self.assertEqual(Path("/content/comp646_scratch") / "qwen", runtime.qwen_scratch_root)
+        self.assertEqual(PROJECT_ROOT / "artifacts" / ".scratch" / "qwen", runtime.qwen_scratch_root)
 
 
 if __name__ == "__main__":

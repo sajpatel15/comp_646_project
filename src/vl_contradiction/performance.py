@@ -178,6 +178,8 @@ def resolve_performance_profile(
     )
 
     scratch_root = Path(config.colab_scratch_root).expanduser() if is_colab else cache_root / ".scratch"
+    if not scratch_root.is_absolute():
+        scratch_root = cache_root / scratch_root
 
     return ResolvedPerformanceProfile(
         name=profile_name,
