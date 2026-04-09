@@ -15,10 +15,10 @@ paths:
 data:
   prototype_families: 1200
   midscale_families: 4000
-  final_families: 6000
+  final_families: 8000
   split_ratio: [0.7, 0.15, 0.15]
   audit_samples_per_family: 25
-  qwen_subset_size: 600
+  qwen_subset_size: 1000
   image_splits: ["val"]
 
 model:
@@ -34,7 +34,7 @@ training:
   num_workers: 2
   device: "auto"
   log_every_epoch: true
-  selection_metric: "macro_f1"
+  selection_metric: "accuracy"
   clip_batch_size: 16
   joint_feature_batch_size: 16
   token_feature_batch_size: 8
