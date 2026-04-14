@@ -22,6 +22,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 from vl_contradiction.plotting import (  # noqa: E402
     build_qualitative_panel_figure,
     resolve_figure_output,
+    save_benchmark_spot_checks,
     save_grouped_comparison_chart,
     save_qualitative_panel,
     save_per_family_accuracy_heatmap,
@@ -323,6 +324,67 @@ class PlottingTests(unittest.TestCase):
             finally:
                 plt.close(fig)
 
+    def test_build_qualitative_panel_figure_remaps_colab_image_paths(self) -> None:
+        temp_root = PROJECT_ROOT / ".codex_tmp"
+        temp_root.mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=temp_root) as tmpdir:
+            tmpdir_path = Path(tmpdir)
+            image_path = tmpdir_path / "mapped.png"
+            self._write_image(image_path, 180, 260, (0, 128, 255))
+            colab_path = Path("/content/project") / image_path.relative_to(PROJECT_ROOT)
+
+            frame = pd.DataFrame(
+                [
+                    {
+                        "sample_id": "sample-0",
+                        "label": "entailment",
+                        "source_caption": "Source caption 0",
+                        "edited_caption": "Edited caption 0",
+                        "file_path": str(colab_path),
+                    }
+                ]
+            )
+
+            fig = build_qualitative_panel_figure(frame, "Synthetic Panel", max_rows=1)
+            try:
+                image_axes = [axis for axis in fig.axes if axis.images]
+                self.assertEqual(1, len(image_axes))
+                image_array = np.asarray(image_axes[0].images[0].get_array())
+                self.assertLess(float(image_array.mean()), 254.0)
+            finally:
+                plt.close(fig)
+
+    def test_build_qualitative_panel_figure_finds_dataset_file_by_filename(self) -> None:
+        dataset_root = PROJECT_ROOT / "artifacts" / "datasets"
+        dataset_root.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=dataset_root) as tmpdir:
+            image_dir = Path(tmpdir) / "val2017"
+            image_dir.mkdir(parents=True, exist_ok=True)
+            image_path = image_dir / "000000999999.jpg"
+            self._write_image(image_path, 180, 260, (255, 128, 0))
+            colab_path = Path("/content/project/artifacts/datasets/coco2017/val2017/000000999999.jpg")
+
+            frame = pd.DataFrame(
+                [
+                    {
+                        "sample_id": "sample-0",
+                        "label": "entailment",
+                        "source_caption": "Source caption 0",
+                        "edited_caption": "Edited caption 0",
+                        "file_path": str(colab_path),
+                    }
+                ]
+            )
+
+            fig = build_qualitative_panel_figure(frame, "Synthetic Panel", max_rows=1)
+            try:
+                image_axes = [axis for axis in fig.axes if axis.images]
+                self.assertEqual(1, len(image_axes))
+                image_array = np.asarray(image_axes[0].images[0].get_array())
+                self.assertLess(float(image_array.mean()), 254.0)
+            finally:
+                plt.close(fig)
+
     def test_save_qualitative_panel_does_not_call_tight_layout(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             tmpdir_path = Path(tmpdir)
@@ -349,6 +411,46 @@ class PlottingTests(unittest.TestCase):
                 save_qualitative_panel(frame, output_path, "Synthetic Panel", max_rows=1)
                 self.assertTrue(output_path.exists())
                 tight_layout.assert_not_called()
+
+    def test_save_benchmark_spot_checks_writes_images_and_manifest(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmpdir_path = Path(tmpdir)
+            image_paths: list[Path] = []
+            for index in range(5):
+                image_path = tmpdir_path / f"image_{index}.png"
+                self._write_image(image_path, 180 + index, 260, (255, 0, 0))
+                image_paths.append(image_path)
+
+            rows: list[dict[str, object]] = []
+            for index, image_path in enumerate(image_paths):
+                for label in ("entailment", "contradiction"):
+                    rows.append(
+                        {
+                            "sample_id": f"sample-{index}-{label}",
+                            "family_id": f"family-{index}",
+                            "image_id": 1000 + index,
+                            "label": label,
+                            "source_caption": f"Source caption {index}",
+                            "edited_caption": f"Edited caption {index} {label}",
+                            "file_path": str(image_path),
+                        }
+                    )
+            frame = pd.DataFrame(rows)
+
+            output_dir = tmpdir_path / "benchmark"
+            manifest = save_benchmark_spot_checks(
+                frame,
+                output_dir,
+                sample_count=5,
+                seed=7,
+                manifest_name="benchmark_spot_checks_test.csv",
+            )
+
+            self.assertEqual(10, len(manifest))
+            self.assertEqual(5, manifest["image_id"].nunique())
+            self.assertTrue((output_dir / "benchmark_spot_checks_test.csv").exists())
+            self.assertEqual(5, len(list(output_dir.glob("benchmark_spot_check_*.png"))))
+            self.assertIn("spot_check_png", manifest.columns)
 
     def test_save_grouped_comparison_chart_writes_nonempty_image(self) -> None:
         frame = pd.DataFrame(

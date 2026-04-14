@@ -25,6 +25,47 @@ LABEL_PALETTE = {
     "contradiction": "#c44e52",
     "entailment": "#4c72b0",
 }
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+COLAB_PROJECT_ROOT = Path("/content/project")
+DATASET_ROOT = PROJECT_ROOT / "artifacts" / "datasets"
+_IMAGE_PATH_CACHE: dict[str, Path] = {}
+
+
+def _resolve_image_path(image_path: str | Path) -> Path:
+    candidate = Path(image_path)
+    cache_key = str(candidate)
+    if cache_key in _IMAGE_PATH_CACHE and _IMAGE_PATH_CACHE[cache_key].exists():
+        return _IMAGE_PATH_CACHE[cache_key]
+    if candidate.exists():
+        _IMAGE_PATH_CACHE[cache_key] = candidate
+        return candidate
+    try:
+        relative_path = candidate.relative_to(COLAB_PROJECT_ROOT)
+    except ValueError:
+        if candidate.is_absolute():
+            if DATASET_ROOT.exists() and candidate.name:
+                matches = list(DATASET_ROOT.rglob(candidate.name))
+                if matches:
+                    preferred = next((match for match in matches if match.parent.name == candidate.parent.name), matches[0])
+                    _IMAGE_PATH_CACHE[cache_key] = preferred
+                    return preferred
+            return candidate
+        remapped = PROJECT_ROOT / candidate
+        if remapped.exists():
+            _IMAGE_PATH_CACHE[cache_key] = remapped
+            return remapped
+        return candidate
+    remapped = PROJECT_ROOT / relative_path
+    if remapped.exists():
+        _IMAGE_PATH_CACHE[cache_key] = remapped
+        return remapped
+    if DATASET_ROOT.exists() and candidate.name:
+        matches = list(DATASET_ROOT.rglob(candidate.name))
+        if matches:
+            preferred = next((match for match in matches if match.parent.name == candidate.parent.name), matches[0])
+            _IMAGE_PATH_CACHE[cache_key] = preferred
+            return preferred
+    return candidate
 
 
 def _prepare_output(path: str | Path) -> Path:
@@ -391,7 +432,7 @@ def save_reliability_diagram(bin_centers: np.ndarray, bin_accuracy: np.ndarray, 
 def _load_thumbnail(image_path: str | Path, thumbnail_size: tuple[int, int]) -> Image.Image:
     size = tuple(int(dimension) for dimension in thumbnail_size)
     try:
-        image = Image.open(image_path).convert("RGB")
+        image = Image.open(_resolve_image_path(image_path)).convert("RGB")
     except Exception:  # pragma: no cover - defensive fallback for bad paths/files
         return Image.new("RGB", size, color="white")
     contained = ImageOps.contain(image, size, method=Image.Resampling.LANCZOS)
@@ -468,8 +509,8 @@ def build_qualitative_panel_figure(
     nrows = int(math.ceil(len(subset) / ncols))
     height_ratios: list[float] = []
     for _ in range(nrows):
-        height_ratios.extend([1.0, 0.60])
-    fig = plt.figure(figsize=(2.85 * ncols, 3.55 * nrows + 0.25))
+        height_ratios.extend([1.0, 0.82])
+    fig = plt.figure(figsize=(2.85 * ncols, 4.20 * nrows + 0.30))
     grid = fig.add_gridspec(
         nrows * 2,
         ncols,
@@ -492,12 +533,12 @@ def build_qualitative_panel_figure(
             "\n".join(_format_panel_lines(row, text_width=text_width)),
             va="top",
             ha="left",
-            fontsize=8.5,
+            fontsize=7.8,
             transform=text_ax.transAxes,
         )
 
     fig.suptitle(title, y=0.965)
-    fig.subplots_adjust(left=0.03, right=0.99, bottom=0.04, top=0.86, wspace=0.04, hspace=0.02)
+    fig.subplots_adjust(left=0.03, right=0.99, bottom=0.04, top=0.88, wspace=0.05, hspace=0.06)
     return fig
 
 
@@ -522,3 +563,44 @@ def save_qualitative_panel(
     )
     fig.savefig(output, bbox_inches="tight")
     plt.close(fig)
+
+
+def save_benchmark_spot_checks(
+    frame: pd.DataFrame,
+    output_dir: str | Path,
+    *,
+    sample_count: int = 5,
+    seed: int = 42,
+    manifest_name: str = "benchmark_spot_checks.csv",
+) -> pd.DataFrame:
+    if frame.empty:
+        raise ValueError("frame must contain at least one benchmark row.")
+
+    output_root = Path(output_dir)
+    output_root.mkdir(parents=True, exist_ok=True)
+
+    key_column = "image_id" if "image_id" in frame.columns else "file_path"
+    representative_rows = frame.drop_duplicates(subset=[key_column]).copy()
+    if representative_rows.empty:
+        raise ValueError("frame must contain at least one unique benchmark image.")
+
+    selection = representative_rows.sample(min(sample_count, len(representative_rows)), random_state=seed).reset_index(drop=True)
+    output_map: dict[object, str] = {}
+    for index, (_, row) in enumerate(selection.iterrows(), start=1):
+        output_path = output_root / f"benchmark_spot_check_{index:02d}.png"
+        output_map[row[key_column]] = str(output_path)
+        save_qualitative_panel(
+            pd.DataFrame([row]),
+            output_path,
+            f"Benchmark Example {index}",
+            max_rows=1,
+            thumbnail_size=(360, 360),
+            text_width=46,
+            ncols=1,
+        )
+
+    manifest = frame.loc[frame[key_column].isin(selection[key_column])].copy()
+    manifest["spot_check_png"] = manifest[key_column].map(output_map)
+    manifest_output = _prepare_output(output_root / manifest_name)
+    manifest.to_csv(manifest_output, index=False)
+    return manifest

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from collections import Counter
+from collections import Counter, deque
 from dataclasses import dataclass
 from typing import Any
 
@@ -608,11 +608,33 @@ def sample_comparison_subset(records: pd.DataFrame, subset_size: int, seed: int)
     """Draw a fixed stratified subset for apples-to-apples model comparison."""
 
     filtered = records.loc[records["label"].isin(CLASS_ORDER)].copy()
-    grouped = filtered.groupby(["label", "edit_family"], group_keys=False)
-    target_per_group = max(subset_size // max(grouped.ngroups, 1), 1)
-    sampled = grouped.apply(lambda frame: frame.sample(min(len(frame), target_per_group), random_state=seed))
-    if len(sampled) > subset_size:
-        sampled = sampled.sample(subset_size, random_state=seed)
+    if filtered.empty or subset_size <= 0:
+        return filtered.sort_values("sample_id").reset_index(drop=True)
+    if subset_size >= len(filtered):
+        return filtered.sort_values("sample_id").reset_index(drop=True)
+
+    grouped_frames = list(filtered.groupby(["label", "edit_family"], sort=True))
+    target_per_group = max(subset_size // max(len(grouped_frames), 1), 1)
+    selected_indices: list[int] = []
+    leftover_indices_by_group: list[deque[int]] = []
+
+    for group_offset, (_, frame) in enumerate(grouped_frames):
+        shuffled = frame.sample(frac=1.0, random_state=seed + group_offset)
+        base_count = min(len(shuffled), target_per_group)
+        selected_indices.extend(shuffled.index[:base_count].tolist())
+        leftover_indices_by_group.append(deque(shuffled.index[base_count:].tolist()))
+
+    remaining = subset_size - len(selected_indices)
+    while remaining > 0 and any(leftover_indices_by_group):
+        for leftover_indices in leftover_indices_by_group:
+            if remaining <= 0:
+                break
+            if not leftover_indices:
+                continue
+            selected_indices.append(leftover_indices.popleft())
+            remaining -= 1
+
+    sampled = filtered.loc[selected_indices]
     return sampled.sort_values("sample_id").reset_index(drop=True)
 
 

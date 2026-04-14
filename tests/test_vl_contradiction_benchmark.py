@@ -16,6 +16,7 @@ from vl_contradiction.benchmark import (  # noqa: E402
     _normalize_caption,
     _object_contradiction,
     build_benchmark,
+    sample_comparison_subset,
 )
 
 
@@ -90,6 +91,61 @@ class BenchmarkRuleTests(unittest.TestCase):
         self.assertEqual(2, benchmark.loc[benchmark["edit_family"] == "contradiction_object"].shape[0])
         self.assertEqual({"contradiction", "entailment"}, set(benchmark["label"]))
         self.assertTrue(bool(coverage["meets_target"].all()))
+
+    def test_sample_comparison_subset_returns_full_split_when_target_exceeds_rows(self) -> None:
+        rows = []
+        edit_families = [
+            ("entailment", "entailment_synonym", 324),
+            ("contradiction", "contradiction_action", 81),
+            ("contradiction", "contradiction_attribute", 81),
+            ("contradiction", "contradiction_count", 81),
+            ("contradiction", "contradiction_object", 81),
+        ]
+        for label, edit_family, count in edit_families:
+            for index in range(count):
+                rows.append(
+                    {
+                        "sample_id": f"{edit_family}-{index:03d}",
+                        "label": label,
+                        "edit_family": edit_family,
+                    }
+                )
+        frame = pd.DataFrame(rows)
+
+        sampled = sample_comparison_subset(frame, subset_size=1000, seed=7)
+
+        self.assertEqual(648, len(sampled))
+        self.assertEqual(set(frame["sample_id"]), set(sampled["sample_id"]))
+
+    def test_sample_comparison_subset_backfills_remaining_quota_from_large_groups(self) -> None:
+        rows = []
+        edit_families = [
+            ("entailment", "entailment_synonym", 250),
+            ("contradiction", "contradiction_action", 50),
+            ("contradiction", "contradiction_attribute", 50),
+            ("contradiction", "contradiction_count", 50),
+            ("contradiction", "contradiction_object", 50),
+        ]
+        for label, edit_family, count in edit_families:
+            for index in range(count):
+                rows.append(
+                    {
+                        "sample_id": f"{edit_family}-{index:03d}",
+                        "label": label,
+                        "edit_family": edit_family,
+                    }
+                )
+        frame = pd.DataFrame(rows)
+
+        sampled = sample_comparison_subset(frame, subset_size=300, seed=11)
+        counts = sampled.groupby(["label", "edit_family"]).size()
+
+        self.assertEqual(300, len(sampled))
+        self.assertEqual(100, int(counts.loc[("entailment", "entailment_synonym")]))
+        self.assertEqual(50, int(counts.loc[("contradiction", "contradiction_action")]))
+        self.assertEqual(50, int(counts.loc[("contradiction", "contradiction_attribute")]))
+        self.assertEqual(50, int(counts.loc[("contradiction", "contradiction_count")]))
+        self.assertEqual(50, int(counts.loc[("contradiction", "contradiction_object")]))
 
 
 if __name__ == "__main__":
