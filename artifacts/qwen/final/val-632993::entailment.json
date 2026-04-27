@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-632993::entailment",
-  "label": "entailment",
-  "pred_label": "contradiction",
-  "rationale": "the caption mentions 'bicycles parked next to each other' while the image shows only one bicycle with a cat behind it",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption mentions 'bicycles parked next to each other' while the image shows only one bicycle with a cat behind it\"}",
-  "runtime_ms": 621.2562165714287
-}

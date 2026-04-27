@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-674604::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the person is not lifting the stool with their feet, but sitting on it. the person is not dropping the cell phone, but holding it.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the person is not lifting the stool with their feet, but sitting on it. the person is not dropping the cell phone, but holding it.\"}",
-  "runtime_ms": 607.6329850833417
-}

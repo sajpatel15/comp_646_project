@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-494506::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "A person is standing on the beach holding a kite. The kite is colorful and appears to be in motion, suggesting it is being flown by the person. This aligns with the description of 'One person on a beach flying a kite'.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"A person is standing on the beach holding a kite. The kite is colorful and appears to be in motion, suggesting it is being flown by the person. This aligns with the description of 'One person on a beach flying a kite'.\"}",
-  "runtime_ms": 614.01486545833
-}

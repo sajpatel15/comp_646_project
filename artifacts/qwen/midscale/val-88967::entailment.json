@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-88967::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The caption describes individuals riding and pushing tricycle carriages, which is consistent with the image where people are seen riding and pushing tricycles on the street.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes individuals riding and pushing tricycle carriages, which is consistent with the image where people are seen riding and pushing tricycles on the street.\"}",
-  "runtime_ms": 601.3073884285924
-}

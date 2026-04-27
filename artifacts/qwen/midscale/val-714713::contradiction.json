@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-714713::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the caption describes two people playing a video game in a living room, which is consistent with the image where two people are playing a video game in a living room.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes two people playing a video game in a living room, which is consistent with the image where two people are playing a video game in a living room.\"}",
-  "runtime_ms": 865.4094801666664
-}

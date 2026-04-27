@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-322775::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "contradiction\nThe given caption states that the people are sleeping, which is contradictory to the image where they are actively preparing food.",
-  "raw_output": "contradiction\nThe given caption states that the people are sleeping, which is contradictory to the image where they are actively preparing food.",
-  "runtime_ms": 619.7854021500007
-}

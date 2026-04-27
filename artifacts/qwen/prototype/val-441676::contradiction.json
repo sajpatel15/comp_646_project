@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-441676::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the skateboard is not in the air",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the skateboard is not in the air\"}",
-  "runtime_ms": 538.4679950499958
-}

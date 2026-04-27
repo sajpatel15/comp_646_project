@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-415974::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "A person in a wetsuit is riding a surfboard on top of a wave, which implies that they are pushing the wave forward as they ride it.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"A person in a wetsuit is riding a surfboard on top of a wave, which implies that they are pushing the wave forward as they ride it.\"}",
-  "runtime_ms": 624.2333990357208
-}

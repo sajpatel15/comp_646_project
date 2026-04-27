@@ -557,19 +557,45 @@ def summarize_family_coverage(candidate_packs: list[_CandidatePack], records: pd
     return pd.DataFrame(rows).sort_values(["label", "edit_family"]).reset_index(drop=True)
 
 
-def _assign_splits(family_ids: list[str], split_ratio: list[float], seed: int) -> dict[str, str]:
+def _assign_splits(family_manifest: pd.DataFrame, split_ratio: list[float], seed: int) -> dict[str, str]:
+    split_names = ["train", "val", "test"]
+    if family_manifest.empty:
+        return {}
+
+    unique_families = family_manifest[["family_id", "image_id"]].drop_duplicates().reset_index(drop=True)
+    image_groups = (
+        unique_families.groupby("image_id", sort=False)["family_id"]
+        .agg(lambda values: sorted(values.tolist()))
+        .reset_index()
+    )
+    image_groups["family_count"] = image_groups["family_id"].str.len()
+
     rng = np.random.default_rng(seed)
-    shuffled = family_ids.copy()
-    rng.shuffle(shuffled)
-    train_end = int(len(shuffled) * split_ratio[0])
-    val_end = train_end + int(len(shuffled) * split_ratio[1])
+    image_groups["_tie_breaker"] = rng.permutation(len(image_groups))
+    image_groups = image_groups.sort_values(
+        by=["family_count", "_tie_breaker"],
+        ascending=[False, True],
+        kind="mergesort",
+    ).reset_index(drop=True)
+
+    total_families = int(unique_families["family_id"].nunique())
+    target_counts = {
+        split_name: total_families * float(split_ratio[index])
+        for index, split_name in enumerate(split_names)
+    }
+    assigned_counts = {split_name: 0 for split_name in split_names}
     split_lookup: dict[str, str] = {}
-    for family_id in shuffled[:train_end]:
-        split_lookup[family_id] = "train"
-    for family_id in shuffled[train_end:val_end]:
-        split_lookup[family_id] = "val"
-    for family_id in shuffled[val_end:]:
-        split_lookup[family_id] = "test"
+
+    for _, row in image_groups.iterrows():
+        deficits = {
+            split_name: target_counts[split_name] - assigned_counts[split_name]
+            for split_name in split_names
+        }
+        chosen_split = max(split_names, key=lambda split_name: (deficits[split_name], -split_names.index(split_name)))
+        for family_id in row["family_id"]:
+            split_lookup[str(family_id)] = chosen_split
+        assigned_counts[chosen_split] += int(row["family_count"])
+
     return split_lookup
 
 
@@ -595,9 +621,10 @@ def build_benchmark(
         print(coverage_summary)
         return BenchmarkBuildResult(records=benchmark, family_manifest=family_manifest, coverage_summary=coverage_summary)
 
-    split_lookup = _assign_splits(sorted(benchmark["family_id"].unique().tolist()), split_ratio, seed)
+    family_manifest = benchmark[["family_id", "image_id"]].drop_duplicates().sort_values("family_id")
+    split_lookup = _assign_splits(family_manifest, split_ratio, seed)
     benchmark["split"] = benchmark["family_id"].map(split_lookup)
-    family_manifest = benchmark[["family_id", "image_id", "split"]].drop_duplicates().sort_values("family_id")
+    family_manifest = family_manifest.assign(split=family_manifest["family_id"].map(split_lookup))
     print(f"Built {len(benchmark)} benchmark rows across {family_manifest.shape[0]} families")
     print("Family coverage summary")
     print(coverage_summary)

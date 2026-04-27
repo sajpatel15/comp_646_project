@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-659649::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption mentions 'holding skis', but the image shows snowboards, not skis. This is a clear contradiction in the objects being described.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption mentions 'holding skis', but the image shows snowboards, not skis. This is a clear contradiction in the objects being described.\"}",
-  "runtime_ms": 636.7252236666635
-}

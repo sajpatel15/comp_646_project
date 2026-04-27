@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-818374::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption mentions a 'big cat,' but the image clearly shows a dog, not a cat.",
-  "raw_output": "{\n    \"label\": \"contradiction\",\n    \"rationale\": \"The caption mentions a 'big cat,' but the image clearly shows a dog, not a cat.\"\n}",
-  "runtime_ms": 668.4725540357184
-}

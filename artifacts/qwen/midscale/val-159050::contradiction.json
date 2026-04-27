@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-159050::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "The image shows two people riding horses on a beach, which aligns with the caption's description of one person on horses on a beach readying for a picture.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people riding horses on a beach, which aligns with the caption's description of one person on horses on a beach readying for a picture.\"}",
-  "runtime_ms": 665.3400951666603
-}

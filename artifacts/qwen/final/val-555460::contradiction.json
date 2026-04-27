@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-555460::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "contradiction\nThe given caption states that the group of people is sleeping, which contradicts the information in the image where they are clearly engaged in playing a video game.",
-  "raw_output": "contradiction\nThe given caption states that the group of people is sleeping, which contradicts the information in the image where they are clearly engaged in playing a video game.",
-  "runtime_ms": 645.2441656428585
-}

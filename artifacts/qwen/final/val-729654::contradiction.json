@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-729654::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the two people in the bottom right corner are putting fire on a cake",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the two people in the bottom right corner are putting fire on a cake\"}",
-  "runtime_ms": 714.7083649642809
-}

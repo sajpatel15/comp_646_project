@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-253637::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the caption says several people dropping umbrella's but the image shows people holding umbrellas",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption says several people dropping umbrella's but the image shows people holding umbrellas\"}",
-  "runtime_ms": 671.1753049642733
-}

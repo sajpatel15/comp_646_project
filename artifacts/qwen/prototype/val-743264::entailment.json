@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-743264::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The image shows three people playing tennis on a grass court, which is consistent with the caption's description.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows three people playing tennis on a grass court, which is consistent with the caption's description.\"}",
-  "runtime_ms": 631.5604861500105
-}

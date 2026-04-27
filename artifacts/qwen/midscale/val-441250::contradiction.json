@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-441250::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the bus is small and the people on the motorcycle are small in comparison to the bus.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the bus is small and the people on the motorcycle are small in comparison to the bus.\"}",
-  "runtime_ms": 785.9574092083411
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-113850::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The image shows two people dressed in formal attire, suggesting they are at a wedding reception.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people dressed in formal attire, suggesting they are at a wedding reception.\"}",
-  "runtime_ms": 794.9515945416673
-}

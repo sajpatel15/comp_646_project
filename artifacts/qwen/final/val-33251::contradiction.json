@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-33251::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the caption describes two people riding surfboards on a wave, which is consistent with the image where there are two people on surfboards in the water.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes two people riding surfboards on a wave, which is consistent with the image where there are two people on surfboards in the water.\"}",
-  "runtime_ms": 680.7438916428542
-}

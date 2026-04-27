@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-282748::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "The caption describes a person using a mouse at a computer desk, which is consistent with the image where a person's hands are on a laptop keyboard and a mouse is present on the desk.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a person using a mouse at a computer desk, which is consistent with the image where a person's hands are on a laptop keyboard and a mouse is present on the desk.\"}",
-  "runtime_ms": 644.925874749999
-}

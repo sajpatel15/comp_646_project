@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-450300::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption mentions people sitting around a park and flying kites, but the image shows people standing on a grassy hill and flying a kite in the sky. These two scenarios are different.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption mentions people sitting around a park and flying kites, but the image shows people standing on a grassy hill and flying a kite in the sky. These two scenarios are different.\"}",
-  "runtime_ms": 683.947864392865
-}

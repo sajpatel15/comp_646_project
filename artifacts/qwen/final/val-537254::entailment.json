@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-537254::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "the sofa is grey and the table is made of glass",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the sofa is grey and the table is made of glass\"}",
-  "runtime_ms": 807.8122216428645
-}

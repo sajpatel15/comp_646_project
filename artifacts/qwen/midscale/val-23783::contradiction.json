@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-23783::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "The caption describes a small crowd of people watching the sky, which is consistent with the image where there is indeed a crowd of people gathered in a cemetery watching kites flying in the sky.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a small crowd of people watching the sky, which is consistent with the image where there is indeed a crowd of people gathered in a cemetery watching kites flying in the sky.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
-  "runtime_ms": 674.1371126250044
-}

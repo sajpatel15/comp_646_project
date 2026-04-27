@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-497570::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "contradiction\nThe given caption states that people are sitting around with their luggage at an airport, which contradicts the information provided in the image description where people are walking through an airport with luggage.",
-  "raw_output": "contradiction\nThe given caption states that people are sitting around with their luggage at an airport, which contradicts the information provided in the image description where people are walking through an airport with luggage.",
-  "runtime_ms": 614.01486545833
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-430124::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "A small brown sectional sofa is present in the image with people sitting on it. The caption accurately describes the sofa's color and the presence of people on it.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"A small brown sectional sofa is present in the image with people sitting on it. The caption accurately describes the sofa's color and the presence of people on it.\"}",
-  "runtime_ms": 538.4679950499958
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-779608::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption states that people are sleeping in the grass, but the image shows children playing soccer on a field. These two statements are contradictory.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that people are sleeping in the grass, but the image shows children playing soccer on a field. These two statements are contradictory.\"}",
-  "runtime_ms": 611.3889890833283
-}

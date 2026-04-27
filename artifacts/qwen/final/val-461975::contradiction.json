@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-461975::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The image shows a person at a skate park, not on a street.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The image shows a person at a skate park, not on a street.\"}",
-  "runtime_ms": 683.947864392865
-}

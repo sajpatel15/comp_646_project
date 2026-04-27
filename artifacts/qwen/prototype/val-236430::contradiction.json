@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-236430::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the image shows a person sitting in a chair, not a ghostly image of a man sitting on a bench.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the image shows a person sitting in a chair, not a ghostly image of a man sitting on a bench.\"}",
-  "runtime_ms": 656.2599291999959
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-429262::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the caption says that the people are pushing horses but in the image they are riding horses",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption says that the people are pushing horses but in the image they are riding horses\"}",
-  "runtime_ms": 569.658100458336
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-817383::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "The caption describes a scene where one person is standing in a field with a kite flying above them, which aligns with the image content.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a scene where one person is standing in a field with a kite flying above them, which aligns with the image content.\"}",
-  "runtime_ms": 673.3037584583409
-}

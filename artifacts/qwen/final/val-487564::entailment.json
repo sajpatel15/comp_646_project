@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-487564::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The image shows two men riding bicycles next to a car on a city street, which is consistent with the caption's description.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two men riding bicycles next to a car on a city street, which is consistent with the caption's description.\"}",
-  "runtime_ms": 781.4557178571379
-}

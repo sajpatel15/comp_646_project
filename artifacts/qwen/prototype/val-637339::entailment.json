@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-637339::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The caption describes the presence of a sofa, a television, and a table with two stools in the small room, which is consistent with the image provided.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes the presence of a sofa, a television, and a table with two stools in the small room, which is consistent with the image provided.\"}",
-  "runtime_ms": 644.32791764998
-}

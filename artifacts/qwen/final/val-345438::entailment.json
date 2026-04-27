@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-345438::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The caption describes a person holding large wooden scissors, which is consistent with the image where a hand is holding a pair of scissors with wooden handles.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a person holding large wooden scissors, which is consistent with the image where a hand is holding a pair of scissors with wooden handles.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
-  "runtime_ms": 680.7438916428542
-}

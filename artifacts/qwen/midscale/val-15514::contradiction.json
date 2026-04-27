@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-15514::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the train is not a bus",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the train is not a bus\"}",
-  "runtime_ms": 665.3400951666603
-}

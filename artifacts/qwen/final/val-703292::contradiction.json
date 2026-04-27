@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-703292::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "There is no laptop in the image. The caption mentions a laptop which is not present in the image.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"There is no laptop in the image. The caption mentions a laptop which is not present in the image.\"}",
-  "runtime_ms": 831.7803645357052
-}

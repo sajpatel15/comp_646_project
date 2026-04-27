@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-598603::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The image shows multiple people riding bicycles along a city street, which aligns with the statement that a line of individuals are riding bicycles on the street.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows multiple people riding bicycles along a city street, which aligns with the statement that a line of individuals are riding bicycles on the street.\"}",
-  "runtime_ms": 571.0362761500164
-}

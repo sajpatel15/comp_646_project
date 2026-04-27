@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-221582::entailment",
-  "label": "entailment",
-  "pred_label": "contradiction",
-  "rationale": "the person is not riding a snowboard but standing on it.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the person is not riding a snowboard but standing on it.\"}",
-  "runtime_ms": 716.1018494285664
-}

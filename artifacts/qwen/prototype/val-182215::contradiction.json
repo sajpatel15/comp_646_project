@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-182215::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the couch is blue and the windows have white curtains",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the couch is blue and the windows have white curtains\"}",
-  "runtime_ms": 612.6621215500109
-}

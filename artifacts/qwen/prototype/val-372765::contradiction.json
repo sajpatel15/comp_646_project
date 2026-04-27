@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-372765::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the caption describes two people standing by a stove in a kitchen which is consistent with the image where there are two people standing near a stove in a kitchen setting.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes two people standing by a stove in a kitchen which is consistent with the image where there are two people standing near a stove in a kitchen setting.\"}",
-  "runtime_ms": 574.3628471000193
-}

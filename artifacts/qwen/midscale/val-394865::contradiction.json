@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-394865::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the caption describes a man holding drinks in a bar setting, which is consistent with the image where multiple people are present in a bar environment holding drinks.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a man holding drinks in a bar setting, which is consistent with the image where multiple people are present in a bar environment holding drinks.\"}",
-  "runtime_ms": 657.03945279166
-}

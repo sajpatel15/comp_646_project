@@ -34,7 +34,7 @@ training:
   num_workers: 2
   device: "auto"
   log_every_epoch: true
-  selection_metric: "accuracy"
+  selection_metric: "macro_f1"
   clip_batch_size: 16
   joint_feature_batch_size: 16
   token_feature_batch_size: 8

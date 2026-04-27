@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-762111::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "Both captions describe the presence of a person holding a Wii remote controller near a sofa, which is consistent with each other.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"Both captions describe the presence of a person holding a Wii remote controller near a sofa, which is consistent with each other.\"}",
-  "runtime_ms": 711.0332358333267
-}

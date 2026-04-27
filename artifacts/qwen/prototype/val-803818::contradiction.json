@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-803818::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the caption states that there is one horse walking alone, but in the image there are two horses walking together.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption states that there is one horse walking alone, but in the image there are two horses walking together.\"}",
-  "runtime_ms": 653.4524329000305
-}

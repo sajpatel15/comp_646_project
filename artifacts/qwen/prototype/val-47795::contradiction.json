@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-47795::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the giraffe is in the middle of the picture and there are people around it",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the giraffe is in the middle of the picture and there are people around it\"}",
-  "runtime_ms": 591.8848619000073
-}

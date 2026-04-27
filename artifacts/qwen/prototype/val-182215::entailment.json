@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-182215::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "the caption describes the room accurately as having two windows and a blue sofa",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the room accurately as having two windows and a blue sofa\"}",
-  "runtime_ms": 612.6621215500109
-}

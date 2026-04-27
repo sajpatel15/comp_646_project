@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-528551::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "A person is standing in the snow wearing a blue jacket and holding ski poles, indicating they are skiing or preparing to ski. The presence of skis on the ground further supports this interpretation.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"A person is standing in the snow wearing a blue jacket and holding ski poles, indicating they are skiing or preparing to ski. The presence of skis on the ground further supports this interpretation.\"}",
-  "runtime_ms": 807.8122216428645
-}

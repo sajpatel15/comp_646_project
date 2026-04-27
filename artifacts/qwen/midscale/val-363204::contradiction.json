@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-363204::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption states that one person is standing near the surf line, but the image shows two people standing on the beach, not near the surf line.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that one person is standing near the surf line, but the image shows two people standing on the beach, not near the surf line.\"}",
-  "runtime_ms": 576.6138363750031
-}

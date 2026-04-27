@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-206254::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "A person is sitting on the ground next to a bicycle while another person is talking on a cell phone. The bicycle is lying on its side on the sidewalk, indicating that it has been involved in an accident. The presence of two people and the bicycle suggests that they are assisting the injured bicyclist.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"A person is sitting on the ground next to a bicycle while another person is talking on a cell phone. The bicycle is lying on its side on the sidewalk, indicating that it has been involved in an accident. The presence of two people and the bicycle suggests that they are assisting the injured bicyclist.\"}",
-  "runtime_ms": 649.7239887999967
-}

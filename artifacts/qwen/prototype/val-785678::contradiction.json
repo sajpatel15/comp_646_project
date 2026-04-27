@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-785678::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption mentions a person riding on top of a cow, but the image shows people riding horses, not cows.",
-  "raw_output": "{\n    \"label\": \"contradiction\",\n    \"rationale\": \"The caption mentions a person riding on top of a cow, but the image shows people riding horses, not cows.\"\n}",
-  "runtime_ms": 653.4524329000305
-}

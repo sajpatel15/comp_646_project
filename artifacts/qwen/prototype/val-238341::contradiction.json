@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-238341::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption mentions a cow being ridden, which is not present in the image. The image only shows horses and a rider.",
-  "raw_output": "{\n    \"label\": \"contradiction\",\n    \"rationale\": \"The caption mentions a cow being ridden, which is not present in the image. The image only shows horses and a rider.\"\n}",
-  "runtime_ms": 656.2599291999959
-}

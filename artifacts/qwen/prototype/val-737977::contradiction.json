@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-737977::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "The image shows two people in bunk beds, with one person looking up at the camera. The caption accurately describes this scene as it mentions both people and their position on bunk beds.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people in bunk beds, with one person looking up at the camera. The caption accurately describes this scene as it mentions both people and their position on bunk beds.\"}",
-  "runtime_ms": 631.5604861500105
-}

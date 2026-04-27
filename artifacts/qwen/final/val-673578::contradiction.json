@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-673578::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the caption mentions a 'two ways' sign while the image has a 'one way' sign",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption mentions a 'two ways' sign while the image has a 'one way' sign\"}",
-  "runtime_ms": 606.0224891428528
-}

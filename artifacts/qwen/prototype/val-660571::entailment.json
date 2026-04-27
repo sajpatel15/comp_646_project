@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-660571::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The individuals are indeed floating in the water in the small wooden boat as described in the caption.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The individuals are indeed floating in the water in the small wooden boat as described in the caption.\"}",
-  "runtime_ms": 601.6554484000153
-}

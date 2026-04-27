@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-478001::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the caption mentions people sitting in the snow, but the image shows people standing on rocks with luggage",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption mentions people sitting in the snow, but the image shows people standing on rocks with luggage\"}",
-  "runtime_ms": 785.9574092083411
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-88183::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "the caption describes the television as being embedded in the mirror, which is consistent with the image where the television is mounted on the wall behind the mirror.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the television as being embedded in the mirror, which is consistent with the image where the television is mounted on the wall behind the mirror.\"}",
-  "runtime_ms": 601.3073884285924
-}

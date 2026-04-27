@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-663724::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "The image shows three people standing near a boat on the shore, which aligns with the description of people preparing to launch a boat. The presence of a large boat is also consistent with the image content.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows three people standing near a boat on the shore, which aligns with the description of people preparing to launch a boat. The presence of a large boat is also consistent with the image content.\"}",
-  "runtime_ms": 601.6554484000153
-}

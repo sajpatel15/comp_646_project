@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-386183::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the image shows a man and woman cutting a cake together",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the image shows a man and woman cutting a cake together\"}",
-  "runtime_ms": 621.6832053214277
-}

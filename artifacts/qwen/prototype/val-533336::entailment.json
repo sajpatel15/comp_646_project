@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-533336::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The caption describes a red sofa and a brown chair, which is consistent with the image description of a red couch and a brown chair in a living room setting.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a red sofa and a brown chair, which is consistent with the image description of a red couch and a brown chair in a living room setting.\"}",
-  "runtime_ms": 648.3929867999905
-}

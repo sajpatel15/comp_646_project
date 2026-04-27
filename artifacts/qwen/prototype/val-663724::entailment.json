@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-663724::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The image shows three people standing near a small boat on the water, which aligns with the description of individuals preparing to launch a small boat in a river.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows three people standing near a small boat on the water, which aligns with the description of individuals preparing to launch a small boat in a river.\"}",
-  "runtime_ms": 601.6554484000153
-}

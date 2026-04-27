@@ -9,7 +9,7 @@ This repository builds and evaluates a COCO-derived multimodal contradiction ben
 - Primary workflow notebook: `notebooks/multimodal_contradiction_project.ipynb`
 - Main Python package used by the notebook: `src/vl_contradiction`
 - Config used by the notebook: `configs/default.yaml`
-- Project implementation notes: `IMPLEMENTATION_PLAN.md`
+- Project implementation notes: `docs/implementation_plan.md`
 
 There is also a `src/multimodal_contradiction` tree in the repo. The current notebook imports `vl_contradiction`, so prefer updating `src/vl_contradiction` unless you confirm the other package is still in use.
 

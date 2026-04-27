@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-475764::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "{\"label\": \"entailment\", \"rationale\": \"The caption describes baseball players in action, with one dressed in green running and the others in black looking and reaching towards the ball. This is consistent with the image where a player in a green jersey is running, and another player in a striped uniform is reaching out to catch or throw the ball. The other players are also in black uniforms, observing the play.\", \"image_url\": \"https://i.imgur.com/",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes baseball players in action, with one dressed in green running and the others in black looking and reaching towards the ball. This is consistent with the image where a player in a green jersey is running, and another player in a striped uniform is reaching out to catch or throw the ball. The other players are also in black uniforms, observing the play.\", \"image_url\": \"https://i.imgur.com/",
-  "runtime_ms": 785.9574092083411
-}

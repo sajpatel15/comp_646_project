@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "multimodal-contradiction-project"
 version = "0.1.0"
 description = "COCO-derived multimodal contradiction benchmark and baselines."
-readme = "IMPLEMENTATION_PLAN.md"
+readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
   "accelerate>=1.1.0",

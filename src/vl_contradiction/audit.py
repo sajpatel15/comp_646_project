@@ -8,11 +8,11 @@ import pandas as pd
 def build_audit_sheet(records: pd.DataFrame, per_family: int, seed: int) -> pd.DataFrame:
     """Sample records for manual audit and add reviewer columns."""
 
-    sampled = (
-        records.groupby("edit_family", group_keys=False)
-        .apply(lambda frame: frame.sample(min(len(frame), per_family), random_state=seed))
-        .reset_index(drop=True)
-    )
+    sampled_frames = [
+        frame.sample(min(len(frame), per_family), random_state=seed).copy()
+        for _, frame in records.groupby("edit_family", sort=True)
+    ]
+    sampled = pd.concat(sampled_frames, ignore_index=True) if sampled_frames else records.head(0).copy()
     sampled["reviewed_label"] = ""
     sampled["label_valid"] = ""
     sampled["grammar_ok"] = ""

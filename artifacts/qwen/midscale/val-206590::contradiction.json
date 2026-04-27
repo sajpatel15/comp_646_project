@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-206590::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption states that people are sleeping behind bales of straw, but the image shows people watching a motorcycle race, not sleeping.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that people are sleeping behind bales of straw, but the image shows people watching a motorcycle race, not sleeping.\"}",
-  "runtime_ms": 800.2579649166724
-}

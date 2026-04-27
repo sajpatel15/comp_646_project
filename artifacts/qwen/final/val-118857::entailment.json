@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-118857::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The caption describes individuals standing near a table with open pizza boxes, which is consistent with the image where four women are standing in front of a table with open pizza boxes on it.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes individuals standing near a table with open pizza boxes, which is consistent with the image where four women are standing in front of a table with open pizza boxes on it.\"}",
-  "runtime_ms": 797.2685564642786
-}

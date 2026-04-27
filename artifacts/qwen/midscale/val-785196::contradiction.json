@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-785196::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption describes people pushing on top of a train, which is not consistent with the image where people are on a boat. The image shows people on a boat, not a train.",
-  "raw_output": "{\n    \"label\": \"contradiction\",\n    \"rationale\": \"The caption describes people pushing on top of a train, which is not consistent with the image where people are on a boat. The image shows people on a boat, not a train.\"\n}",
-  "runtime_ms": 611.3889890833283
-}

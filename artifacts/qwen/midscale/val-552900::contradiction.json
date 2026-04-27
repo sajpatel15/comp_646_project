@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-552900::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption states that the person is \"pushing\" the wave, which implies they are actively engaging with the wave to move it. However, in reality, a surfer rides the wave, not pushes it. This action is contradictory to the description given in the caption.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that the person is \\\"pushing\\\" the wave, which implies they are actively engaging with the wave to move it. However, in reality, a surfer rides the wave, not pushes it. This action is contradictory to the description given in the caption.\"}",
-  "runtime_ms": 648.7179205833323
-}

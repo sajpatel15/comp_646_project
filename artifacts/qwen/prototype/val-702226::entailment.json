@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-702226::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The caption describes a group of people posing for a photograph, which is consistent with the image where multiple people are sitting together and smiling. The mention of 'black tie' suggests a formal event, which aligns with the attire of the individuals in the image. Therefore, the caption entails the content of the image.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a group of people posing for a photograph, which is consistent with the image where multiple people are sitting together and smiling. The mention of 'black tie' suggests a formal event, which aligns with the attire of the individuals in the image. Therefore, the caption entails the content of the image.\"}",
-  "runtime_ms": 820.0722485999904
-}

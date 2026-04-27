@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-775815::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The image shows three wine glasses being held together in a toast, which aligns with the caption that individuals are holding up wine glasses to each other.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows three wine glasses being held together in a toast, which aligns with the caption that individuals are holding up wine glasses to each other.\"}",
-  "runtime_ms": 597.7762604642943
-}

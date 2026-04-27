@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-345159::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "the three pictures show the same person snowboarding",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the three pictures show the same person snowboarding\"}",
-  "runtime_ms": 680.7438916428542
-}

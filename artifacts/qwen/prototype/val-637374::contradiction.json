@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-637374::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the caption states that the person is sitting in the ocean, but the image shows a person walking in the water holding a surfboard",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption states that the person is sitting in the ocean, but the image shows a person walking in the water holding a surfboard\"}",
-  "runtime_ms": 644.32791764998
-}

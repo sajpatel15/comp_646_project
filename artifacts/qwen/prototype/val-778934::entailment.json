@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-778934::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The caption describes the image as a black and white photo of three individuals standing, which is consistent with the description of the image provided.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes the image as a black and white photo of three individuals standing, which is consistent with the description of the image provided.\"}",
-  "runtime_ms": 653.4524329000305
-}

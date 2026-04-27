@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-356219::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "The caption describes two people walking on the beach with surfboards, which is consistent with the image where two individuals are seen holding surfboards while walking along the shore.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes two people walking on the beach with surfboards, which is consistent with the image where two individuals are seen holding surfboards while walking along the shore.\"}",
-  "runtime_ms": 576.6138363750031
-}

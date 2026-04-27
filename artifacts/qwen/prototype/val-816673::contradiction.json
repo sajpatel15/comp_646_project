@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-816673::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "contradiction\n\nRationale: The caption states that the person is \"sleeping,\" which contradicts the image where the person is standing in the kitchen. Additionally, the caption mentions a stove, while the image shows a refrigerator, not a stove.",
-  "raw_output": "contradiction\n\nRationale: The caption states that the person is \"sleeping,\" which contradicts the image where the person is standing in the kitchen. Additionally, the caption mentions a stove, while the image shows a refrigerator, not a stove.",
-  "runtime_ms": 653.4524329000305
-}

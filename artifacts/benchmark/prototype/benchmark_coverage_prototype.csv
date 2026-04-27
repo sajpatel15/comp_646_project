@@ -1,6 +1,0 @@
-label,edit_family,candidate_count,selected_count,target_count,meets_target
-contradiction,contradiction_action,1282,300,300,True
-contradiction,contradiction_attribute,386,300,300,True
-contradiction,contradiction_count,873,300,300,True
-contradiction,contradiction_object,678,300,300,True
-entailment,entailment_synonym,2276,1200,1200,True

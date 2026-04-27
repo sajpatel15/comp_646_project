@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-71627::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "contradiction\nThe given caption states that people are sitting across the street at an intersection, which is not consistent with the image description where people are walking on the sidewalk.",
-  "raw_output": "contradiction\nThe given caption states that people are sitting across the street at an intersection, which is not consistent with the image description where people are walking on the sidewalk.",
-  "runtime_ms": 820.0722485999904
-}

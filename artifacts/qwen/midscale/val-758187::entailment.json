@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-758187::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The caption describes a group of people holding frisbees in a field, which is consistent with the image content where four individuals are holding white frisbees in a grassy area.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a group of people holding frisbees in a field, which is consistent with the image content where four individuals are holding white frisbees in a grassy area.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
-  "runtime_ms": 711.0332358333267
-}

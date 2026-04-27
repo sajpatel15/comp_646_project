@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-534371::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the bowl is white not black",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the bowl is white not black\"}",
-  "runtime_ms": 822.5971583749943
-}

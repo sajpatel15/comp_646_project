@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-526274::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption states that two people are putting doughnuts into a bag, while the image shows only one person preparing doughnuts. The action described in the caption does not match the actual activity in the image.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that two people are putting doughnuts into a bag, while the image shows only one person preparing doughnuts. The action described in the caption does not match the actual activity in the image.\"}",
-  "runtime_ms": 611.3906013500127
-}

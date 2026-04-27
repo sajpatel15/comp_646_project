@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-459642::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the woman is not sitting on top of the bench but on the couch",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the woman is not sitting on top of the bench but on the couch\"}",
-  "runtime_ms": 683.947864392865
-}

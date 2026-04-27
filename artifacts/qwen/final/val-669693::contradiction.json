@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-669693::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the caption says that there are many people sitting around but the image shows people walking in the airport",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption says that there are many people sitting around but the image shows people walking in the airport\"}",
-  "runtime_ms": 606.0224891428528
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-71434::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "contradiction\nThe given caption states that many people are gathered on the platforms of a bus station, which is incorrect as the image shows a train station with people waiting for a train.",
-  "raw_output": "contradiction\nThe given caption states that many people are gathered on the platforms of a bus station, which is incorrect as the image shows a train station with people waiting for a train.",
-  "runtime_ms": 865.4094801666664
-}

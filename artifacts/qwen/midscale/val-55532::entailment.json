@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-55532::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The caption describes three people riding horses on the beach with waves coming in, which is consistent with the image where three people are seen riding horses on the beach with waves in the background.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes three people riding horses on the beach with waves coming in, which is consistent with the image where three people are seen riding horses on the beach with waves in the background.\"}",
-  "runtime_ms": 648.7179205833323
-}

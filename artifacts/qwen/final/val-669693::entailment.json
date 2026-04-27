@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-669693::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "the image shows a busy airport with people walking around",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the image shows a busy airport with people walking around\"}",
-  "runtime_ms": 606.0224891428528
-}

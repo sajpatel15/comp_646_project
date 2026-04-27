@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-635542::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption states that the ball is blue, but the image shows a red ball.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that the ball is blue, but the image shows a red ball.\"}",
-  "runtime_ms": 644.32791764998
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-204946::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "the person in the picture is talking on a cell phone while sitting next to a bike that is laying on its side on the sidewalk.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the person in the picture is talking on a cell phone while sitting next to a bike that is laying on its side on the sidewalk.\"}",
-  "runtime_ms": 649.7239887999967
-}

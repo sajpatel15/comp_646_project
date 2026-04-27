@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-162703::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The caption describes two men standing in front of a flat screen television, which is consistent with the image where two men are standing in front of a TV playing a video game.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes two men standing in front of a flat screen television, which is consistent with the image where two men are standing in front of a TV playing a video game.\"}",
-  "runtime_ms": 683.6538839285628
-}

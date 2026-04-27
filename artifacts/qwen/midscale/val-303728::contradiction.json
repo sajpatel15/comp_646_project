@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-303728::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption mentions an old person, but the image shows a young child skateboarding. The age of the person is incorrect in the caption.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption mentions an old person, but the image shows a young child skateboarding. The age of the person is incorrect in the caption.\"}",
-  "runtime_ms": 632.739540250005
-}

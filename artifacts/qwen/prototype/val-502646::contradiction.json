@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-502646::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption states that the frisbee is blue, but the image shows a red frisbee.",
-  "raw_output": "{\n  \"label\": \"contradiction\",\n  \"rationale\": \"The caption states that the frisbee is blue, but the image shows a red frisbee.\"\n}",
-  "runtime_ms": 611.3906013500127
-}

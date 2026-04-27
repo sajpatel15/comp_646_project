@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-254727::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption states that two people's hands are holding the doughnut, but the image shows only one hand holding the doughnut. This is a contradiction.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that two people's hands are holding the doughnut, but the image shows only one hand holding the doughnut. This is a contradiction.\"}",
-  "runtime_ms": 671.1753049642733
-}

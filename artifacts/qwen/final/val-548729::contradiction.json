@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-548729::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the image shows two people reaching for a container on a counter",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the image shows two people reaching for a container on a counter\"}",
-  "runtime_ms": 645.2441656428585
-}

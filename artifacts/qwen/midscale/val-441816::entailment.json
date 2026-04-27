@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-441816::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The individuals in the image are indeed milling about at a bus terminal, preparing to board the bus. The caption accurately describes this scenario without any contradictions or additional information not present in the image.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The individuals in the image are indeed milling about at a bus terminal, preparing to board the bus. The caption accurately describes this scenario without any contradictions or additional information not present in the image.\"}",
-  "runtime_ms": 785.9574092083411
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-791226::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "the caption describes the scene accurately as it mentions a person wearing a wetsuit, standing on a surfboard, holding a paddle, and being in a large body of water. The black and white nature of the image is also mentioned in the caption.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the scene accurately as it mentions a person wearing a wetsuit, standing on a surfboard, holding a paddle, and being in a large body of water. The black and white nature of the image is also mentioned in the caption.\"}",
-  "runtime_ms": 653.4524329000305
-}

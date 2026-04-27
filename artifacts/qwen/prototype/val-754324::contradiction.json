@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-754324::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the caption mentions a dog instead of a cat, which is incorrect.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption mentions a dog instead of a cat, which is incorrect.\"}",
-  "runtime_ms": 631.5604861500105
-}

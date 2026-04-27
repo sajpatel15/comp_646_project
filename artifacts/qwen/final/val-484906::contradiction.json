@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-484906::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the caption mentions a laptop while the image shows a television",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption mentions a laptop while the image shows a television\"}",
-  "runtime_ms": 781.4557178571379
-}

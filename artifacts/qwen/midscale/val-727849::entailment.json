@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-727849::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "the treat is chocolate and looks delicious",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the treat is chocolate and looks delicious\"}",
-  "runtime_ms": 865.4094801666664
-}

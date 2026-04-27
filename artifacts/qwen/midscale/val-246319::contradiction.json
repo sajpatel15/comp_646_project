@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-246319::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption states that the people are in blue uniforms, but the image shows individuals in red uniforms.",
-  "raw_output": "{\n    \"label\": \"contradiction\",\n    \"rationale\": \"The caption states that the people are in blue uniforms, but the image shows individuals in red uniforms.\"\n}",
-  "runtime_ms": 674.1371126250044
-}

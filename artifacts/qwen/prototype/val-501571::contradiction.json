@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-501571::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "The caption describes two people playing an interactive game, which is consistent with the image where two individuals are engaged in a video game session. The third person sitting on the couch observing them aligns with the description of someone watching the game. Therefore, the caption entails the scene depicted in the image.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes two people playing an interactive game, which is consistent with the image where two individuals are engaged in a video game session. The third person sitting on the couch observing them aligns with the description of someone watching the game. Therefore, the caption entails the scene depicted in the image.\"}",
-  "runtime_ms": 611.3906013500127
-}

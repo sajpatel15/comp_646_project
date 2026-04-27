@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-420747::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The image shows a television screen displaying a man's face, not a laptop with two men merged together.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The image shows a television screen displaying a man's face, not a laptop with two men merged together.\"}",
-  "runtime_ms": 624.2333990357208
-}

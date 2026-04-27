@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-261383::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "A boy is riding a bike with a teddy bear as two people sitting is toasting a beer",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"A boy is riding a bike with a teddy bear as two people sitting is toasting a beer\"}",
-  "runtime_ms": 656.2599291999959
-}

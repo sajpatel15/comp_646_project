@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-142504::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "the bus is parked diagonally from the curb and there are people standing near it.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the bus is parked diagonally from the curb and there are people standing near it.\"}",
-  "runtime_ms": 570.6522192500415
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-533336::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption describes a blue couch, but the image shows a red couch. Additionally, the caption mentions a brown chair, while the image has a dark brown chair. These details do not match the description provided in the caption.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption describes a blue couch, but the image shows a red couch. Additionally, the caption mentions a brown chair, while the image has a dark brown chair. These details do not match the description provided in the caption.\"}",
-  "runtime_ms": 648.3929867999905
-}

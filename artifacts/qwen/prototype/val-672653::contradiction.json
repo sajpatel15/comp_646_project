@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-672653::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the caption states that the child is large while the image shows a small child",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption states that the child is large while the image shows a small child\"}",
-  "runtime_ms": 601.6554484000153
-}

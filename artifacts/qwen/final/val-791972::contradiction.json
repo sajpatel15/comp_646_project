@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-791972::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the horse is jumping the obstacle not a cow",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the horse is jumping the obstacle not a cow\"}",
-  "runtime_ms": 597.7762604642943
-}

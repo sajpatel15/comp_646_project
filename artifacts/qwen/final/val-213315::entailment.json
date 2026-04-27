@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-213315::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The caption describes a cat sitting on a sofa and a dog on the floor, which is consistent with the image where a cat is indeed sitting on a sofa and a dog is lying on the floor next to it.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a cat sitting on a sofa and a dog on the floor, which is consistent with the image where a cat is indeed sitting on a sofa and a dog is lying on the floor next to it.\"}",
-  "runtime_ms": 716.1018494285664
-}

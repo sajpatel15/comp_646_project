@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-255171::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the caption describes a group of people sitting at two dining tables, which is consistent with the image where multiple people are seated at different tables in a dining area.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a group of people sitting at two dining tables, which is consistent with the image where multiple people are seated at different tables in a dining area.\"}",
-  "runtime_ms": 618.7864701250021
-}

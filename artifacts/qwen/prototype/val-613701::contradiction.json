@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-613701::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "There is only one person in the picture",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"There is only one person in the picture\"}",
-  "runtime_ms": 571.0362761500164
-}

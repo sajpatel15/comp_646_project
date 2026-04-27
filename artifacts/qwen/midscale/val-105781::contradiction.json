@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-105781::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "contradiction\nThe caption states that the person is \"sleeping snow,\" which is contradictory to the fact that they are actively skiing in the snow.",
-  "raw_output": "contradiction\nThe caption states that the person is \"sleeping snow,\" which is contradictory to the fact that they are actively skiing in the snow.",
-  "runtime_ms": 794.9515945416673
-}

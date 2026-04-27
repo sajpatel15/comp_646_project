@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-248971::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the giraffe is facing the camera",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the giraffe is facing the camera\"}",
-  "runtime_ms": 671.1753049642733
-}

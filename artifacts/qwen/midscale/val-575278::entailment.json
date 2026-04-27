@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-575278::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "the dog is laying on the sofa",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the dog is laying on the sofa\"}",
-  "runtime_ms": 670.2207414583276
-}

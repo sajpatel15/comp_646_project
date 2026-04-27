@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-530517::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "The caption describes a scene where a woman is standing with a cigarette, and there is a group of people with luggage walking towards two buses. This is consistent with the image provided, which shows a woman with a cigarette in her hand and a group of people with luggage walking towards buses. The action of the woman holding a cigarette and the presence of people with luggage aligns with the description in the caption.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a scene where a woman is standing with a cigarette, and there is a group of people with luggage walking towards two buses. This is consistent with the image provided, which shows a woman with a cigarette in her hand and a group of people with luggage walking towards buses. The action of the woman holding a cigarette and the presence of people with luggage aligns with the description in the caption.\"}",
-  "runtime_ms": 822.5971583749943
-}

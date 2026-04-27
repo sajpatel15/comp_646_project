@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-825599::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "A sofa and table are present in the living room as described in the image.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"A sofa and table are present in the living room as described in the image.\"}",
-  "runtime_ms": 725.9123901000294
-}

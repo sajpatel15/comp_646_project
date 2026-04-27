@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-765179::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the cat is only on one couch",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the cat is only on one couch\"}",
-  "runtime_ms": 597.7762604642943
-}

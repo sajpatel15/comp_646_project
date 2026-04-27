@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-709346::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "A woman is walking a bicycle down a walkway in a train station.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"A woman is walking a bicycle down a walkway in a train station.\"}",
-  "runtime_ms": 831.7803645357052
-}

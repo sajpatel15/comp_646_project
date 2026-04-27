@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-774267::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "The image shows two people holding Wii remotes, indicating they are playing an interactive game on the Wii console.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people holding Wii remotes, indicating they are playing an interactive game on the Wii console.\"}",
-  "runtime_ms": 631.5604861500105
-}

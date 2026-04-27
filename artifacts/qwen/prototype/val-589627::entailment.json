@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-589627::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The image shows a person bending over to look inside a refrigerator, and a cat is standing nearby, observing the scene. This directly entails that the individual is looking in the refrigerator while the cat looks on.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows a person bending over to look inside a refrigerator, and a cat is standing nearby, observing the scene. This directly entails that the individual is looking in the refrigerator while the cat looks on.\"}",
-  "runtime_ms": 571.0362761500164
-}

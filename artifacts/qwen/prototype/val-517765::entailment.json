@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-517765::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "the bus is full of people driving down the street",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the bus is full of people driving down the street\"}",
-  "runtime_ms": 611.3906013500127
-}

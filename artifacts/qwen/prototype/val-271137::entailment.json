@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-271137::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The caption describes several people standing around a table with one cutting a cake, which is consistent with the image where three people are standing around a table with a cake in front of them.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes several people standing around a table with one cutting a cake, which is consistent with the image where three people are standing around a table with a cake in front of them.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
-  "runtime_ms": 656.2599291999959
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-562349::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The image shows three people sitting at a desk, each using a cell phone. This directly supports the statement that they are all looking at their phones.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows three people sitting at a desk, each using a cell phone. This directly supports the statement that they are all looking at their phones.\"}",
-  "runtime_ms": 648.3929867999905
-}

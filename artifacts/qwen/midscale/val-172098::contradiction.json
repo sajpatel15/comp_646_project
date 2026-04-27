@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-172098::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the lighthouse is red not blue",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the lighthouse is red not blue\"}",
-  "runtime_ms": 665.3400951666603
-}

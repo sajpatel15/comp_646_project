@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-640694::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "contradiction\nThe given caption states that the crowd is sitting, while the image shows people standing on the sidewalk.",
-  "raw_output": "contradiction\nThe given caption states that the crowd is sitting, while the image shows people standing on the sidewalk.",
-  "runtime_ms": 621.2562165714287
-}

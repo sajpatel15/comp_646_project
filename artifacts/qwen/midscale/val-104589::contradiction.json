@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-104589::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the people are playing frisbee on the beach",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people are playing frisbee on the beach\"}",
-  "runtime_ms": 794.9515945416673
-}

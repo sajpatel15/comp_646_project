@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-622128::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the vase is white not black",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the vase is white not black\"}",
-  "runtime_ms": 644.32791764998
-}

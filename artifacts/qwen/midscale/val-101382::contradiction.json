@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-101382::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "The image shows two dirt bike racers on a track, with one racer leaning into a turn and the other following closely behind. The rider in the foreground is indeed skidding or sliding on the dirt track, which aligns with the description of 'skidding' in the caption.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two dirt bike racers on a track, with one racer leaning into a turn and the other following closely behind. The rider in the foreground is indeed skidding or sliding on the dirt track, which aligns with the description of 'skidding' in the caption.\"}",
-  "runtime_ms": 794.9515945416673
-}

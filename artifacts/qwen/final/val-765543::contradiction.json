@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-765543::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption states that 'some people are sleeping around in a room', but the image shows two men playing video games, not sleeping. This is a clear contradiction.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that 'some people are sleeping around in a room', but the image shows two men playing video games, not sleeping. This is a clear contradiction.\"}",
-  "runtime_ms": 597.7762604642943
-}

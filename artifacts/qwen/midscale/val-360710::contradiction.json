@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-360710::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption mentions 'several people sleeping', but the image shows people walking on the tarmac, not sleeping. The caption is therefore contradictory to the image content.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption mentions 'several people sleeping', but the image shows people walking on the tarmac, not sleeping. The caption is therefore contradictory to the image content.\"}",
-  "runtime_ms": 576.6138363750031
-}

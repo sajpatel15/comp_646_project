@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-528846::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption states that the person is riding a cow in the pen, but the image shows a horse being ridden by a person in a field.",
-  "raw_output": "{\n  \"label\": \"contradiction\",\n  \"rationale\": \"The caption states that the person is riding a cow in the pen, but the image shows a horse being ridden by a person in a field.\"\n}",
-  "runtime_ms": 648.3929867999905
-}

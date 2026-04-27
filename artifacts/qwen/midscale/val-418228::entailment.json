@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-418228::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The caption describes two people having a conversation at an intersection, which is consistent with the image where two people are standing near a street sign and traffic lights at an intersection.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes two people having a conversation at an intersection, which is consistent with the image where two people are standing near a street sign and traffic lights at an intersection.\"}",
-  "runtime_ms": 569.658100458336
-}

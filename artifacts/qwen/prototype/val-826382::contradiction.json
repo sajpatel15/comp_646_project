@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-826382::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the train is yellow not black",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the train is yellow not black\"}",
-  "runtime_ms": 725.9123901000294
-}

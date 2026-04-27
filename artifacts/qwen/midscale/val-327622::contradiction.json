@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-327622::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the person is riding a motorcycle not a bicycle",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the person is riding a motorcycle not a bicycle\"}",
-  "runtime_ms": 694.2744383750038
-}

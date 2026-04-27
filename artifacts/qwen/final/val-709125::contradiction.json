@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-709125::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the caption says that the people are sleeping but in the image they are not sleeping",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption says that the people are sleeping but in the image they are not sleeping\"}",
-  "runtime_ms": 831.7803645357052
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-113850::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "There is only one person in the image, and they are both dressed for a wedding reception.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"There is only one person in the image, and they are both dressed for a wedding reception.\"}",
-  "runtime_ms": 794.9515945416673
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-406990::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the caption describes a group of people skiing down a snowy slope, which is consistent with the image where multiple skiers are visible on the slope.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes a group of people skiing down a snowy slope, which is consistent with the image where multiple skiers are visible on the slope.\"}",
-  "runtime_ms": 624.2333990357208
-}

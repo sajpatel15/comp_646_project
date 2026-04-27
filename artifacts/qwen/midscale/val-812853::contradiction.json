@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-812853::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the caption says the man is swinging two tennis rackets but the image shows only one racket",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption says the man is swinging two tennis rackets but the image shows only one racket\"}",
-  "runtime_ms": 673.3037584583409
-}

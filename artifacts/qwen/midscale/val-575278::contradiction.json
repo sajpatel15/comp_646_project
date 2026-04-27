@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-575278::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the dog is not on a red couch but on a light blue couch",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the dog is not on a red couch but on a light blue couch\"}",
-  "runtime_ms": 670.2207414583276
-}

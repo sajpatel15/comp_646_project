@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-589627::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption mentions a dog, but there is no dog visible in the image. The cat is the only animal present.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption mentions a dog, but there is no dog visible in the image. The cat is the only animal present.\"}",
-  "runtime_ms": 571.0362761500164
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-159050::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The image shows two people riding horses on a beach, which aligns with the caption's description of them being on horses on a beach. The caption also mentions readiness for a picture, which is consistent with the context of the image where people are riding horses on a beach.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people riding horses on a beach, which aligns with the caption's description of them being on horses on a beach. The caption also mentions readiness for a picture, which is consistent with the context of the image where people are riding horses on a beach.\"}",
-  "runtime_ms": 683.6538839285628
-}

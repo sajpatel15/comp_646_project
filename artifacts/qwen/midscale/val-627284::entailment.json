@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-627284::entailment",
-  "label": "entailment",
-  "pred_label": "contradiction",
-  "rationale": "the caption mentions a dog on a boat but there is no mention of any person in the water.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption mentions a dog on a boat but there is no mention of any person in the water.\"}",
-  "runtime_ms": 562.4779267916816
-}

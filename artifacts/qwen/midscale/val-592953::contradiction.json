@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-592953::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "The image shows multiple people playing a game involving a frisbee, which aligns with the caption's description of playing two frisbees games in the middle of a field.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows multiple people playing a game involving a frisbee, which aligns with the caption's description of playing two frisbees games in the middle of a field.\"}",
-  "runtime_ms": 670.2207414583276
-}

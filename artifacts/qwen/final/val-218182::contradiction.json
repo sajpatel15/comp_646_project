@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-218182::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the person is cooking pancakes not eggs",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the person is cooking pancakes not eggs\"}",
-  "runtime_ms": 716.1018494285664
-}

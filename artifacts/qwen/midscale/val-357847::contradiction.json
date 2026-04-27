@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-357847::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption states that the person is \"pushing the waves\" which implies they are riding the wave, not pushing it. The image shows the surfer riding the wave, not pushing it.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that the person is \\\"pushing the waves\\\" which implies they are riding the wave, not pushing it. The image shows the surfer riding the wave, not pushing it.\"}",
-  "runtime_ms": 576.6138363750031
-}

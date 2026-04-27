@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-674604::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "the image shows a person sitting on a stool with their feet up and another person holding a cell phone.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the image shows a person sitting on a stool with their feet up and another person holding a cell phone.\"}",
-  "runtime_ms": 607.6329850833417
-}

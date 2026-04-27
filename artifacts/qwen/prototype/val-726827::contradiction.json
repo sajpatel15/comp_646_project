@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-726827::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the people are not sleeping but standing",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the people are not sleeping but standing\"}",
-  "runtime_ms": 820.0722485999904
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-173155::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption describes a person reading a paper on a park couch, but the image shows a statue of a man reading a newspaper on a bench. These are different subjects and settings.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption describes a person reading a paper on a park couch, but the image shows a statue of a man reading a newspaper on a bench. These are different subjects and settings.\"}",
-  "runtime_ms": 665.3400951666603
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-498040::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the people are standing on the sand and there is a kite behind them.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people are standing on the sand and there is a kite behind them.\"}",
-  "runtime_ms": 781.4557178571379
-}

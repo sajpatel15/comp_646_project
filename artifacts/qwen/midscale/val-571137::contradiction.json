@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-571137::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "The people on motorcycles are indeed pushing across the bridge in the image.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The people on motorcycles are indeed pushing across the bridge in the image.\"}",
-  "runtime_ms": 670.2207414583276
-}

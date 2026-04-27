@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-785196::entailment",
-  "label": "entailment",
-  "pred_label": "contradiction",
-  "rationale": "The caption mentions a group of individuals riding on top of a train, while the image shows people on a boat. These are two different scenarios and cannot both be true at the same time.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption mentions a group of individuals riding on top of a train, while the image shows people on a boat. These are two different scenarios and cannot both be true at the same time.\"}",
-  "runtime_ms": 597.7762604642943
-}

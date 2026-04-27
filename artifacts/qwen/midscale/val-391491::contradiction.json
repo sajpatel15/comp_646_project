@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-391491::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the people in the picture are standing next to a suitcase that is on display as a statue",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people in the picture are standing next to a suitcase that is on display as a statue\"}",
-  "runtime_ms": 657.03945279166
-}

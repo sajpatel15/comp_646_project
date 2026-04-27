@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-217377::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the caption describes the scene accurately as it mentions two people, drinks, plates, and a pizza which is present in the image.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the scene accurately as it mentions two people, drinks, plates, and a pizza which is present in the image.\"}",
-  "runtime_ms": 716.1018494285664
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-262585::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the caption says the woman is dropping a smart phone but the image shows her holding it",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption says the woman is dropping a smart phone but the image shows her holding it\"}",
-  "runtime_ms": 618.7864701250021
-}

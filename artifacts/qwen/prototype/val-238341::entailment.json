@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-238341::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "the caption describes two horses, one being ridden and the other standing, which is consistent with the image showing a horse being ridden and another horse standing in the same area.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes two horses, one being ridden and the other standing, which is consistent with the image showing a horse being ridden and another horse standing in the same area.\"}",
-  "runtime_ms": 656.2599291999959
-}

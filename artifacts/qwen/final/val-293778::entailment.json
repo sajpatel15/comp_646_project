@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-293778::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The image shows three people on a beach with kites flying in the sky, which is consistent with the caption's description.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows three people on a beach with kites flying in the sky, which is consistent with the caption's description.\"}",
-  "runtime_ms": 644.925874749999
-}

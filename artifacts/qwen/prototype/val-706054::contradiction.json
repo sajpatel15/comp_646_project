@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-706054::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption states that several people are sleeping in a green field, but the image shows people flying kites in a field. These two scenarios are contradictory.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that several people are sleeping in a green field, but the image shows people flying kites in a field. These two scenarios are contradictory.\"}",
-  "runtime_ms": 820.0722485999904
-}

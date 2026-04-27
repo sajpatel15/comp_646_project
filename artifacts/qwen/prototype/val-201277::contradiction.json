@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-201277::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the building is blue not red",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the building is blue not red\"}",
-  "runtime_ms": 649.7239887999967
-}

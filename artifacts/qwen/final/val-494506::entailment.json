@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-494506::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The image shows two people on the beach, one of whom is holding a large kite, which aligns with the caption's description of 'Two individuals on a beach flying a kite'.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The image shows two people on the beach, one of whom is holding a large kite, which aligns with the caption's description of 'Two individuals on a beach flying a kite'.\"}",
-  "runtime_ms": 781.4557178571379
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-528307::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The caption describes a large stack of trunks and luggage on a sidewalk with individuals behind it, which is consistent with the image where there is a pile of suitcases and people in the background.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a large stack of trunks and luggage on a sidewalk with individuals behind it, which is consistent with the image where there is a pile of suitcases and people in the background.\", \"image_url\": \"https://i.imgur.com/3Q5z5.png\"}",
-  "runtime_ms": 822.5971583749943
-}

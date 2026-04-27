@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-286479::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "the people in the picture are walking and standing in front of a building with a clock on it",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people in the picture are walking and standing in front of a building with a clock on it\"}",
-  "runtime_ms": 619.7854021500007
-}

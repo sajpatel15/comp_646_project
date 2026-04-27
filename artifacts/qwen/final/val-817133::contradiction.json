@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-817133::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "contradiction\nThe given caption suggests that people are sleeping near sheep, which is not consistent with the image where people are feeding sheep. The image shows people actively engaging with the sheep by feeding them, not sleeping near them.",
-  "raw_output": "contradiction\nThe given caption suggests that people are sleeping near sheep, which is not consistent with the image where people are feeding sheep. The image shows people actively engaging with the sheep by feeding them, not sleeping near them.",
-  "runtime_ms": 668.4725540357184
-}

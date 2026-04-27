@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-56807::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the caption says two people sitting on a bicycle but the image shows two people sitting on a motorcycle",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the caption says two people sitting on a bicycle but the image shows two people sitting on a motorcycle\"}",
-  "runtime_ms": 651.0731214500083
-}

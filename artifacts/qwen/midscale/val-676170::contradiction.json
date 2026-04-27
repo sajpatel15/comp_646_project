@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-676170::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the people in the image are wearing uniforms and there is a train in the background.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the people in the image are wearing uniforms and there is a train in the background.\"}",
-  "runtime_ms": 607.6329850833417
-}

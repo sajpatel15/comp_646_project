@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-324116::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption states that the person is 'dropping' a pole, but the image shows the person holding two poles. This is a contradiction.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that the person is 'dropping' a pole, but the image shows the person holding two poles. This is a contradiction.\"}",
-  "runtime_ms": 680.7438916428542
-}

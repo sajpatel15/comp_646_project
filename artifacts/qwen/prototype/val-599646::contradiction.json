@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-599646::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the horse is brown and the person is wearing a blue helmet",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the horse is brown and the person is wearing a blue helmet\"}",
-  "runtime_ms": 571.0362761500164
-}

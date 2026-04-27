@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-126013::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "\"contradiction\"\n\nRationale: The caption states that the group is \"sleeping,\" which contradicts the image where multiple people are standing and engaged in various activities such as cooking or preparing food. Additionally, the presence of a baby being held by one of the individuals further supports the idea that they are awake and active rather than sleeping.",
-  "raw_output": "\"contradiction\"\n\nRationale: The caption states that the group is \"sleeping,\" which contradicts the image where multiple people are standing and engaged in various activities such as cooking or preparing food. Additionally, the presence of a baby being held by one of the individuals further supports the idea that they are awake and active rather than sleeping.",
-  "runtime_ms": 794.9515945416673
-}

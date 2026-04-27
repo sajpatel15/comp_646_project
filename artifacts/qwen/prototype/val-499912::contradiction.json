@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-499912::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the kite in the picture is large and colorful, not small or parachute-like",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the kite in the picture is large and colorful, not small or parachute-like\"}",
-  "runtime_ms": 611.3906013500127
-}

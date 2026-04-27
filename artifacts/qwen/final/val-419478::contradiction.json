@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-419478::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption states that there is a picture of a laptop screen, but the image shows a television screen displaying a man's face.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that there is a picture of a laptop screen, but the image shows a television screen displaying a man's face.\"}",
-  "runtime_ms": 624.2333990357208
-}

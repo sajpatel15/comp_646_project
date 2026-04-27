@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-541408::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "The caption states that the people are playing games while dropping remotes, but in the image, they are not dropping any remotes. They are holding them instead.",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"The caption states that the people are playing games while dropping remotes, but in the image, they are not dropping any remotes. They are holding them instead.\"}",
-  "runtime_ms": 648.3929867999905
-}

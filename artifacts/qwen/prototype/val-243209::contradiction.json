@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-243209::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "People are not running in lounge chairs on the beach",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"People are not running in lounge chairs on the beach\"}",
-  "runtime_ms": 656.2599291999959
-}

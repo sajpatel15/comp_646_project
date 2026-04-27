@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-403659::contradiction",
-  "label": "contradiction",
-  "pred_label": "contradiction",
-  "rationale": "the person in the picture is not old",
-  "raw_output": "{\"label\": \"contradiction\", \"rationale\": \"the person in the picture is not old\"}",
-  "runtime_ms": 657.03945279166
-}

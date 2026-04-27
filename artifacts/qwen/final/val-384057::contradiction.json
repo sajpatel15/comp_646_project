@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-384057::contradiction",
-  "label": "contradiction",
-  "pred_label": "entailment",
-  "rationale": "the caption describes the room as having comfortable furniture and a small TV, which is consistent with the image showing a living room with a couch, chairs, and a television set on the wall.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"the caption describes the room as having comfortable furniture and a small TV, which is consistent with the image showing a living room with a couch, chairs, and a television set on the wall.\"}",
-  "runtime_ms": 621.6832053214277
-}

@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-157430::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The caption describes a dog jumping over a pool of water with people watching, which is consistent with the image where a dog is seen jumping over a pool of water with spectators in the background.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a dog jumping over a pool of water with people watching, which is consistent with the image where a dog is seen jumping over a pool of water with spectators in the background.\"}",
-  "runtime_ms": 665.3400951666603
-}

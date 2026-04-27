@@ -1,8 +1,0 @@
-{
-  "sample_id": "val-180311::entailment",
-  "label": "entailment",
-  "pred_label": "entailment",
-  "rationale": "The caption describes a black and white cat lying on a sofa with a remote control in its paws, which is consistent with the image where a cat is indeed lying on a sofa with a remote control nearby.",
-  "raw_output": "{\"label\": \"entailment\", \"rationale\": \"The caption describes a black and white cat lying on a sofa with a remote control in its paws, which is consistent with the image where a cat is indeed lying on a sofa with a remote control nearby.\"}",
-  "runtime_ms": 612.6621215500109
-}
