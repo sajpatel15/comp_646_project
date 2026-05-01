@@ -1,11 +1,14 @@
 # Multimodal Contradiction Project
 
+Authors: Saj Patel and Prathamesh Swar.
+
 This repository builds and evaluates a COCO-derived multimodal contradiction benchmark. The main deliverable is the [final experiment notebook](notebooks/multimodal_contradiction_project.ipynb), backed by the Python package in `src/vl_contradiction`.
 
 The notebook downloads COCO assets as needed, builds the benchmark, trains/evaluates CLIP-based baselines, runs the Qwen2.5-VL reference model, and writes generated outputs under `artifacts/`. Generated datasets, model outputs, figures, checkpoints, logs, and Qwen cache files are intentionally not committed.
 
 ## Submission Links
 
+- [Source repository](https://github.com/sajpatel15/comp_646_project)
 - [Run the final experiment notebook](notebooks/multimodal_contradiction_project.ipynb)
 - [Read the final report](reports/final/report.pdf)
 
